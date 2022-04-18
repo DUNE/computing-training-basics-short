@@ -52,7 +52,7 @@ If you already are a kerberos-aficionado, go to the next section. If not, we giv
 
 **Why does FNAL use Kerberos?** Fermilab uses Kerberos to implement strong authentication, so that no passwords go over the internet (if a hacker steals a ticket, it is only valid for a day).
 
-**How it works?** Kerberos uses tickets to authenticate users. Tickets are made by the kinit command, which asks for your kerberos password (info on kerberos password [here][kerberos-password]). The kinit command reads the password, encrypts it and sends it to the Key Distribution Centre (KDC) at FNAL. The Kerberos configuration file, which lists the KDCs, is stored in a file named krb5.conf. On Linux and Mac, it is located here:
+**How does it work?** Kerberos uses tickets to authenticate users. Tickets are made by the kinit command, which asks for your kerberos password (info on kerberos password [here][kerberos-password]). The kinit command reads the password, encrypts it and sends it to the Key Distribution Centre (KDC) at FNAL. The Kerberos configuration file, which lists the KDCs, is stored in a file named krb5.conf. On Linux and Mac, it is located here:
 
 ~~~
 /etc/krb5.conf
@@ -68,7 +68,7 @@ kinit -f username@FNAL.GOV
 ~~~
 {: .language-bash}
 
-The -f option means your ticket is forwardable. A forwardable ticket is one that originated on computer A, but can be forwarded to computer B and will remain valide on computer B. Careful: you need to write FNAL.GOV in uppercase.
+The -f option means your ticket is forwardable. A forwardable ticket is one that originated on computer A, but can be forwarded to computer B and will remain valid on computer B. Careful: you need to write FNAL.GOV in uppercase.
 
 To know if you have a valid ticket, type:
 
@@ -88,6 +88,7 @@ Jan 20 15:29:41 2021  Jan 21 17:29:38 2021  krbtgt/FNAL.GOV@FNAL.GOV
 ~~~
 {: .output}
 
+Tickets are stored in /tmp and have file permissions so that only you can read and write them.
 If your ticket has not expired yet but will soon, you can refresh it for another 26 hours by typing:
 
 ~~~
@@ -123,7 +124,16 @@ Then you can simply use:
 ~~~
 mykinit
 ~~~
+{: .language-bash}
 
+If you need to remove a ticket (for example, you are logged in at CERN with one Kerberos account but want to log in to a Fermilab machine with your Fermilab account), you can use the command
+
+~~~
+kdestroy
+~~~
+{: .language-bash}
+
+After executing this command, you will have to use kinit again to get a new ticket.
 
 ## 2. ssh-in
 **What is it?** SSH stands for Secure SHell. It is a safe protocol used for connecting to remote machines. The configuration is done in your local file in your home directory:
@@ -343,7 +353,7 @@ Setting up DUNE UPS area... /cvmfs/dune.opensciencegrid.org/products/dune/
 ### 2. Access tutorial datasets
 Normally, the datasets are accessible through the grid resource. But with your CERN account, you may not be part of the DUNE VO yet (more on this during the tutorial). We found a workaround: some datasets have been copied locally for you. You can check them here:
 ~~~
-ls /afs/cern.ch/work/t/tjunk/public/may2021tutorialfiles/
+ls /afs/cern.ch/work/t/tjunk/public/may2022tutorialfiles/
 ~~~
 {: .language-bash}
 ~~~
