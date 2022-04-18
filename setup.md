@@ -177,7 +177,23 @@ env | grep -i nova
 ~~~
 {: .language-bash}
 
-Here you can tweak your .bashrc/.profile file(s) to temporarily comment out those (the "export" commands that are setting custom environment variables).
+Another useful command that will detect UPS products that have been set up is
+
+~~~
+ups active
+~~~
+{: .language-bash}
+
+A "clean" response to the above command is:  
+
+~~~
+bash: ups: command not found...
+~~~
+{: .output}
+
+and if your environment has UPS products set up, the above command will list the ones you have.
+
+Once you identify environment variables that might conflict with your DUNE work, you can tweak your .bashrc/.profile file(s) to temporarily comment out those (the "export" commands that are setting custom environment variables, or UPS's setup command).
 
 **Cleanup option 2:** Backup your login scripts and go minimal at login (recommended)
 
