@@ -195,7 +195,7 @@ and if your environment has UPS products set up, the above command will list the
 
 Once you identify environment variables that might conflict with your DUNE work, you can tweak your .bashrc/.profile file(s) to temporarily comment out those (the "export" commands that are setting custom environment variables, or UPS's setup command).
 
-**Cleanup option 2:** Backup your login scripts and go minimal at login (recommended)
+**Cleanup option 2:** Back up your login scripts and go minimal at login (recommended)
 
 A simpler solution would be to rename your login scripts (for instance .bashrc as .bashrc_save and/or .profile as .profile_bkp) so that your setup at login will be minimal and you will get the cleanest shell. For this to take into effect, you will need to exit and reconnect through ssh.
 
@@ -238,15 +238,15 @@ Setting up DUNE UPS area... /cvmfs/dune.opensciencegrid.org/products/dune/
 ## 5. Exercise! (it's easy)
 This exercise will help organizers see if you reached this step or need help.
 
-1) Start in your home area `cd ~` and create the file ```.dune_presetup_202105.sh```. Files starting with a dot are hidden files and can be seen with the command `ls -la` (**a** for **a**ll files). Write in it the following:
+1) Start in your home area `cd ~` and create the file ```.dune_presetup_202205.sh```. Files starting with a dot are hidden files and can be seen with the command `ls -la` (**a** for **a**ll files). Write in it the following:
 ~~~
-export DUNETPC_VERSION=v09_22_02
+export DUNESW_VERSION=v09_48_01d00
 alias dune_setup='source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh'
 ~~~
 {: .source}
 When you start the training, you will have to source this file:
 ~~~
-source ~/.dune_presetup_202105.sh
+source ~/.dune_presetup_202205.sh
 ~~~
 {: .language-bash}
 Then, to setup DUNE, use the created alias:
