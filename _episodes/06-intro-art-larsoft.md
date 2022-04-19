@@ -270,7 +270,7 @@ services.LArG4Parameters.ModBoxA: 7.7E-1
 Plug-ins each have their own .so library which gets dynamically loaded by art when referenced by name in the fcl configuration.
 
 **Producer Modules**  
-A producer module is a software component that writes data products to the event memory. It is characterized by produces<> and consumes<> statements in the class constructor, and `art::Event::put()` calls in the `produces()` method. A producer must produce the data product collection it says it produces, even if it is empty, or art will throw an exception. `art::Event::put()` transfers ownership of memory (use std::move so as not to copy the data) from the module to the art event memory. Data in the art event memory will be written to the output file unless output commands in the fcl file tell art not to do that. Documentation on output commands can be found in the LArSoft wiki here: [https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Rerun_part_of_all_a_job_on_an_output_file_of_that_job][larsoft-rerun-part-job] Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
+A producer module is a software component that writes data products to the event memory. It is characterized by produces<> and consumes<> statements in the class constructor, and `art::Event::put()` calls in the `produces()` method. A producer must produce the data product collection it says it produces, even if it is empty, or art will throw an exception. `art::Event::put()` transfers ownership of memory (use std::move so as not to copy the data) from the module to the art event memory. Data in the art event memory will be written to the output file unless output commands in the fcl file tell art not to do that. Documentation on output commands can be found in the LArSoft wiki here: [https://larsoft.github.io/LArSoftWiki/Rerun_part_of_all_a_job_on_an_output_file_of_that_job][larsoft-rerun-part-job] Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
 
 **Analyzer Modules**  
 Analyzer modules read data product from the event memory and produce histograms or TTrees, or other output. They are typically scheduled after the producer modules have been run. Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
@@ -447,7 +447,7 @@ The follow-up part of this tutorial gives hands-on exercises for doing these thi
 
 Unlike dunetpc, protoduneana and garsoft, which are hosted in Fermilab's Redmine repository, the LArSoft git repositories are hosted on GitHub and use a pull-request model. LArSoft's github link is [https://github.com/larsoft][github-link]
 
-See the documentation at this link: [https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Developing_With_LArSoft][developing-with-larsoft]
+See the documentation at this link: [https://larsoft.github.io/LArSoftWiki/Developing_With_LArSoft][developing-with-larsoft]
 
 There are bi-weekly LArSoft coordination meetings [https://indico.fnal.gov/category/405/][larsoft-meetings] at which stakeholders, managers, and users discuss upcoming releases, plans, and new features to be added to LArSoft.
 
@@ -458,7 +458,7 @@ A good old-fashioned `grep -r` or a find command can be effective if you are loo
 ~~~
  #!/bin/sh
  USERNAME=`whoami`
- LARSOFT_VERSION=v09_13_00
+ LARSOFT_VERSION=v09_48_00
  COMPILER=e19
  source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
  cd /dune/app/users/${USERNAME}
@@ -473,16 +473,15 @@ A good old-fashioned `grep -r` or a find command can be effective if you are loo
  mrb g larsoftobj_suite
  mrb g larutils
  mrb g larbatch
- mrb g dunetpc
- mrb g duneutil
+ mrb g dune_suite
  mrb g -d dune_raw_data dune-raw-data
 ~~~
 {: .language-bash}
 
-Putting it to use: A very common workflow in developing software is to look for an example of how to do something similar to what you want to do. Let's say you want to find some examples of how to use `FindManyP` -- it's an *art* method for retrieving associations between data products, and the art documentation isn't anywhere near as good as the examples for learning how to use it. You can use a recursive grep through your checked-out version, or you can even look through the installed source in CVMFS:
+Putting it to use: A very common workflow in developing software is to look for an example of how to do something similar to what you want to do. Let's say you want to find some examples of how to use `FindManyP` -- it's an *art* method for retrieving associations between data products, and the art documentation isn't as good as the examples for learning how to use it. You can use a recursive grep through your checked-out version, or you can even look through the installed source in CVMFS. This example looks through the duneprototype product's source files for FindManyP:
 
 ```bash 
- cd $DUNETPC_DIR/source/dune
+ cd $DUNEPROTOTYPES_DIR/source/duneprototypes
  grep -r -i findmanyp *
  ``` 
  
