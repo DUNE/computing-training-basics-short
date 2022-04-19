@@ -328,6 +328,7 @@ More documentation: [https://art.fnal.gov/gallery/][art-more-documentation]
 ### Introductory Documentation
 
 LArSoft's home page: [https://larsoft.org][larsoft.org]
+  
 The LArSoft wiki is here:  [https://larsoft.github.io/LArSoftWiki/][larsoft-wiki].
 
 ### Software structure
@@ -384,7 +385,7 @@ export USER=`whoami`
  mkdir -p /dune/data/users/$USER/tutorialtest
  cd /dune/data/users/$USER/tutorialtest
  source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
- setup dunetpc v09_22_02 -q e19:prof
+ setup dunesw v09_48_01d00 -q e20:prof
  lar -n 1 -c mcc12_gen_protoDune_beam_cosmics_p1GeV.fcl -o gen.root
  lar -n 1 -c protoDUNE_refactored_g4_stage1.fcl gen.root -o g4_stage1.root
  lar -n 1 -c protoDUNE_refactored_g4_stage2_sce_datadriven.fcl g4_stage1.root -o g4_stage2.root
@@ -404,10 +405,10 @@ This example puts all files in a subdirectory of your home directory. There is a
 
 ```bash 
  cd ~
- mkdir May2021Tutorial
- cd May2021Tutorial
+ mkdir May2022Tutorial
+ cd May2022Tutorial
  source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
- setup dunetpc v09_22_02 -q e19:prof
+ setup dunesw v09_48_01d00 -q e20:prof
  cat > tmpgen.fcl << EOF
  #include "mcc12_gen_protoDune_beam_cosmics_p1GeV.fcl"
  physics.producers.generator.FileName: "/afs/cern.ch/work/t/tjunk/public/may2021tutorialfiles/H4_v34b_1GeV_-27.7_10M_1.root"
@@ -436,7 +437,7 @@ but it will run very slowly over a tunneled X connection. A VNC session will be 
 
 ### DUNE software documentation and how-to's
 
-This wiki page provides a lot of information on how to check out, build, and contribute to dune-specific larsoft plug-in code.
+The following legacy wiki page provides information on how to check out, build, and contribute to dune-specific larsoft plug-in code.
 
 [https://cdcvs.fnal.gov/redmine/projects/dunetpc/wiki][dunetpc-wiki]
 
