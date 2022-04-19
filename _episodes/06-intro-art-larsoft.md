@@ -47,9 +47,9 @@ The configuration storage is particularly useful if you receive a data file from
 Log in to a `dunegpvm*.fnal.gov` machine and set up your environment (This script is defined in Exercise 5 of https://dune.github.io/computing-training-202105/setup.html)
 
 ```bash
-source ~/.dune_presetup_202105.sh
+source ~/.dune_presetup_202205.sh
 dune_setup
-setup dunetpc $DUNETPC_VERSION -q e19:prof
+setup dunetpc $DUNETPC_VERSION -q e20:prof
 setup_fnal_security
 ```
 
@@ -57,7 +57,7 @@ setup_fnal_security
 The examples below will refer to files in `dCache` at Fermilab which can best be accessed via `xrootd`. 
 
 **For those with no access to Fermilab computing resources but with a CERN account:**  
-Copies are stored in `/afs/cern.ch/work/t/tjunk/public/may2021tutorialfiles/`.
+Copies are stored in `/afs/cern.ch/work/t/tjunk/public/may2022tutorialfiles/`.
 
 The follow-up of this tutorial provides help on how to find data and MC files in storage.
 
@@ -67,13 +67,13 @@ You can list available versions of `dunetpc` installed in `CVMFS` with this comm
 ups list -aK+ dunetpc
 ```
 
-The output is not sorted, although portions of it may look sorted. Do not depend on it being sorted. The string indicating the version is called the version tag (v09_22_02 here). The qualifiers are e19 and prof. Qualifiers can be entered in any order and are separated by colons. "e19" refers to a specific version of the gnu compiler collection (v8_2_0). We will soon be moving everything to "e20" which corresponds to `gcc v9_3_0`. We also compile with `clang` -- the compiler qualifier for that is "c7".
+The output is not sorted, although portions of it may look sorted. Do not depend on it being sorted. The string indicating the version is called the version tag (v09_48_01d00 here). The qualifiers are e20 and prof. Qualifiers can be entered in any order and are separated by colons.  "e20" corresponds to a specific version of the GNU compiler -- v9.3.0.   We also compile with `clang` -- the compiler qualifier for that is "c7".
 
 "prof" means "compiled with optimizations turned on." "debug" means "compiled with optimizations turned off". More information on qualifiers is [here][about-qualifiers].
 
-In addition to the version and qualifiers, `UPS` products have "flavors". This refers to the operating system and version. Older versions of `dunetpc` and `larsoft` supported `SL6` and some versions of macOS. Currently only SL7 and the compatible CentOS 7 are supported. The flavor of a product is automatically selected to match your current operating system when you set up a product. If a flavor is missing, you will get an error message.
+In addition to the version and qualifiers, `UPS` products have "flavors". This refers to the operating system type and version. Older versions of DUNE software supported `SL6` and some versions of macOS. Currently only SL7 and the compatible CentOS 7 are supported. The flavor of a product is automatically selected to match your current operating system when you set up a product. If a flavor is missing, you will get an error message.
 
-There is a setup command provided by the operating system -- you usually don't want to use it (at least not when developing DUNE software). If you haven't sourced the `setup_dune.sh` script in `CVMFS` above and type `setup xyz`, you will get the system setup command, which will ask you for the root password. Just `control-C` out of it, source the `setup_dune.sh` script, and try again.
+There is a setup command provided by the operating system -- you usually don't want to use it (at least not when developing DUNE software). If you haven't yet sourced the `setup_dune.sh` script in `CVMFS` above but type `setup xyz` anyway, you will get the system setup command, which will ask you for the root password. Just `control-C` out of it, source the `setup_dune.sh` script, and try again.
 
 UPS's setup command (find out where it lives with this command):
 
@@ -81,7 +81,7 @@ UPS's setup command (find out where it lives with this command):
 type setup
 ```
 
-will not only set up the product you specify (in the instructions above, dunetpc), but also all dependent products with corresponding versions so that you get a consistent software environment. You can get a list of everything that's set up with this command
+will not only set up the product you specify (in the instructions above, dunesw), but also all dependent products with corresponding versions so that you get a consistent software environment. You can get a list of everything that's set up with this command
 
 ```bash
  ups active
