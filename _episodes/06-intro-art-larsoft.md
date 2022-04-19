@@ -335,7 +335,7 @@ The LArSoft wiki is here:  [https://larsoft.github.io/LArSoftWiki/][larsoft-wiki
 
 The LArSoft toolkit is a set of software components that simulate and reconstruct LArTPC data, and also it provides tools for accessing raw data from the experiments. LArSoft contains an interface to GEANT4 (art does not list GEANT4 as a dependency) and the GENIE generator. It contains geometry tools that are adapted for wire-based LArTPC detectors.
 
-A recent graph of the UPS products in a full stack staring with protduneana is available here: [https://wiki.dunescience.org/w/img_auth.php/8/87/Protoduneana_v09_22_02_e19_prof_graph.pdf][protoduneana] You can see the LArSoft pieces under dunetpc, as well as GEANT4, GENIE, ROOT, and a few others.
+A recent graph of the UPS products in a full stack staring with dunesw is available here: [https://wiki.dunescience.org/w/img_auth.php/f/f0/Dunesw_v09_48_01d00_e20_prof_graph.pdf][dunesw] You can see the LArSoft pieces under dunetpc, as well as GEANT4, GENIE, ROOT, and a few others.
 
 ### LArSoft Data Products
 
