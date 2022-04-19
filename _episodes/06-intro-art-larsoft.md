@@ -21,7 +21,7 @@ keypoints:
 
 ## Introduction to *art*
 
-*Art* is the framework used for the offline software used to process LArTPC data from the far detector and the ProtoDUNEs. It was chosen not only because of the features it provides, but also because it allows DUNE to use and share algorithms developed for other LArTPC experiments, such as ArgoNeuT, MicroBooNE and ICARUS. The section below describes LArSoft, a shared software toolkit. Art is also used by the NOvA and mu2e experiments. The primary language for *art* and experiment-specific plug-ins is C++.
+*Art* is the framework used for the offline software used to process LArTPC data from the far detector and the ProtoDUNEs. It was chosen not only because of the features it provides, but also because it allows DUNE to use and share algorithms developed for other LArTPC experiments, such as ArgoNeuT, LArIAT, MicroBooNE and ICARUS. The section below describes LArSoft, a shared software toolkit. Art is also used by the NOvA and mu2e experiments. The primary language for *art* and experiment-specific plug-ins is C++.
 
 The *art* wiki page is here: [https://cdcvs.fnal.gov/redmine/projects/art/wiki][art-wiki]. It contains important information on command-line utilities, how to configure an art job, how to define, read in and write out data products, how and when to use art modules, services, and tools.
 
@@ -327,7 +327,8 @@ More documentation: [https://art.fnal.gov/gallery/][art-more-documentation]
 
 ### Introductory Documentation
 
-Using LArSoft: [https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Using_LArSoft][using-larsoft].
+LArSoft's home page: [https://larsoft.org][larsoft.org]
+The LArSoft wiki is here:  [https://larsoft.github.io/LArSoftWiki/][larsoft-wiki].
 
 ### Software structure
 
