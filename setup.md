@@ -81,10 +81,11 @@ Typical output of klist on macOS looks like this:
 
 ~~~
 Mac-124243:~ trj$ klist
-Credentials cache: API:F083D4AF-D901-41BE-99AF-92FE01838C3B
-       Principal: trj@FNAL.GOV
-Issued                Expires               Principal
-Jan 20 15:29:41 2021  Jan 21 17:29:38 2021  krbtgt/FNAL.GOV@FNAL.GOV
+Credentials cache: API:6A0A9594-540A-45DC-8D2C-47FF774F4E4C
+        Principal: trj@FNAL.GOV
+
+  Issued                Expires               Principal
+Apr 19 15:02:41 2022  Apr 20 16:52:20 2022  krbtgt/FNAL.GOV@FNAL.GOV
 ~~~
 {: .output}
 
@@ -136,14 +137,14 @@ kdestroy
 After executing this command, you will have to use kinit again to get a new ticket.
 
 ## 2. ssh-in
-**What is it?** SSH stands for Secure SHell. It is a safe protocol used for connecting to remote machines. The configuration is done in your local file in your home directory:
+**What is it?** SSH stands for Secure SHell. It uses an encrypted protocol used for connecting to remote machines and it works with Kerberos tickets when configured to do so. The configuration is done in your local file in your home directory:
 
 ~~~
 cat ~/.ssh/config
 ~~~
 {: .language-bash}
 
-If it does not exist, create it. A minimum working example to connect to FNAL machines is as follow:
+If it does not exist, create it. A minimum working example to connect to FNAL machines is as follows:
 
 ~~~
 Host *.fnal.gov
@@ -209,7 +210,7 @@ Once you identify environment variables that might conflict with your DUNE work,
 
 A simpler solution would be to rename your login scripts (for instance .bashrc as .bashrc_save and/or .profile as .profile_bkp) so that your setup at login will be minimal and you will get the cleanest shell. For this to take into effect, you will need to exit and reconnect through ssh.
 
-## 4. Setting up the DUNE software
+## 4. Setting up DUNE software
 To set up your environment with DUNE, the command is:
 ~~~
 source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
