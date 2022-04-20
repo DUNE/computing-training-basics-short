@@ -250,7 +250,7 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Break up very large source files into pieces.**   `g++’s` analysis and optimization steps take an amount of time that grows faster than linearly with the number of source lines.
 
-**Use ninja instead of make**   Instructions are here: [ninjadocpageredmine]
+**Use ninja instead of make**   Instructions are [here][ninjadocpageredmine]
 
 ## Workflow optimization:
 
