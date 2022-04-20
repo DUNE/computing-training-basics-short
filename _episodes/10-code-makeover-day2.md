@@ -250,6 +250,8 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Break up very large source files into pieces.**   `g++’s` analysis and optimization steps take an amount of time that grows faster than linearly with the number of source lines.
 
+**Use ninja instead of make**   Instructions are here: [ninjadocpageredmine]
+
 ## Workflow optimization:
 
 **Pre-stage your datasets**  It takes a lot of time to wait for a tape (sometimes hours!).  CPUs are accounted by wall-clock time, whether you're using them or not.  So if your jobs are waiting for data, they will run slowly even if you optimized the CPU usage.  Pre-stage your data!
@@ -266,6 +268,7 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 [gnu-manuals-gprof]: https://ftp.gnu.org/old-gnu/Manuals/gprof-2.9.1/html_mono/gprof.html
 [valgrind-quickstart]: https://www.valgrind.org/docs/manual/quick-start.html
 [valgrind-ms-manual]: https://www.valgrind.org/docs/manual/ms-manual.html
+[ninjadocpageredmine]: https://cdcvs.fnal.gov/redmine/projects/dunetpc/wiki/_Tutorial_#Using-the-ninja-build-system-instead-of-make
 
 
 {%include links.md%}
