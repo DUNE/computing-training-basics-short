@@ -10,7 +10,7 @@ keypoints:
 - CPU, memory, and build time optimizations are possible when good code practices are followed.
 ---
 
-## DUNE Computing Training May 2021
+## DUNE Computing Training May 2022
 
 ## Session Video
 
@@ -66,7 +66,7 @@ for (size_t i=0; i<n_channels; ++i)<br>
 </div><!--side by side table by DeMuth-->
 
 
-The example above also takes advantage of the fact that floating-point multiplies generally have significantly less latency than floating-point divides (still true, even with modern CPU.
+The example above also takes advantage of the fact that floating-point multiplies generally have significantly less latency than floating-point divides (still true, even with modern CPUs).
 
 **Use sqrt():** Don’t use `pow()` or `TMath::Power` when a multiplication or `sqrt()` function can be used.
 
@@ -95,11 +95,11 @@ If the things you are squaring above are complicated expressions, use `TMath::Sq
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (GOOD)</div>
 
 <div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
-double r = TMath::Sqrt( slow_function_calculating_x()*slow_function_calculating_x() +  slow_function_calculating_y()*slow_function_calculating_y()  );
+double r = TMath::Sqrt( slow_function_calculating_x()*<br>slow_function_calculating_x() + <br> slow_function_calculating_y()* <br> slow_function_calculating_y()  );
 </div>
 
 <div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
-double r = TMath::Sqrt( TMath::Sq(slow_function_calculating_x()) + TMath::Sq(slow_function_calculating_y()));
+double r = TMath::Sqrt( TMath::Sq(slow_function_calculating_x()) + <br> TMath::Sq(slow_function_calculating_y()));
 </div>
 </div>
 
