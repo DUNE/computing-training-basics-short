@@ -509,11 +509,11 @@ and you can check out the source and build it by following the instructions on t
 
 [about-qualifiers]: https://cdcvs.fnal.gov/redmine/projects/cet-is-public/wiki/AboutQualifiers
 [art-wiki]: https://cdcvs.fnal.gov/redmine/projects/art/wiki
-[larsoft-rerun-part-job]: https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Rerun_part_of_all_a_job_on_an_output_file_of_that_job
+[larsoft-rerun-part-job]: https://larsoft.github.io/LArSoftWiki/Rerun_part_of_all_a_job_on_an_output_file_of_that_job
 [github-link]: https://github.com/larsoft
 [protodune-sim-task-force]: https://wiki.dunescience.org/wiki/ProtoDUNE-SP_Simulalation_Task_Force
 [larsoft-meetings]: https://indico.fnal.gov/category/405/][larsoft-meetings
-[developing-with-larsoft]: https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Developing_With_LArSoft
+[developing-with-larsoft]: https://larsoft.github.io/LArSoftWiki/Developing_With_LArSoft
 [fhicl-described]: https://cdcvs.fnal.gov/redmine/documents/327
 [garsoft-wiki]: https://cdcvs.fnal.gov/redmine/projects/garsoft/wiki
 [art-wiki-redmine]: https://cdcvs.fnal.gov/redmine/projects/art/wiki#How-to-use-the-modularity-of-art
