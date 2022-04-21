@@ -46,7 +46,7 @@ If you have a valid FNAL account but not on DUNE yet (say you have access to ano
 If you do not have any FNAL accounts yet, go through this form: [https://get-connected.fnal.gov/users/access/][get-connected-user-access]
 
 **STEP 3**: Kerberos business -->
-If you already are a kerberos-aficionado, go to the next section. If not, we give you a little tour of it below.
+If you already are a Kerberos aficionado, go to the next section. If not, we give you a little tour of it below.
 
 **What is it?** Kerberos is a computer-network authentication protocol that works on the basis of tickets.
 
@@ -338,7 +338,7 @@ voms-proxy-info >> /dune/app/users/${USER}/my_first_login.txt
 
 Caution: the following instructions are for those of you who do not have a valid FNAL account but have access to CERN machines. 
 
-### 1. Source the DUNE environment
+### 1. Source the DUNE environment setup script
 CERN access is mainly for ProtoDUNE collaborators. If you have a valid CERN ID and access to lxplus via ssh, you can setup your environment for this tutorial as follow:
 ~~~
 source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
