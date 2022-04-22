@@ -20,9 +20,12 @@ Coordinator: Heidi Schellman (Oregon State University)
 
 ## Welcome Session Video
 
+
+The session will be captured on video a placed here after the workshop for asynchronous study.
+<!--
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2Vg4kXcxzCs" title="DUNE Computing Tutorial May 2021 Welcome" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+</center>-->
 
 ## Tutorial Instructors
 
@@ -42,23 +45,18 @@ Coordinator: Heidi Schellman (Oregon State University)
 
 ## Schedule
 
-The workshop spans three days.
-
-{%include figure.html url="" max-width="75%"
-   file="/fig/Schedule_computing_training_202105.png"
-   alt="May 2021 Workshop Schedule" caption="May 2021 Workshop Schedule" %}
-
+This incarnation of the computing training spans two days.
 
 ## Support
 
 There will be live documents linked from [Indico][indico-event-link] for each [Zoom][zoom-link] session. You can write questions there, anonymously or not, and experts will reply. The chat on Zoom can quickly saturate so this is a more convenient solution and proved very successful at the previous training. We will collect all questions and release a Q&A after the event.
 
-You can join DUNE's Slack: `dunescience.slack.com`. We created a special channel `computing_training_may2021` for technical support, join [here][slack-join-link].
+You can join DUNE's Slack: `dunescience.slack.com`. We created a special channel `computing_training_basics` for technical support, join [here][slack-join-link].
 
 
-[indico-event-link]: https://indico.fnal.gov/event/48756/
+[indico-event-link]: https://indico.fnal.gov/event/54191/
 [slack-join-link]: https://join.slack.com/share/zt-q6y8w1ya-4U3kYPtxWhRR3Qd7wELQuQ 
-[zoom-link]: https://fnal.zoom.us/j/99381838849
+[zoom-link]: https://fnal.zoom.us/
 
 
 {%include links.md%} 
