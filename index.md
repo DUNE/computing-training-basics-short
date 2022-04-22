@@ -8,14 +8,14 @@ country: "us"
 language: "en"
 latitude: "45"
 longitude: "-1"
-humandate: "May 12-14, 2021"
-humantime: "8:00 am - 12:30 pm"
-startdate: "2021-05-12"
-enddate: "2021-05-14"
-instructor: ["Claire David", "Michael Kirby"]
+humandate: "May 12-13, 2022"
+humantime: "8:00 am - 3:00 pm"
+startdate: "2022-05-12"
+enddate: "2021-05-13"
+instructor: ["Michael Kirby","Steve Timms","Tom Junk","Ken Herner"]
 helper: ["mentor1", "mentor2"]
-email: ["claire.david@cern.ch","mkirby@fnal.gov"]
-collaborative_notes: "2021-04-12-dune"
+email: ["mkirby@fnal.gov","timms@fnal.gov","junk@fnal.gov","herner@fnal.gov"]
+collaborative_notes: "2022-04-12-dune"
 eventbrite:
 ---
 
@@ -55,9 +55,10 @@ You will need a valid FNAL or CERN account to be able to do the tutorial and be 
 
 <h2 id="schedule">Schedule by Day</h2>
 
-<!-- {% include custom_schedule3.html %} -->
-<center><img  alt="" src="fig/Schedule_computing_training_202105.png"/></center>
 
+{% include sc/schedule.html %}
+
+<!--<center><img  alt="" src="fig/Schedule_computing_training_202105.png"/></center>-->
 
 <!-- An [asynchronous session]({{site.baseurl}}/asynchronous/) is designed as later day acivities for the first two days of the workshop.-->
 

@@ -10,7 +10,7 @@ This edition of the computing training extends from the [January 2021 training](
 
 When:
 
-2021 May 12-13-14, Wednesday to Friday, from 8:00 AM - 12:30 PM CST
+2022 May 13-14, from 8:00 AM - 3:00 PM CST
 
 What:
 
@@ -21,7 +21,7 @@ New! There will be quizzes and special sessions “expert in the room” to answ
 
 How to attend?
 
-Participants must have a valid FNAL or CERN account. The Indico site is [https://indico.fnal.gov/event/48756/][indico-event]
+Participants must have a valid FNAL or CERN account. The Indico site is [https://indico.fnal.gov/event/54191/][indico-event]
 
 Apply immediately if you do not yet have accounts at either lab (info).
 
@@ -29,7 +29,7 @@ Questions?
 
 Contact the organizers at: dune-computing-training@fnal.gov 
 
-New slack channel: #computing_training_may2021 
+New slack channel: #computing_training_basics
 
 ## Contributing
 
@@ -41,7 +41,6 @@ New slack channel: #computing_training_may2021
 
 Maintainers of this GitHub space are:
 
-* Claire David
 * David DeMuth
 
 ## Authors
@@ -54,5 +53,5 @@ The lesson framework utilizes the the [Software Carpentry's styles template][car
 
 To cite this lesson, please consult with [CITATION](CITATION)
 
-[indico-event]: https://indico.fnal.gov/event/48756/
+[indico-event]: https://indico.fnal.gov/event/54191/
 [carpentry-source]: https://github.com/carpentries/lesson-example
