@@ -326,7 +326,7 @@ voms-proxy-info >> /dune/app/users/${USER}/my_first_login.txt
 {: .language-bash}
 
 > ## Issues
-> If you have issues here, please refer to the [Indico event page](https://indico.fnal.gov/event/48756/) to get support. Please mention in your message it is the Step 6 of the setup. Thanks!
+> If you have issues here, please refer to the [Indico event page](https://indico.fnal.gov/event/54191/) to get support. Please mention in your message it is the Step 6 of the setup. Thanks!
 {: .challenge}
 
 > ## Success
@@ -364,7 +364,7 @@ PDSPProd4_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_datadriven_41094796_0_20210121
 {: .output}
 
 ### 3. Notify us
-You should be good to go, and you might revisit [Indico event page](https://indico.fnal.gov/event/48756/).
+You should be good to go, and you might revisit [Indico event page](https://indico.fnal.gov/event/54191/).
 If however you are experiencing issues, please contact us as soon as possible. Be sure to mention "Setup on CERN machines" if that is the case, and we will do our best to assist you.
 
 > ## Success
