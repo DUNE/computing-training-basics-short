@@ -22,6 +22,7 @@ Coordinator: Heidi Schellman (Oregon State University)
 
 
 The session will be captured on video a placed here after the workshop for asynchronous study.
+
 <!--
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2Vg4kXcxzCs" title="DUNE Computing Tutorial May 2021 Welcome" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -30,7 +31,7 @@ The session will be captured on video a placed here after the workshop for async
 ## Tutorial Instructors
 
 **Organizers:**
-- Claire David (York University / FNAL)
+- Heidi Schellman (Oregon State University /FNAL)
 - David DeMuth (Valley City State University)
 
 **Lecturers (in order of appearance in the schedule):**
