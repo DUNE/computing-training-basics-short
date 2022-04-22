@@ -26,7 +26,7 @@ keypoints:
 
 ## Requirements
 
-You must be on the DUNE Collaboration member list and have a valid FNAL or CERN account. See the [Indico Requirement page](https://indico.fnal.gov/event/48756/page/2790-requirements) for more information.
+You must be on the DUNE Collaboration member list and have a valid FNAL or CERN account. See the [Indico Requirement page](https://indico.fnal.gov/event/54191/page/2930-requirements) for more information.
 
 
 > ## Note
