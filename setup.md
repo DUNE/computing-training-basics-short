@@ -376,7 +376,7 @@ If however you are experiencing issues, please contact us as soon as possible. B
 {: .checklist}
 
 > ## Issues
-> If you have issues here, please refer to the [Indico event page](https://indico.fnal.gov/event/48756/) to get support. Please note that you are on a CERN machine in your message. Thanks!
+> If you have issues here, please refer to the [Indico event page](https://indico.fnal.gov/event/54191/) to get support. Please note that you are on a CERN machine in your message. Thanks!
 {: .discussion}
 
 
