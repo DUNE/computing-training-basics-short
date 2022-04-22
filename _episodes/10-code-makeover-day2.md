@@ -14,9 +14,11 @@ keypoints:
 
 ## Session Video
 
-<center>
+The session will be captured on video a placed here after the workshop for asynchronous study.
+
+<!--<center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/k74QnmovOzA" title="DUNE Computing Tutorial May 2021 Code-makeover on how to code for better efficiency" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+</center>-->
 
 ### Code Make-over
 

@@ -19,9 +19,14 @@ keypoints:
 
 ## Session Video
 
+The session will be captured on video a placed here after the workshop for asynchronous study.
+
+<!-- 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0FMtb3jy7H8" title="DUNE Computing Tutorial May 2021 Storage Systems" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
+-->
+
 
 ## Introduction
 There are three types of storage volumes that you will encounter at Fermilab: local hard drives, network attached storage, and large-scale, distributed storage. Each has it's own advantages and limitations, and knowing which one to use when isn't all straightforward or obvious. But with some amount of foresight, you can avoid some of the common pitfalls that have caught out other users.

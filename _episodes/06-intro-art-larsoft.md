@@ -15,9 +15,12 @@ keypoints:
 
 ## Session Video
 
+The session will be captured on video a placed here after the workshop for asynchronous study.
+
+<!--
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MFHCYC8KfQQ" title="DUNE Computing Tutorial May 2021 Introduction to art and LArSoft" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+</center>-->
 
 ## Introduction to *art*
 

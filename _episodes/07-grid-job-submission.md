@@ -19,9 +19,11 @@ keypoints:
 
 ## Video Session Part 1 of 2
 
-<center>
+The session will be captured on video a placed here after the workshop for asynchronous study.
+
+<!--<center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1tpUd3c3Irc" title="DUNE Computing Tutorial May 2021 Day 2 Grid Job Submission and Common Errors" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+</center>-->
 
 ## Submit a job
 
@@ -179,9 +181,11 @@ This can get a little complicated when trying to do it for things several direct
 
 ## Video Session Part 2 of 2
 
-<center>
+The session will be captured on video a placed here after the workshop for asynchronous study.
+
+<!--<center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/L3dx-NQJvp8" title="DUNE Computing Tutorial May 2021 Day 2 Grid Job Submission and Common Errors Part 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+</center>-->
 
 ## Monitor your jobs
 For all links below, log in with your FNAL Services credentials (FNAL email, not Kerberos password).
