@@ -249,7 +249,7 @@ Setting up DUNE UPS area... /cvmfs/dune.opensciencegrid.org/products/dune/
 ## 5. Exercise! (it's easy)
 This exercise will help organizers see if you reached this step or need help.
 
-1) Start in your home area `cd ~` and create the file ```.dune_presetup_202205.sh```. Files starting with a dot are hidden files and can be seen with the command `ls -la` (**a** for **a**ll files). Write in it the following:
+1) Start in your home area `cd ~` and create the file ```dune_presetup_202205.sh```.  Write in it the following:
 ~~~
 export DUNESW_VERSION=v09_48_01d00
 alias dune_setup='source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh'
@@ -257,7 +257,7 @@ alias dune_setup='source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dun
 {: .source}
 When you start the training, you will have to source this file:
 ~~~
-source ~/.dune_presetup_202205.sh
+source ~/dune_presetup_202205.sh
 ~~~
 {: .language-bash}
 Then, to setup DUNE, use the created alias:
@@ -380,8 +380,6 @@ If however you are experiencing issues, please contact us as soon as possible. B
 {: .discussion}
 
 
- 
-  
    
 This page extends from a similar page on the private [DUNE Wiki][dune-setup-jan2021]
 
