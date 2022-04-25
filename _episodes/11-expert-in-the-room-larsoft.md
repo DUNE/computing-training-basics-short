@@ -264,8 +264,8 @@ histograms or trees.
 
 Aside on module labels and types:  A module label is used to identify
 which modules to run in which order in a trigger path in an art job, and also
-to label the output data products.  The module type is the name of the source
-file:  `<moduletype>_module.cc` is the filename of the source code for a module
+to label the output data products.  The "module type" is the name of the source
+file:  `moduletype_module.cc` is the filename of the source code for a module
 with class name moduletype.  The build system preserves this and makes a shared object (`.so`)
 library that art loads when it sees a particular module_type in the configuration document.
 The reason there are two names here is so you
@@ -477,7 +477,7 @@ For protoduneana and dunesw, this [wiki page][dunetpc-wiki-tutorial] is quite go
 
 #### Version mismatch between source code and installed products
 
-When you perform an mrbsetenv or a mrbslp, sometimes you get a version mismatch.  The most common reason for this is that you have set up an older version of the dependent products (protoduneana depends on dunetpc, which depends on larsoft, which depends on *art*, ROOT, GEANT4, and many other products).  If the source code is newer than the installed products, the versions may mismatch.  You can check out an older version of the source code (see the example above) with
+When you perform an mrbsetenv or a mrbslp, sometimes you get a version mismatch.  The most common reason for this is that you have set up an older version of the dependent products.  Dunesw depends on protoduneana, which depends on dunecore, which depends on larsoft, which depends on *art*, ROOT, GEANT4, and many other products.  This [picture][dunesw-dependency-tree] shows the software dependency tree for dunesw v09_48_01_d00.  If the source code is newer than the installed products, the versions may mismatch.  You can check out an older version of the source code (see the example above) with
 
 ~~~
   mrb g -t <tag> repository
@@ -563,7 +563,7 @@ Do not store data files on the app disk!   Sometimes the app disk fills up nonet
 
 #### Runtime errors
 
-Segmentation faults:  These do not throw errors that *art* can catch -- they terminate the program immediately.  Use the debugger to find out where they happened and why.
+Segmentation faults:  These do not throw errors that *art* can catch. They terminate the program immediately.  Use the debugger to find out where they happened and why.
 
 Exceptions that are caught.  The `ddt` debugger has in its menu a set of standard breakpoints.   You can instruct the debugger to stop any time an exception is thrown.  A common exception is a vector accessed past its size using `at()`, but often these are hard to track down because they could be anywhere.  Start your program with the debugger, but it is often a good idea to turn off the break-on-exception feature until after the geometry has been read in.  Some of the XML parsing code throws a lot of exceptions that are later caught as part of its normal mode of operation, and if you hit a breakpoint on each of these and push the "go" button with your mouse each time, you could be there all day.  Wait until the initialization is over, press "pause" and then turn on the breakpoints by exception.
 
@@ -621,7 +621,7 @@ will use your valid Kerberos ticket to generate the necessary certificates and p
 [redmine-dev-larsoft]: https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Developing_With_LArSoft
 [redmine-working-github]: https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Working_with_GitHub
 [dune-larsoft-may21]: https://wiki.dunescience.org/wiki/Presentation_of_LArSoft_May_2021
-
+[dunesw-dependency-tree]: https://wiki.dunescience.org/w/img_auth.php/f/f0/Dunesw_v09_48_01d00_e20_prof_graph.pdf
 
 {%include links.md%} 
 
