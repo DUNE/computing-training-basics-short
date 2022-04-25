@@ -276,7 +276,7 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Use const frequently** The const keyword prevents overwriting variables unintentionally.  Constness is how *art* protects the data in its event memory.  This mechanism is exposed to the user in that pointers to const memory must be declared as pointers to consts, or you will get obscure error messages from the compiler.  Const can also protect you from yourself and your colleagues when you know that the contents of a variable ought not to change.
 
-**Use simple constructs even if they are more verbose**  Sometimes very clever, terse expressions get the job done, but they can be difficult for a human to understand if and when that person must make a change.
+**Use simple constructs even if they are more verbose**  Sometimes very clever, terse expressions get the job done, but they can be difficult for a human to understand if and when that person must make a change.   There is an [obfuscated C contest][obfuscated-C] if you want to see examples of difficult-to-read code (that may in fact be very efficient!  But people time is important, too).
 
 
 
@@ -286,6 +286,6 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 [valgrind-ms-manual]: https://www.valgrind.org/docs/manual/ms-manual.html
 [ninjadocpageredmine]: https://cdcvs.fnal.gov/redmine/projects/dunetpc/wiki/_Tutorial_#Using-the-ninja-build-system-instead-of-make
 [valgrind-root]: https://root-forum.cern.ch/t/valgrind-and-root/28506
-
+[obfuscated-C]: https://www.ioccc.org/
 
 {%include links.md%}
