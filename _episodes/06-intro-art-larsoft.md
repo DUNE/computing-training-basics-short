@@ -165,7 +165,7 @@ count_events root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dune
 
 #### product_sizes_dumper
 
-You can get a peek at what's inside an artroot file with `product_sizes_dumper`.
+You can get a peek at what's inside an *art*ROOT file with `product_sizes_dumper`.
 
 Try it out:
 ```bash
