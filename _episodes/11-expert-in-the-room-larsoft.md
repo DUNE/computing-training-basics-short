@@ -55,17 +55,15 @@ Start up session #1, editing code, on one of the dunegpvm*.fnal.gov
 interactive nodes.  These scripts have also been tested on the
 lxplus.cern.ch interactive nodes. Create two scripts in your home directory:
 
-Modification as of September 27, 2021:  Due to an incompatible version of mrb that was rolled out on September 21, 2021 and made current, in order to use the older version of dunetpc in this tutorial, we must also use the older version of mrb.  Two lines, unsetup mrb and setup mrb -o have been added to the setup scripts.  Versions of protoduneana, dunetpc and larsoft v09_31_00 and newer will need the new (current) mrb, and older verisons will use the older version.
-
-`newDevMay2021Tutorial.sh` should have these contents:
+`newDevMay2022Tutorial.sh` should have these contents:
 
 ~~~
 #!/bin/sh
 
-PROTODUNEANA_VERSION=v09_22_02
+PROTODUNEANA_VERSION=v09_48_01d00
 
-QUALS=e19:prof
-DIRECTORY=may2021tutorial
+QUALS=e20:prof
+DIRECTORY=may2022tutorial
 USERNAME=`whoami`
 export WORKDIR=/dune/app/users/${USERNAME}
 if [ ! -d "$WORKDIR" ]; then
@@ -73,8 +71,6 @@ if [ ! -d "$WORKDIR" ]; then
 fi
 
 source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
-unsetup mrb
-setup mrb -o
 
 cd ${WORKDIR}
 touch ${DIRECTORY}
@@ -93,15 +89,13 @@ mrb i -j16
 ~~~
 {: .language-bash}
 
-and `setupMay2021Tutorial.sh` should have these contents:
+and `setupMay2022Tutorial.sh` should have these contents:
 
 ~~~
-DIRECTORY=may2021tutorial
+DIRECTORY=may2022tutorial
 USERNAME=`whoami`
 
 source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
-unsetup mrb
-setup mrb -o
 export WORKDIR=/dune/app/users/${USERNAME}
 if [ ! -d "$WORKDIR" ]; then
   export WORKDIR=`echo ~`
@@ -110,6 +104,7 @@ fi
 cd $WORKDIR/$DIRECTORY
 source localProducts*/setup
 cd work
+setup dunesw v09_48_01_d00 -q e20:prof
 mrbslp
 ~~~
 {: .language-bash}
@@ -117,7 +112,7 @@ mrbslp
 Execute this command to make the first script executable.
 
 ~~~
-  chmod +x newDevMay2021Tutorial.sh
+  chmod +x newDevMay2022Tutorial.sh
 ~~~
 {: .language-bash}
 
@@ -144,7 +139,7 @@ to run programs (people need them to build code!)
 On the build node, execute the `newDev` script:
 
 ~~~
-  ./newDevMay2021Tutorial.sh
+  ./newDevMay2022Tutorial.sh
 ~~~
 {: .language-bash}
 
@@ -155,13 +150,7 @@ worked on the code some, as this script will wipe it out and start fresh.
 
 This build script will take a few minutes to check code out and compile it.
 
-The `mrb g` command does a `git clone` of the specified repository with an optional tag and destination name.  LArSoft repositories (not used in this example but you may want to modify LArSoft code too someday) are hosted these days on GitHub, while DUNE's repositories, `protoduneana`, `dunetpc`, `duneutil`, and a few others are hosted on Redmine git repositories served by cdcvs.fnal.gov.  mrb g is smart enough to be able to clone the repository from the right server.  It also tests if you have push permissions and uses the ssh URL if you do, otherwise it falls back to a read-only clone over https.  Ask Tom Junk for developer permission for dune code and he can add you to the list.  More information is available [here][dunetpc-wiki].  
-
-During testing, I found that my `~/.ssh/known_hosts` file had an old entry
-for `cdcvs.fnal.gov` in it, and the `mrb g protoduneana` command failed because of
-it.  Solution -- edit `~/.ssh/known_hosts` and delete the entry for
-cdcvs.fnal.gov and try again.  You may get a message asking you to add
-cdcvs.fnal.gov's `ssh key` to your `known_hosts` file -- answer "yes".
+The `mrb g` command does a `git clone` of the specified repository with an optional tag and destination name.    More information is available [here][dunetpc-wiki] and [here][mrb-reference-guide].
 
 Some comments on the build command
 
@@ -170,7 +159,9 @@ Some comments on the build command
 ~~~
 {: .language-bash}
 
-The `-j16` says how many concurrent processes to run.  Set the number to no more than the number of cores on the computer you're running it on.  A dunegpvm machine has four cores, and the two build nodes each have 16.  You can find the number of cores a machine has with
+The `-j16` says how many concurrent processes to run.  Set the number to no more than the number of cores on the computer you're running it on.  A dunegpvm machine has four cores, and the two build nodes each have 16.  Running more concurrent processes on a computer with a limited number of cores won't make the build finish any faster, but you may run out of memory.  The dunegpvms do not have enough memory to run 16 instances of the C++ compiler at a time, and you may see the word `killed` in your error messages if you ask to run many more concurrent compile processes than the interactive computer can handle.
+
+You can find the number of cores a machine has with
 
 ~~~
   cat /proc/cpuinfo
@@ -179,13 +170,13 @@ The `-j16` says how many concurrent processes to run.  Set the number to no more
 
 The `mrb` system builds code in a directory distinct from the source code.  Source code is in `$MRB_SOURCE` and built code is in `$MRB_BUILDDIR`.  If the build succeeds (no error messages, and compiler warnings are treated as errors, and these will stop the build, forcing you to fix the problem), then the built artifacts are put in `$MRB_TOP/localProducts*`.  mrbslp directs ups to search in `$MRB_TOP/localProducts*` first for software and necessary components like `fcl` files.  It is good to separate the build directory from the install directory as a failed build will not prevent you from running the program from the last successful build.  But you have to look at the error messages from the build step before running a program.  If you edited source code, made a mistake, built it unsuccessfully, then running the program may run successfully with the last version which compiled.  You may be wondering why your code changes are having no effect.  You can look in `$MRB_TOP/localProducts*` to see if new code has been added (look for the "lib" directory under the architecture-specific directory of your product).
 
-Because you ran the `newDevMay2021Tutorial.sh` script instead of sourcing it, the environment it
+Because you ran the `newDevMay2022Tutorial.sh` script instead of sourcing it, the environment it
 set up within it is not retained in the login session you ran it from.  You will need to set up your environment again.
 You will need to do this when you log in anyway, so it is good to have
 that setup script.  In session #2, type this:
 
 ~~~
-  source setupMay2021Tutorial.sh
+  source setupMay2022Tutorial.sh
   cd $MRB_BUILDDIR
   mrbsetenv
 ~~~
@@ -195,7 +186,7 @@ The shell command "source" instructs the command interpreter (bash) to read comm
 Do the following in session #1, the source editing session:
 
 ~~~
-source setupMay2021Tutorial.sh
+source setupMay2022Tutorial.sh
   cd $MRB_SOURCE
   mrbslp
 ~~~
@@ -207,7 +198,7 @@ source setupMay2021Tutorial.sh
 computer for session #3
 
 ~~~
-  source setupMay2021Tutorial.sh
+  source setupMay2022Tutorial.sh
   mrbslp
   setup_fnal_security
 ~~~
@@ -242,7 +233,7 @@ Now run the program with the input file accessed by that URL:
 lar -c analyzer_job.fcl root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/protodune-sp/full-reconstructed/2021/mc/out1/PDSPProd4/40/57/23/91/PDSPProd4_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_datadriven_41094796_0_20210121T214555Z.root
 ~~~
 
-CERN Users without access to Fermilab's `dCache`: -- example input files for this tutorial have been copied to `/afs/cern.ch/work/t/tjunk/public/may2021tutorialfiles/`.
+CERN Users without access to Fermilab's `dCache`: -- example input files for this tutorial have been copied to `/afs/cern.ch/work/t/tjunk/public/may2022tutorialfiles/`.
 
 After running the program, you should have an output file `tutorial_hist.root`.  Note -- please do not
 store large rootfiles in `/dune/app`!  The disk is rather small, and we'd like to
@@ -461,13 +452,13 @@ code in CVMFS points to locations on the Jenkins build nodes.
 Your environment has lots of variables pointing at installed code.  Look for variables like
 
 ~~~
-  DUNETPC_DIR
+  PROTODUNEANA_DIR
 ~~~
 
 which points to a directory in `CVMFS`.
 
 ~~~
-  ls $DUNETPC_DIR/source
+  ls $PROTODUNEANA_DIR/source
 
 or $LARDATAOBJ_DIR/include
 ~~~
@@ -476,7 +467,7 @@ are good examples of places to look for code, for example.
 
 #### Checking out and committing code to the git repository
 
-For protoduneana and dunetpc, this [wiki page][dunetpc-wiki-tutorial] is quite good.  LArSoft uses GitHub with a pull-request model.  See 
+For protoduneana and dunesw, this [wiki page][dunetpc-wiki-tutorial] is quite good.  LArSoft uses GitHub with a pull-request model.  See 
 
 [https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Developing_With_LArSoft][redmine-dev-larsoft]
 
@@ -623,6 +614,7 @@ will use your valid Kerberos ticket to generate the necessary certificates and p
 
 
 [dunetpc-wiki]:  https://cdcvs.fnal.gov/redmine/projects/dunetpc/wiki/_Tutorial_
+[mrb-reference-guide]: https://cdcvs.fnal.gov/redmine/projects/mrb/wiki/MrbRefereceGuide
 [dune-wiki-protodune-sp]: https://wiki.dunescience.org/wiki/Look_at_ProtoDUNE_SP_data
 [redmine-327]:  https://cdcvs.fnal.gov/redmine/documents/327
 [dunetpc-wiki-tutorial]:  https://cdcvs.fnal.gov/redmine/projects/dunetpc/wiki/_Tutorial_
