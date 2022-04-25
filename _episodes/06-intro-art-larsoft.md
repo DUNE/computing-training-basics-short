@@ -172,7 +172,7 @@ Try it out:
 product_sizes_dumper -f 0 root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/protodune-sp/full-reconstructed/2021/mc/out1/PDSPProd4/40/57/23/91/PDSPProd4_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_datadriven_41094796_0_20210121T214555Z.root
 ```
 
-It is also useful to redirect the output of this command to a file so you can look at it with a text editor and search for items of interest. This command lists the sizes of the `TBranches` in the `Events TTree` in the `artroot` file. There is one `TBranch` per data product, and the name of the `TBranch` is the data product name, an "s" is appended (even if the plural of the data product name doesn't make sense with just an "s" on the end), an underscore, then the module label that made the data product, an underscore, the instance name, an underscore, and the process name and a period.
+It is also useful to redirect the output of this command to a file so you can look at it with a text editor and search for items of interest. This command lists the sizes of the `TBranches` in the `Events TTree` in the *art*ROOT file. There is one `TBranch` per data product, and the name of the `TBranch` is the data product name, an "s" is appended (even if the plural of the data product name doesn't make sense with just an "s" on the end), an underscore, then the module label that made the data product, an underscore, the instance name, an underscore, and the process name and a period.
 
 
 Quiz questions, looking at the output from above.
@@ -239,7 +239,7 @@ Parameters may be defined more than once. The last instance of a parameter defin
 block.subblock.parameter: new_value
 ~~~
 
-To see what block and subblock a parameter is in, use `fhcl-dump on` the parent fcl file and look for the curly brackets. You can also use
+To see what block and subblock a parameter is in, use `fhcl-dump` on the parent fcl file and look for the curly brackets. You can also use
 
 ```bash
 lar -c fclfile.fcl --debug-config tmp.txt --annotate
@@ -273,16 +273,16 @@ services.LArG4Parameters.ModBoxA: 7.7E-1
 Plug-ins each have their own .so library which gets dynamically loaded by art when referenced by name in the fcl configuration.
 
 **Producer Modules**  
-A producer module is a software component that writes data products to the event memory. It is characterized by produces<> and consumes<> statements in the class constructor, and `art::Event::put()` calls in the `produces()` method. A producer must produce the data product collection it says it produces, even if it is empty, or *art* will throw an exception at runtime. `art::Event::put()` transfers ownership of memory (use std::move so as not to copy the data) from the module to the *art* event memory. Data in the *art* event memory will be written to the output file unless output commands in the fcl file tell art not to do that. Documentation on output commands can be found in the LArSoft wiki here: [https://larsoft.github.io/LArSoftWiki/Rerun_part_of_all_a_job_on_an_output_file_of_that_job][larsoft-rerun-part-job] Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
+A producer module is a software component that writes data products to the event memory. It is characterized by produces<> and consumes<> statements in the class constructor, and `art::Event::put()` calls in the `produces()` method. A producer must produce the data product collection it says it produces, even if it is empty, or *art* will throw an exception at runtime. `art::Event::put()` transfers ownership of memory (use std::move so as not to copy the data) from the module to the *art* event memory. Data in the *art* event memory will be written to the output file unless output commands in the fcl file tell art not to do that. Documentation on output commands can be found in the LArSoft wiki [here][larsoft-rerun-part-job]. Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: `modulename_module.cc`, where `modulename` does not have any underscores in it.
 
 **Analyzer Modules**  
-Analyzer modules read data products from the event memory and produce histograms or TTrees, or other output. They are typically scheduled after the producer modules have been run. Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
+Analyzer modules read data products from the event memory and produce histograms or TTrees, or other output. They are typically scheduled after the producer modules have been run. Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: `modulename_module.cc`, where `modulename` does not have any underscores in it.
 
 **Source Modules**  
-Source modules read data from input files and reformat it as need be, in order to put the data in *art* event data store. Most jobs use the art-provided RootInput source module which reads in art-formatted ROOT files. RootInput interacts well with the rest of the framework in that it provides lazy reading of TTree branches.  When using the RootInput source, data are not actually fetched from the file into memory when the source executes, but only when GetHandle or GetValidHandle or other product get methods are called. This is useful for *art* jobs that only read a subset of the TBranches in an input file. Code for sources must be in files of the form: <modulename>_source.cc, where modulename does not have any underscores in it.
+Source modules read data from input files and reformat it as need be, in order to put the data in *art* event data store. Most jobs use the art-provided RootInput source module which reads in art-formatted ROOT files. RootInput interacts well with the rest of the framework in that it provides lazy reading of TTree branches.  When using the RootInput source, data are not actually fetched from the file into memory when the source executes, but only when GetHandle or GetValidHandle or other product get methods are called. This is useful for *art* jobs that only read a subset of the TBranches in an input file. Code for sources must be in files of the form: `modulename_source.cc`, where `modulename` does not have any underscores in it.
 
 **Services**  
-These are singleton classes that are globally visible within an *art* job. They can be FHiCL configured like modules, and they can schedule methods to be called on begin job, begin run, begin event, etc. They are meant to help supply configuration parameters like the drift velocity, or more complicated things like geometry functions, to modules that need them. Please do not use services as a back door for storing event data outside of the *art* event store. Source code must be in files of the form: `<modulename>_service.cc`, where servicename does not have any underscores in it.
+These are singleton classes that are globally visible within an *art* job. They can be FHiCL configured like modules, and they can schedule methods to be called on begin job, begin run, begin event, etc. They are meant to help supply configuration parameters like the drift velocity, or more complicated things like geometry functions, to modules that need them. Please do not use services as a back door for storing event data outside of the *art* event store. Source code must be in files of the form: `servicename_service.cc`, where servicename does not have any underscores in it.
 
 **Tools**  
 Tools are FHiCL-configurable software components that are not singletons, like services. They are meant to be swappable by FHiCL parameters which tell art which .so libraries to load up, configure, and call from user code. See the [Art Wiki Page][art-wiki-redmine] for more information on tools and other plug-ins.
@@ -297,11 +297,11 @@ for instructions on how to invoke it.
 
 ### Non-Plug-In Code
 
-You are welcome to write standard C++ code -- classes and C-style functions are no problem. In fact, to enhance the portability of code, the art team encourages the separation of algorithm code into non-framework-specific source files, and to call these functions or class methods from the art plug-ins. Typically, source files for standalone algorithm code have the extension .cxx while art plug-ins have .cc extensions. Most directories have a CMakeLists.txt file which has instructions for building the plug-ins, each of which is built into a .so library, and all other code gets built and put in a separate .so library.
+You are welcome to write standard C++ code -- classes and C-style functions are no problem. In fact, to enhance the portability of code, the *art* team encourages the separation of algorithm code into non-framework-specific source files, and to call these functions or class methods from the *art* plug-ins. Typically, source files for standalone algorithm code have the extension .cxx while art plug-ins have .cc extensions. Most directories have a CMakeLists.txt file which has instructions for building the plug-ins, each of which is built into a .so library, and all other code gets built and put in a separate .so library.
 
 ### Retrieving Data Products
 
-In a producer or analyzer module, data products can be retrieved from the art event store with `getByLabel()` or `getValidHandle()` calls, or more rarely `getManyByType` or other calls. The arguments to these calls specify the module label and the instance of the data product. A typical `TBranch` name in the Events tree in an artroot file is
+In a producer or analyzer module, data products can be retrieved from the art event store with `getByLabel()` or `getValidHandle()` calls, or more rarely `getManyByType` or other calls. The arguments to these calls specify the module label and the instance of the data product. A typical `TBranch` name in the Events tree in an *art*ROOT file is
 
 ~~~
 simb::MCParticles_largeant__G4Stage1.
@@ -310,7 +310,7 @@ simb::MCParticles_largeant__G4Stage1.
 
 here, `simb::MCParticle` is the name of the class that defines the data product. The "s" after the data product name is added by *art* -- you have no choice in this even if the plural of your noun ought not to just add an "s". The underscore separates the data product name from the module name, "largeant". Another underscore separates the module name and the instance name, which in this example is the empty string -- there are two underscores together there. The last string is the process name and usually is not needed to be specified in data product retrieval. You can find the `TBranch` names by browsing an artroot file with `ROOT` and using a `TBrowser`, or by using `product_sizes_dumper -f 0`.
 
-### Art documentation
+### *Art* documentation
 
 There is a mailing list -- `art-users@fnal.gov` where users can ask questions and get help.
 
