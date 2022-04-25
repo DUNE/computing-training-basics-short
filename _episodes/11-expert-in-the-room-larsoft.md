@@ -182,7 +182,7 @@ that setup script.  In session #2, type this:
 ~~~
 {: .language-bash}
 
-The shell command "source" instructs the command interpreter (bash) to read commands from the file `setupMay2021Tutorial.sh` as if they were typed at the terminal.  This way, environment variables set up by the script stay set up.
+The shell command "source" instructs the command interpreter (bash) to read commands from the file `setupMay2022Tutorial.sh` as if they were typed at the terminal.  This way, environment variables set up by the script stay set up.
 Do the following in session #1, the source editing session:
 
 ~~~
