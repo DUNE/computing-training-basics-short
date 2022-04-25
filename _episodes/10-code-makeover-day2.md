@@ -28,14 +28,14 @@ DUNE simulation, reconstruction and analysis jobs take a lot of memory and CPU t
 
 ### CPU optimization:
 
-**Run  with the “prof” build when launching big jobs.**  While both the "debug" and "prof" builds have debugging and profiling information included in the executables and shared libraries, the "prof" build has a high level of compiler optimization turned on while "debug" has optimizations disabled.  Debugging with the "prof" build can be done, but it is more difficult because operations can be reordered and variables put in CPU registers instead of inspectable memory. The “debug” builds are generally much slower, by a factor of four or more.  Often this difference is so stark that the time spent repeatedly waiting for a slow program to chug through the first trigger record in an interactive debugging session is more costly than the inconvenience of not being able to see some of the variables in the debugger.  If you are not debugging, then there really is (almost) no reason to use the “debug” builds.  If your program produces a different result when run with the debug build and the prof build (and it’s not just the random seed), then there is a bug to be investigated.
+**Run  with the “prof” build when launching big jobs.**  While both the "debug" and "prof" builds have debugging and profiling information included in the executables and shared libraries, the "prof" build has a high level of compiler optimization turned on while "debug" has optimizations disabled.  Debugging with the "prof" build can be done, but it is more difficult because operations can be reordered and some variables get put in CPU registers instead of inspectable memory. The “debug” builds are generally much slower, by a factor of four or more.  Often this difference is so stark that the time spent repeatedly waiting for a slow program to chug through the first trigger record in an interactive debugging session is more costly than the inconvenience of not being able to see some of the variables in the debugger.  If you are not debugging, then there really is (almost) no reason to use the “debug” builds.  If your program produces a different result when run with the debug build and the prof build (and it’s not just the random seed), then there is a bug to be investigated.
 
 **Compile your interactive ROOT scripts instead of running them in the interpreter**   At the ROOT prompt, use .L myprogram.C++ (even though its filename is myprogram.C).  Also .x myprogram.C++ will compile and then execute it.  This will force a compile.  .L myprogram.C+ will compile it only if necessary.
 
 **Run gprof or other profilers like valgrind's callgrind:**   You might be surprised at what is actually taking all the time in your program.  There is abundant documentation on the [web][gnu-manuals-gprof], and also the valgrind online documentation.
 There is no reason to profile a "debug" build and there is no need to hand-optimize something the compiler will optimize anyway, and which may even hurt the optimality of the compiler-optimized version.
 
-**The Debugger can be used as a simple profiler:** If your program is horrendously slow (and/or it used to be fast), pausing it at any time is likely to pause it while it is doing its slow thing.  Run your program in the debugger, pause it when you think it is doing its slow thing (i.e. after initialization), and look at the call stack.  This technique can be handy because you can then inspect the values of variables that might give a clue if there’s a bug making your program slow.  (e.g. looping over 10<sup>15</sup> wires in the Far Detector, which would indicate a bug.**.
+**The Debugger can be used as a simple profiler:** If your program is horrendously slow (and/or it used to be fast), pausing it at any time is likely to pause it while it is doing its slow thing.  Run your program in the debugger, pause it when you think it is doing its slow thing (i.e. after initialization), and look at the call stack.  This technique can be handy because you can then inspect the values of variables that might give a clue if there’s a bug making your program slow.  (e.g. looping over 10<sup>15</sup> wires in the Far Detector, which would indicate a bug, such as an uninitialized loop counter or an unsigned loop counter that is initialized with a negative value.
 
 **Don't perform calculations or do file i/o that will only later  be ignored.**  It's just a waste of time.  If you need to pre-write some code because in future versions of your program the calculation is not ignored, comment it out, or put a test around it so it doesn't get executed when it is not needed.
 
@@ -68,7 +68,7 @@ for (size_t i=0; i<n_channels; ++i)<br>
 </div><!--side by side table by DeMuth-->
 
 
-The example above also takes advantage of the fact that floating-point multiplies generally have significantly less latency than floating-point divides (still true, even with modern CPUs).
+The example above also takes advantage of the fact that floating-point multiplies generally have significantly less latency than floating-point divides (this is still true, even with modern CPUs).
 
 **Use sqrt():** Don’t use `pow()` or `TMath::Power` when a multiplication or `sqrt()` function can be used.
 
@@ -218,11 +218,11 @@ Use `valgrind`.  Its default operation checks for memory leaks and invalid acces
 
 ~~~
 setup valgrind
-valgrind --leak-check=yes myprog arg1 arg2
+valgrind --leak-check=yes --suppressions=$ROOTSYS/etc/valgrind-root.supp myprog arg1 arg2
 ~~~
 {: .source}
 
-More information is available [here][valgrind-quickstart]
+More information is available [here][valgrind-quickstart].  ROOT-specific suppressions are described [here][valgrind-root].  You can omit them, but your output file will be cluttered up with messages about things that ROOT does routinely that are not bugs.
 
 Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see documentation [here][valgrind-ms-manual].
 
@@ -264,6 +264,20 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Write out histograms to ROOTfiles and decorate them in a separate script**  You may need to experiment many times with borders, spacing, ticks, fonts, colors, line widths, shading, labels, titles, legends, axis ranges, etc.  Best not to have to re-compute the contents when you're doing this, so save the histograms to a file first and read it in to touch it up for presentation.
 
+## Software readability and maintainability:
+
+**Keep the test suite up to date**   dunesw and larsoft have many examples of unit tests and integration tests.  A colleague's commit to your code or even to a different piece of code or even a data file might break your code in unexpected, difficult-to-diagnose ways.  The continuous integration (CI) system is there to catch such breakage, and even small changes in run time, memory consumption, and data product output.
+
+**Keep your methods short**  If you have loaded up a lot of functionality in a method, it may become hard to reuse the components to do similar things.  A long method is probably doing a lot of different things that can be given meaningful names.
+
+**Update the comments when code changes**   Not many things are more confusing than an out-of-date-comment that refers to how code used to work long ago.
+
+**Update names when meaning changes** As software evolves, the meaning of the variables may shift.  It may be a quick fix to change the contents of a variable without changing its name, but some variables may then contain contents that is the opposite of what the variable name implies.  While the code will run, future maintainers will get confused.
+
+**Use const frequently** The const keyword prevents overwriting variables unintentionally.  Constness is how *art* protects the data in its event memory.  This mechanism is exposed to the user in that pointers to const memory must be declared as pointers to consts, or you will get obscure error messages from the compiler.  Const can also protect you from yourself and your colleagues when you know that the contents of a variable ought not to change.
+
+**Use simple constructs even if they are more verbose**  Sometimes very clever, terse expressions get the job done, but they can be difficult for a human to understand if and when that person must make a change.
+
 
 
 [cpp-lower-bound]: https://en.cppreference.com/w/cpp/algorithm/lower_bound
@@ -271,6 +285,7 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 [valgrind-quickstart]: https://www.valgrind.org/docs/manual/quick-start.html
 [valgrind-ms-manual]: https://www.valgrind.org/docs/manual/ms-manual.html
 [ninjadocpageredmine]: https://cdcvs.fnal.gov/redmine/projects/dunetpc/wiki/_Tutorial_#Using-the-ninja-build-system-instead-of-make
+[valgrind-root]: https://root-forum.cern.ch/t/valgrind-and-root/28506
 
 
 {%include links.md%}
