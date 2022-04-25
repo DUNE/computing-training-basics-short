@@ -282,6 +282,11 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Minimize the scope of variables**  Often a variable will only have a meaningful value iniside of a loop.  You can declare variables as you use them.  Old langauges like Fortran 77 insisted that you declare all variables at the start of a program block.  This is not true in C and C++.  Declaring variables inside of blocks delimiated by braces means they will go out of scope when the program exits the block, both freeing the memory and preventing you from referring to the variable after the loop is done and only considering the last value it took.  Sometimes this is the desired behaviour, though, and so this is not a blanket rule.
 
+## Coding for Thread Safety
+
+Modern CPUs often have many cores available.  It is not unusual for a grid worker node to have as many as 64 cores on it, and 128 GB of RAM.  Making use of the available hardware to maximize throughput is an important way to optimize our time and resources.  DUNE jobs tend to be "embarrassingly parallel", in that they can be divided up into many small jobs that do not need to communicated with one another.  Therefore, making use of all the cores on a grid node is usually as easy as breaking a task up into many small jobs and letting the grid schedulers work out what jobs run where.  The issue however is effective memory usage.  If several small jobs share a lot of memory whose contents do not change (code libraries loaded into RAM, geometry description, calibration constants), then one can group the work together into a single job that uses multipole threads to get the work done faster.  If the memory usage of a job is dominated by per-event data, then loading 
+
+See this very thorough [presentation][knoepfel-thread-safety] by Kyle Knoepfel at the 2019 LArSoft [workshop][LArSoftWorkshop2019].  Several other talks at the workshop also focus on multi-threaded software.  In short, if data are shared between threads and they are mutable, this is a recipe for race conditions and non-reproducible behavior of programs.  Giving each thread a separate instance of each object is one way to contain possible race conditions.  Alternately, private and public class members which do not change or which have synchronous access methods can also help provide thread safety.
 
 
 [cpp-lower-bound]: https://en.cppreference.com/w/cpp/algorithm/lower_bound
@@ -291,5 +296,7 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 [ninjadocpageredmine]: https://cdcvs.fnal.gov/redmine/projects/dunetpc/wiki/_Tutorial_#Using-the-ninja-build-system-instead-of-make
 [valgrind-root]: https://root-forum.cern.ch/t/valgrind-and-root/28506
 [obfuscated-C]: https://www.ioccc.org/
+[knoepfel-thread-safety]: https://indico.fnal.gov/event/20453/contributions/57777/attachments/36182/44065/2019-LArSoftWorkshop-ThreadSafety.pdf
+[LArSoftSorkshop2019]: https://indico.fnal.gov/event/20453/timetable/?view=standard
 
 {%include links.md%}
