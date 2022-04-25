@@ -379,9 +379,13 @@ If however you are experiencing issues, please contact us as soon as possible. B
 > If you have issues here, please refer to the [Indico event page](https://indico.fnal.gov/event/54191/) to get support. Please note that you are on a CERN machine in your message. Thanks!
 {: .discussion}
 
-
+> ## Useful Links
    
-This page extends from a similar page on the private [DUNE Wiki][dune-setup-jan2021]
+The January 2021 DUNE training setup tutorial in the [DUNE Wiki][dune-setup-jan2021]
+
+[May 2021 DUNE Computing training][dune-training-may2021]
+
+[Wiki page][dune-wiki-interactive-resources] on DUNE's interactive computing resources, including tips on using Kerberos and VNC
 
 {%include links.md%} 
 
@@ -395,3 +399,6 @@ This page extends from a similar page on the private [DUNE Wiki][dune-setup-jan2
 [dunegpvm-vnc]: https://wiki.dunescience.org/wiki/DUNE_Computing/Using_VNC_Connections_on_the_dunegpvms
 [proxy-info]: https://cdcvs.fnal.gov/redmine/projects/sbndcode/wiki/Get_a_certificate_proxy 
 [dune-setup-jan2021]: https://wiki.dunescience.org/wiki/DUNE_Computing/Setup_Jan2021
+[dune-training-may2021]: https://dune.github.io/computing-training-202105/
+[dune-wiki-interactive-resources]: https://wiki.dunescience.org/wiki/DUNE_Computing/DUNE_Interactive_Computing_Resources
+
