@@ -278,6 +278,10 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Use simple constructs even if they are more verbose**  Sometimes very clever, terse expressions get the job done, but they can be difficult for a human to understand if and when that person must make a change.   There is an [obfuscated C contest][obfuscated-C] if you want to see examples of difficult-to-read code (that may in fact be very efficient!  But people time is important, too).
 
+**Always initialize variables when you declare them**  Compilers will warn about the use of uninitialized variables, so you will get used to doing this anyway.  The initialization step takes a little time and it is not needed if the first use of the memory is to set the variable, which is why compilers do not automatically initialize variables.
+
+**Minimize the scope of variables**  Often a variable will only have a meaningful value iniside of a loop.  You can declare variables as you use them.  Old langauges like Fortran 77 insisted that you declare all variables at the start of a program block.  This is not true in C and C++.  Declaring variables inside of blocks delimiated by braces means they will go out of scope when the program exits the block, both freeing the memory and preventing you from referring to the variable after the loop is done and only considering the last value it took.  Sometimes this is the desired behaviour, though, and so this is not a blanket rule.
+
 
 
 [cpp-lower-bound]: https://en.cppreference.com/w/cpp/algorithm/lower_bound
