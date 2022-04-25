@@ -5,11 +5,11 @@ exercises: 0
 questions:
 - Why do we need a complicated software framework? Can't I just write standalone code?
 objectives:  
-- Learn what services the art framework provides.
+- Learn what services the *art* framework provides.
 - Learn how the LArSoft tookit is organized and how to use it.
 keypoints:
-- Art provides the tools physicists in a large collaboration need in order to contribute software to a large, shared effort without getting in each others' way.
-- Art helps us keep track of our data and job configuration, reducing the chances of producing mystery data that no one knows where it came from.
+- *Art* provides the tools physicists in a large collaboration need in order to contribute software to a large, shared effort without getting in each others' way.
+- *Art* helps us keep track of our data and job configuration, reducing the chances of producing mystery data that no one knows where it came from.
 - LArSoft is a set of simulation and reconstruction tools shared among the liquid-argon TPC collaborations.
 ---
 
@@ -26,7 +26,7 @@ The session will be captured on video a placed here after the workshop for async
 
 *Art* is the framework used for the offline software used to process LArTPC data from the far detector and the ProtoDUNEs. It was chosen not only because of the features it provides, but also because it allows DUNE to use and share algorithms developed for other LArTPC experiments, such as ArgoNeuT, LArIAT, MicroBooNE and ICARUS. The section below describes LArSoft, a shared software toolkit. Art is also used by the NOvA and mu2e experiments. The primary language for *art* and experiment-specific plug-ins is C++.
 
-The *art* wiki page is here: [https://cdcvs.fnal.gov/redmine/projects/art/wiki][art-wiki]. It contains important information on command-line utilities, how to configure an art job, how to define, read in and write out data products, how and when to use art modules, services, and tools.
+The *art* wiki page is here: [https://cdcvs.fnal.gov/redmine/projects/art/wiki][art-wiki]. It contains important information on command-line utilities, how to configure an *art* job, how to define, read in and write out data products, how and when to use *art* modules, services, and tools.
 
 *Art* features:
 
@@ -34,10 +34,10 @@ The *art* wiki page is here: [https://cdcvs.fnal.gov/redmine/projects/art/wiki][
 2. Manages event data storage memory and prevents unintended overwrites
 3. Input file interface -- allows ganging together input files
 4. Schedules module execution
-5. Defines a standard way to store data products in art-formatted ROOT files
+5. Defines a standard way to store data products in *art*-formatted ROOT files
 6. Defines a format for associations between data products (for example, tracks have hits, and associations between  tracks and hits can be made via art's association mechanism.
 7. Provides a uniform job configuration interface
-8. Stores job configuration information in art-formatted root files.
+8. Stores job configuration information in *art*-formatted root files.
 9. Output file control -- lets you define output filenames based on parts of the input filename.
 10. Message handling
 11. Random number control
@@ -47,12 +47,12 @@ The configuration storage is particularly useful if you receive a data file from
 
 ### Getting set up to try the tools
 
-Log in to a `dunegpvm*.fnal.gov` machine and set up your environment (This script is defined in Exercise 5 of https://dune.github.io/computing-training-202105/setup.html)
+Log in to a `dunegpvm*.fnal.gov` machine and set up your environment (This script is defined in Exercise 5 of https://dune.github.io/computing-training-basics/setup.html)
 
 ```bash
-source ~/.dune_presetup_202205.sh
+source ~/dune_presetup_202205.sh
 dune_setup
-setup dunetpc $DUNETPC_VERSION -q e20:prof
+setup dunesw $DUNESW_VERSION -q e20:prof
 setup_fnal_security
 ```
 
@@ -64,17 +64,17 @@ Copies are stored in `/afs/cern.ch/work/t/tjunk/public/may2022tutorialfiles/`.
 
 The follow-up of this tutorial provides help on how to find data and MC files in storage.
 
-You can list available versions of `dunetpc` installed in `CVMFS` with this command:
+You can list available versions of `dunesw` installed in `CVMFS` with this command:
 
 ```bash
-ups list -aK+ dunetpc
+ups list -aK+ dunesw
 ```
 
 The output is not sorted, although portions of it may look sorted. Do not depend on it being sorted. The string indicating the version is called the version tag (v09_48_01d00 here). The qualifiers are e20 and prof. Qualifiers can be entered in any order and are separated by colons.  "e20" corresponds to a specific version of the GNU compiler -- v9.3.0.   We also compile with `clang` -- the compiler qualifier for that is "c7".
 
 "prof" means "compiled with optimizations turned on." "debug" means "compiled with optimizations turned off". More information on qualifiers is [here][about-qualifiers].
 
-In addition to the version and qualifiers, `UPS` products have "flavors". This refers to the operating system type and version. Older versions of DUNE software supported `SL6` and some versions of macOS. Currently only SL7 and the compatible CentOS 7 are supported. The flavor of a product is automatically selected to match your current operating system when you set up a product. If a flavor is missing, you will get an error message.
+In addition to the version and qualifiers, `UPS` products have "flavors". This refers to the operating system type and version. Older versions of DUNE software supported `SL6` and some versions of macOS. Currently only SL7 and the compatible CentOS 7 are supported. The flavor of a product is automatically selected to match your current operating system when you set up a product. If a product does not have a compatible flavor, you will get an error message.  "Unflavored" products are ones that do not depend on the operating-system libraries.  They are listed with a flavor of "NULL". 
 
 There is a setup command provided by the operating system -- you usually don't want to use it (at least not when developing DUNE software). If you haven't yet sourced the `setup_dune.sh` script in `CVMFS` above but type `setup xyz` anyway, you will get the system setup command, which will ask you for the root password. Just `control-C` out of it, source the `setup_dune.sh` script, and try again.
 
@@ -181,12 +181,12 @@ Quiz questions, looking at the output from above.
 > Questions:
 > 1.  What is the name of the data product that takes up the most space in the file?
 > 2.  What the module label for this data product?
-> 3.  What is the module instance name for this data product?   (tricky.  You have to count underscores here).
+> 3.  What is the module instance name for this data product?   (This question is tricky.  You have to count underscores here).
 > 4.  How many different modules produced simb::MCTruth data products?  What are their module labels?
 > 5.  How many different modules produced recob::Hit data products?  What are their module labels?
 {: .solution}
 
-You can open up an artoot file with `ROOT` and browse the `TTrees` in it with a `TBrowser`. Not all `TBranches` and leaves can be inspected easily this way, but enough can that it can save a lot of time programming if you just want to know something simple about a file such as whether it contains a particular data product and how many there are. 
+You can open up an *art*ROOT file with `ROOT` and browse the `TTrees` in it with a `TBrowser`. Not all `TBranches` and leaves can be inspected easily this way, but enough can that it can save a lot of time programming if you just want to know something simple about a file such as whether it contains a particular data product and how many there are. 
 
 Try it out
 ```bash
@@ -199,9 +199,9 @@ new TBrowser
 
 This will be faster with `VNC`. Navigate to the `Events TTree` in the file that is automatically opened, navigate to the `TBranch` with the Argon 39 MCTruths (it's near the bottom), click on the branch icon `simb::MCTruths_ar39__SinglesGen.obj`, and click on the `NParticles()` leaf (It's near the bottom. Yes, it has a red exclamation point on it, but go ahead and click on it). How many events are there? How many 39Ar decays are there per event on average?
 
-`Art` is not constrained to using `ROOT` files -- some effort has already been underway to use HDF5-formatted files for some purposes.
+*Art* is not constrained to using `ROOT` files -- some effort has already been underway to use HDF5-formatted files for some purposes.
 
-The `art` main executable program is a very short stub that interprets command-line options, reads in the configuration document (a `FHiCL` file which usually includes other `FHiCL` files), and loads shared libraries, initializes software components, and schedules execution of modules. Most code we are interested in is in the form of art plug-ins -- modules, services, and tools. The generic executable for invoking art is called `art`, but a LArSoft-customized one is called lar. No additional customization has yet been applied so in fact, the lar executable has identical functionality to the `art` executable.
+The *art* main executable program is a very short stub that interprets command-line options, reads in the configuration document (a `FHiCL` file which usually includes other `FHiCL` files), and loads shared libraries, initializes software components, and schedules execution of modules. Most code we are interested in is in the form of *art* plug-ins -- modules, services, and tools. The generic executable for invoking *art* is called `art`, but a LArSoft-customized one is called `lar`. No additional customization has yet been applied so in fact, the `lar` executable has identical functionality to the `art` executable.
 
 There is online help:
 
@@ -211,7 +211,7 @@ There is online help:
 
 All programs in the art suite have a `--help` command-line option.
 
-Most `art` job invocations take the form 
+Most *art* job invocations take the form 
 
 ```bash
 lar -n <nevents> -c fclfile.fcl artrootfile.root
@@ -230,7 +230,7 @@ The `outputhistofile.root` file contains `ROOT` objects that have been declared 
 
 The Fermilab Hierarchical Configuration Language, FHiCL is described  here [https://cdcvs.fnal.gov/redmine/documents/327][fhicl-described].
 
-It is **not** a Turing-complete language: you cannot write an executable program in it. It is meant to declare values for named parameters to steer job execution and adjust algorithm parameters (such as the electron lifetime in the simulation and reconstruction). Look at `.fcl` files in installed job directories, like `$DUNETPC_DIR/job` for examples. `Fcl` files are sought in the directory seach path `FHICL_FILE_PATH` when art starts up and when `#include` statements are processed. A fully-expanded `fcl` file with all the #include statements executed is referred to as a fhicl "document".
+FHiCL is **not** a Turing-complete language: you cannot write an executable program in it. It is meant to declare values for named parameters to steer job execution and adjust algorithm parameters (such as the electron lifetime in the simulation and reconstruction). Look at `.fcl` files in installed job directories, like `$DUNESW_DIR/fcl` for examples. `Fcl` files are sought in the directory seach path `FHICL_FILE_PATH` when art starts up and when `#include` statements are processed. A fully-expanded `fcl` file with all the #include statements executed is referred to as a fhicl "document".
 
 Parameters may be defined more than once. The last instance of a parameter definition wins out over previous ones. This makes for a common idiom in changing one or two parameters in a fhicl document. The generic pattern for making a short fcl file that modifies a parameter is:
 
@@ -273,21 +273,21 @@ services.LArG4Parameters.ModBoxA: 7.7E-1
 Plug-ins each have their own .so library which gets dynamically loaded by art when referenced by name in the fcl configuration.
 
 **Producer Modules**  
-A producer module is a software component that writes data products to the event memory. It is characterized by produces<> and consumes<> statements in the class constructor, and `art::Event::put()` calls in the `produces()` method. A producer must produce the data product collection it says it produces, even if it is empty, or art will throw an exception. `art::Event::put()` transfers ownership of memory (use std::move so as not to copy the data) from the module to the art event memory. Data in the art event memory will be written to the output file unless output commands in the fcl file tell art not to do that. Documentation on output commands can be found in the LArSoft wiki here: [https://larsoft.github.io/LArSoftWiki/Rerun_part_of_all_a_job_on_an_output_file_of_that_job][larsoft-rerun-part-job] Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
+A producer module is a software component that writes data products to the event memory. It is characterized by produces<> and consumes<> statements in the class constructor, and `art::Event::put()` calls in the `produces()` method. A producer must produce the data product collection it says it produces, even if it is empty, or *art* will throw an exception at runtime. `art::Event::put()` transfers ownership of memory (use std::move so as not to copy the data) from the module to the *art* event memory. Data in the *art* event memory will be written to the output file unless output commands in the fcl file tell art not to do that. Documentation on output commands can be found in the LArSoft wiki here: [https://larsoft.github.io/LArSoftWiki/Rerun_part_of_all_a_job_on_an_output_file_of_that_job][larsoft-rerun-part-job] Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
 
 **Analyzer Modules**  
-Analyzer modules read data product from the event memory and produce histograms or TTrees, or other output. They are typically scheduled after the producer modules have been run. Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
+Analyzer modules read data products from the event memory and produce histograms or TTrees, or other output. They are typically scheduled after the producer modules have been run. Producer modules have methods that are called on begin job, begin run, begin subrun, and on each event, as well as at the end of processing, so you can initialize counters or histograms, and finish up summaries at the end. Source code must be in files of the form: <modulename>_module.cc, where modulename does not have any underscores in it.
 
 **Source Modules**  
-Source modules read data from input files and reformat it as need be, in order to put the data in art event data store. Most jobs use the art-provided RootInput source module which reads in art-formatted ROOT files. RootInput interacts well with the rest of the framework in that it provides lazy reading of TTree branches. Only when GetByLabel or GetValidHandle or other product get methods are called is the data actually fetched from the input file. This is useful for art jobs that only read a subset of the TBranches in an input file. Source code must be in files of the form: <modulename>_source.cc, where modulename does not have any underscores in it.
+Source modules read data from input files and reformat it as need be, in order to put the data in *art* event data store. Most jobs use the art-provided RootInput source module which reads in art-formatted ROOT files. RootInput interacts well with the rest of the framework in that it provides lazy reading of TTree branches.  When using the RootInput source, data are not actually fetched from the file into memory when the source executes, but only when GetHandle or GetValidHandle or other product get methods are called. This is useful for *art* jobs that only read a subset of the TBranches in an input file. Code for sources must be in files of the form: <modulename>_source.cc, where modulename does not have any underscores in it.
 
 **Services**  
-These are singleton classes that are globally visible within an art job. They can be FHiCL configured like modules, and they can schedule methods to be called on begin job, begin run, begin event, etc. They are meant to help supply configuration parameters like the drift velocity, or more complicated things like geometry functions, to modules that need them. Please do not use services as a back door for storing event data outside of the art event store. Source code must be in files of the form: `<modulename>_service.cc`, where servicename does not have any underscores in it.
+These are singleton classes that are globally visible within an *art* job. They can be FHiCL configured like modules, and they can schedule methods to be called on begin job, begin run, begin event, etc. They are meant to help supply configuration parameters like the drift velocity, or more complicated things like geometry functions, to modules that need them. Please do not use services as a back door for storing event data outside of the *art* event store. Source code must be in files of the form: `<modulename>_service.cc`, where servicename does not have any underscores in it.
 
 **Tools**  
 Tools are FHiCL-configurable software components that are not singletons, like services. They are meant to be swappable by FHiCL parameters which tell art which .so libraries to load up, configure, and call from user code. See the [Art Wiki Page][art-wiki-redmine] for more information on tools and other plug-ins.
 
-You can use cetskelgen to make empty skeletons of art plug-ins. See the art wiki for documentation, or use
+You can use cetskelgen to make empty skeletons of *art* plug-ins. See the art wiki for documentation, or use
 
 ```bash
 cetskelgen --help
