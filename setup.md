@@ -204,7 +204,7 @@ bash: ups: command not found...
 
 and if your environment has UPS products set up, the above command will list the ones you have.
 
-Once you identify environment variables that might conflict with your DUNE work, you can tweak your .bashrc/.profile file(s) to temporarily comment out those (the "export" commands that are setting custom environment variables, or UPS's setup command).
+Once you identify environment variables that might conflict with your DUNE work, you can tweak your login scripts, like .bashrc, .profile, .shrc, .login etc., to temporarily comment out those (the "export" commands that are setting custom environment variables, or UPS's setup command).  Note:  files with names that begin with "." are "hidden" in that they do not show up with a simple `ls` command.  To see them, type ```ls **-a**``` which lists **a**ll files.
 
 **Cleanup option 2:** Back up your login scripts and go minimal at login (recommended)
 
