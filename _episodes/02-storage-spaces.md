@@ -48,21 +48,21 @@ There are three types of storage volumes that you will encounter at Fermilab: lo
 * not accessible as an output location from grid worker nodes
 * not for code developement (size of less than 2 GB)
 * You need a valid Kerberos ticket in order to access files in your Home area
-* Periodic snapshots are taken so you can recover deleted files.  /nashome/.snapshot
+* Periodic snapshots are taken so you can recover deleted files. (/nashome/.snapshot)
 
 **Locally mounted volumes** are local physical disks, mounted directly
-* mounted on the machine with direct links to the /dev/ location
+* physically inside the computer and mounted on the machine through motherboard (not over network)
 * used as temporary storage for infrastructure services (e.g. /var, /tmp,)
-* can be used to store certificates and tickets.  These are saved there automatically with owner-read permission and other permissions disabled.
+* can be used to store certificates and tickets. (These are saved there automatically with owner-read permission and other permissions disabled.)
 * usually very small and should not be used to store data files or for code development
-* Data on these volumes is not backed up.
+* files on these volumes are not backed up
 
 **Network Attached Storage (NAS)** element behaves similar to a locally mounted volume.
 * functions similar to services such as Dropbox or OneDrive
 * fast and stable access rate 
 * volumes available only on a limited number of computers or servers
-* not available to on larger grid computing
-* /dune/app has periodic snapshots in /dune/app/.snapshot, but /dune/data and /dune/data2 do not.
+* not available on larger grid computing (FermiGrid, Open Science Grid, etc.)
+* /dune/app has periodic snapshots in /dune/app/.snapshot, but /dune/data and /dune/data2 do not
 
 
 ## Grid-accessible storage volumes
@@ -71,9 +71,9 @@ At Fermilab, an instance of dCache+Enstore is used for large-scale, distributed 
 
 **Persistent dCache**: the data in the file is actively available for reads at any time and will not be removed until manually deleted by user
 
-**Scratch dCache**: large volume shared across all experiments. When a new file is written to scratch space, old files are removed in order to make room for the newer file.
+**Scratch dCache**: large volume shared across all experiments. When a new file is written to scratch space, old files are removed in order to make room for the newer file. removal is based on LRU policy
 
-**Resilient dCache**: handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here.
+**Resilient dCache**: (NOTE: DIRECT USAGE is being phased out) handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here (no data or ntuples).
 
 **Tape-backed dCache**: disk based storage areas that have their contents mirrored to permanent storage on Enstore tape.  
 Files are not available for immediate read on disk, but needs to be 'staged' from tape first. 
@@ -127,8 +127,10 @@ Another useful data handling command you will soon come across is ifdh. This sta
 
 Here is an example to copy a file. Refer to the [Mission Setup]({{ site.baseurl }}/setup.html) for the setting up the `DUNETPC_VERSION`.
 ~~~
-source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
-setup dunetpc $DUNETPC_VERSION -q e19:prof
+export DUNESW_VERSION=v09_48_01d00
+alias dune_setup='source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh'
+source ~/.dune_presetup_202205.sh
+dune_setup
 setup_fnal_security
 ifdh cp root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/physics/full-reconstructed/2019/mc/out1/PDSPProd2/22/60/37/10/PDSPProd2_protoDUNE_sp_reco_35ms_sce_off_23473772_0_452d9f89-a2a1-4680-ab72-853a3261da5d.root /dev/null
 ~~~
