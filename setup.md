@@ -381,6 +381,8 @@ If however you are experiencing issues, please contact us as soon as possible. B
 
 ### Useful Links
    
+The [DUNE FAQ][dunefaq] in GitHub
+
 The January 2021 DUNE training setup tutorial in the [DUNE Wiki][dune-setup-jan2021]
 
 [May 2021 DUNE Computing training][dune-training-may2021]
@@ -401,4 +403,5 @@ The January 2021 DUNE training setup tutorial in the [DUNE Wiki][dune-setup-jan2
 [dune-setup-jan2021]: https://wiki.dunescience.org/wiki/DUNE_Computing/Setup_Jan2021
 [dune-training-may2021]: https://dune.github.io/computing-training-202105/
 [dune-wiki-interactive-resources]: https://wiki.dunescience.org/wiki/DUNE_Computing/DUNE_Interactive_Computing_Resources
+[dunefaq]: https://github.com/DUNE/FAQ
 
