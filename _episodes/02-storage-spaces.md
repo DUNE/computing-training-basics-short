@@ -104,6 +104,15 @@ In the following table, \<exp\> stands for the experiment (uboone, nova, dune, e
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 
 
+## Monitoring and Usage
+Remember that these volumes are not infinite, and monitoring your and the experiment usage of these volumes is important to smooth access to data and simulation samples. To see your persistent usage visit here (bottom left):
+
+https://fifemon.fnal.gov/monitor/d/000000175/dcache-persistent-usage-by-vo?orgId=1&var-VO=dune
+
+And to see the have some idea about the total volume usage at Rucio Storage Elements around the world:
+
+**Resource** [DUNE Rucio Storage](https://dune.monitoring.edi.scotgrid.ac.uk/app/dashboards#/view/7eb1cea0-ca5e-11ea-b9a5-15b75a959b33?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-1d,to:now)))
+
 ## Commands and tools
 This section will teach you the main tools and commands to display storage information and access data.
 
