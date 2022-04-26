@@ -50,8 +50,9 @@ There are three types of storage volumes that you will encounter at Fermilab: lo
 * You need a valid Kerberos ticket in order to access files in your Home area
 * Periodic snapshots are taken so you can recover deleted files. (/nashome/.snapshot)
 
-**Locally mounted volumes** are local physical disks, mounted directly
-* physically inside the computer and mounted on the machine through motherboard (not over network)
+**Locally mounted volumes** are physical disks, mounted directly
+* physically inside the computer node you are remotely accessing
+* mounted on the machine through the motherboard (not over network)
 * used as temporary storage for infrastructure services (e.g. /var, /tmp,)
 * can be used to store certificates and tickets. (These are saved there automatically with owner-read permission and other permissions disabled.)
 * usually very small and should not be used to store data files or for code development
@@ -73,10 +74,11 @@ At Fermilab, an instance of dCache+Enstore is used for large-scale, distributed 
 
 **Scratch dCache**: large volume shared across all experiments. When a new file is written to scratch space, old files are removed in order to make room for the newer file. removal is based on LRU policy
 
-**Resilient dCache**: (NOTE: DIRECT USAGE is being phased out) handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here (no data or ntuples).
+**Resilient dCache**: (NOTE: DIRECT USAGE is being phased out) handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here (no data or ntuples). keeps many copies of tarball so storage of data or ntuples has large impact/problem
 
 **Tape-backed dCache**: disk based storage areas that have their contents mirrored to permanent storage on Enstore tape.  
-Files are not available for immediate read on disk, but needs to be 'staged' from tape first. 
+Files are not available for immediate read on disk, but needs to be 'staged' from tape first. Video of a tape storage robot (https://www.youtube.com/watch?v=kiNWOhl00Ao)
+
 
 ## Summary on storage spaces
 Full documentation: [Understanding Storage Volumes](https://cdcvs.fnal.gov/redmine/projects/fife/wiki/Understanding_storage_volumes)
@@ -94,7 +96,7 @@ In the following table, \<exp\> stands for the experiment (uboone, nova, dune, e
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | Tape backed| dCache	No/O(10) PB | LRU eviction (from disk) | Yes | Approx 30 days | Long-term archive | /pnfs/dune/... | Yes |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
-| NAS Data | Yes (~1 TB)/ 32+30 TB total | Managed by Experiment | No | Till manually deleted | Storing final analysis samples | /dune/data | No |
+| NAS Data | Yes (~1 TB)/ 32+30 TB total | Managed by Experiment | No | Until manually deleted | Storing final analysis samples | /dune/data | No |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | NAS App | Yes (~100 GB)/ ~15 TB total | Managed by Experiment | No | Until manually deleted | Storing and compiling software | /dune/app | No |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
@@ -125,14 +127,14 @@ df -h
 
 Another useful data handling command you will soon come across is ifdh. This stands for Intensity Frontier Data Handling. It is a tool suite that facilitates selecting the appropriate data transfer method from many possibilities while protecting shared resources from overload. You may see *ifdhc*, where *c* refers to *client*.
 
-Here is an example to copy a file. Refer to the [Mission Setup]({{ site.baseurl }}/setup.html) for the setting up the `DUNETPC_VERSION`.
+Here is an example to copy a file. Refer to the [Mission Setup]({{ site.baseurl }}/setup.html) for the setting up the `DUNESW_VERSION`.
 ~~~
 export DUNESW_VERSION=v09_48_01d00
 alias dune_setup='source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh'
 source ~/.dune_presetup_202205.sh
 dune_setup
 setup_fnal_security
-ifdh cp root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/physics/full-reconstructed/2019/mc/out1/PDSPProd2/22/60/37/10/PDSPProd2_protoDUNE_sp_reco_35ms_sce_off_23473772_0_452d9f89-a2a1-4680-ab72-853a3261da5d.root /dev/null
+ifdh cp -D root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/physics/full-reconstructed/2019/mc/out1/PDSPProd2/22/60/37/10/PDSPProd2_protoDUNE_sp_reco_35ms_sce_off_23473772_0_452d9f89-a2a1-4680-ab72-853a3261da5d.root /dev/null
 ~~~
 {: .language-bash}
 
@@ -140,10 +142,10 @@ ifdh cp root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/p
 
 > ## Exercise 2
 > Using the ifdh command, complete the following tasks:
-* create a directory in your dCache scratch area (/pnfs/dune/scratch/users/${USER}/) called "DUNE_tutorial_May2021"
+* create a directory in your dCache scratch area (/pnfs/dune/scratch/users/${USER}/) called "DUNE_tutorial_May2022"
 * copy your ~/.bashrc file to that directory.
-* copy the .bashrc file from your scrtach directory DUNE_tutorial_May2021 dCache to /dev/null
-* remove the directory DUNE_tutorial_May2021 using "ifdh rmdir /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_May2021"
+* copy the .bashrc file from your scrtach directory DUNE_tutorial_May2022 dCache to /dev/null
+* remove the directory DUNE_tutorial_May2022 using "ifdh rmdir /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_May2022"
 > Note, if the destination for an ifdh cp command is a directory instead of filename with full path, you have to add the "-D" option to the command line. Also, for a directory to be deleted, it must be empty.
 {: .challenge}
 
@@ -155,13 +157,33 @@ XRootD is most suitable for read-only data access.
 [XRootD Man pages](https://xrootd.slac.stanford.edu/docs.html)
 
 
-Issue the following commands and try to understand how the first command enables completing the parameters for the second command.
+Issue the following commands. The first command converts a pnfs location into an xrootd URI. Please look at the input and output of the first command, to try and understand how this translation could be done by hand if you needed to do so. The output of the first command allows one to type the second command inputs for any pnfs directory.
 
 ~~~
 pnfs2xrootd /pnfs/dune/scratch/users/${USER}/
-xrdfs root://fndca1.fnal.gov:1094/ ls /pnfs/fnal.gov/usr/dune/scratch/users/${USER}/DUNE_tutorial_May2021
+xrdfs root://fndca1.fnal.gov:1094/ ls /pnfs/fnal.gov/usr/dune/scratch/users/${USER}/DUNE_tutorial_May2022
 ~~~
 {: .language-bash}
+
+Note that you can do
+~~~
+lar -c <xrootd_uri> <input.fcl>
+~~~
+{: .language-bash}
+
+to stream into a larsoft module configured within the fhicl file. As well, it can be implemented in standalone C++ as
+
+~~~
+TFile * thefile = TFile::Open(<xrootd_uri>)
+~~~
+{: .language-c++}
+
+or PyROOT code as
+
+~~~
+thefile = ROOT.TFile.Open(<xrootd_uri>)
+~~~
+{: .language-python}
 
 ## Let's practice
 
