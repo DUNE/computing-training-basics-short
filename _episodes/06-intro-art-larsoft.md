@@ -414,7 +414,7 @@ This example puts all files in a subdirectory of your home directory. There is a
  setup dunesw v09_48_01d00 -q e20:prof
  cat > tmpgen.fcl << EOF
  #include "mcc12_gen_protoDune_beam_cosmics_p1GeV.fcl"
- physics.producers.generator.FileName: "/afs/cern.ch/work/t/tjunk/public/may2021tutorialfiles/H4_v34b_1GeV_-27.7_10M_1.root"
+ physics.producers.generator.FileName: "/afs/cern.ch/work/t/tjunk/public/may2022tutorialfiles/H4_v34b_1GeV_-27.7_10M_1.root"
  EOF
  lar -n 1 -c tmpgen.fcl -o gen.root
  lar -n 1 -c protoDUNE_refactored_g4_stage1.fcl gen.root -o g4_stage1.root
