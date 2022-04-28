@@ -169,22 +169,22 @@ UPS is set up when you setup DUNE:
 
 This sourcing defines the UPS `setup` command. Now to get DUNE's LArSoft-based software, this is done through:
 ~~~
- setup dunetpc $DUNETPC_VERSION -q e19:prof
+ setup dunesw $DUNESW_VERSION -q e20:prof
 ~~~
 {: .language-bash}
 
 
-`dunetpc`: product name <br>
-`$DUNETPC_VERSION` version tag <br>
-`e19:prof` are "qualifiers". Qualifiers are separated with colons and may be specified in any order. The "e19" qualifier refers to a specific version of the gcc compiler suite, and "prof" means select the installed product that has been compiled with optimizations turned on. An alternative to "prof" is the "debug" qualifier. All builds of LArSoft and dunetpc are compiled with debug symbols turned on, but the "debug" builds are made with optimizations turned off. Both kinds of software can be debugged, but it is easier to debug the debug builds (code executes in the proper order and variables aren't optimized away so they can be inspected).
+`dunesw`: product name <br>
+`$DUNESW_VERSION` version tag <br>
+`e20:prof` are "qualifiers". Qualifiers are separated with colons and may be specified in any order. The "e20" qualifier refers to a specific version of the gcc compiler suite, and "prof" means select the installed product that has been compiled with optimizations turned on. An alternative to "prof" is the "debug" qualifier. All builds of LArSoft and dunesw are compiled with debug symbols turned on, but the "debug" builds are made with optimizations turned off. Both kinds of software can be debugged, but it is easier to debug the debug builds (code executes in the proper order and variables aren't optimized away so they can be inspected).
 
 Another specifier of a product install is the "flavor". This refers to the operating system the program was compiled for. These days we only support SL7, but in the past we used to also support SL6 and various versions of macOS. The flavor is automatically selected when you set up a product using setup (unless you override it which is usually a bad idea). Some product are "unflavored" because they do not contain anything that depends on the operating system. Examples are products that only contain data files or text files.
 
 Setting up a UPS product defines many environment variables. Most products have an environment variable of the form `<productname>_DIR`, where `<productname>` is the name of the UPS product in all capital letters. This is the top-level directory and can be used when searching for installed source code or fcl files for example. `<productname>_FQ_DIR` is the one that specifies a particular qualifier and flavor.
 
 > ## Exercise 3
-> * show all the versions of dunetpc that are currently available by using the "ups list -aK+ dunetpc" command
-> * pick one version and substitute that for DUNETPC_VERSION above and set up dunetpc
+> * show all the versions of dunesw that are currently available by using the "ups list -aK+ dunesw" command
+> * pick one version and substitute that for DUNESW_VERSION above and set up dunesw
 {: .challenge}
 
 Many products modify the following search path variables, prepending their pieces when set up. These search paths are needed by _art_ jobs.
@@ -207,12 +207,12 @@ Also the PYTHONPATH describes where Python modules will be loaded from.
 
 | Command                                        | Action                                                           |
 |------------------------------------------------|------------------------------------------------------------------|
-| `ups list -aK+ dunetpc`                        | List the versions and flavors of dunetpc that exist on this node |
+| `ups list -aK+ dunesw`                        | List the versions and flavors of dunesw that exist on this node |
 | `ups active`                                   | Displays what has been setup                                     |
-| `ups depend dunetpc v08_57_00 -q e19:prof:py2` | Displays the dependencies for this version of dunetpc            |
+| `ups depend dunesw v09_48_01d00 -q e20:prof` | Displays the dependencies for this version of dunesw           |
 
 > ## Exercise 4
-> * show all the dependencies of dunetpc by using "ups depend dunetpc $DUNETPC_VERSION -q e19:prof"
+> * show all the dependencies of dunesw by using "ups depend dunesw $DUNESW_VERSION -q e20:prof"
 {: .challenge}
 
 >## UPS Docmentation Links
