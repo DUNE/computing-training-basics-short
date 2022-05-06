@@ -104,7 +104,7 @@ fi
 cd $WORKDIR/$DIRECTORY
 source localProducts*/setup
 cd work
-setup dunesw v09_48_01_d00 -q e20:prof
+setup dunesw v09_48_01d00 -q e20:prof
 mrbslp
 ~~~
 {: .language-bash}
