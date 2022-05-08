@@ -1,6 +1,6 @@
 ---
-title: Putty Setup
-
+title: Putty Setup 
+permalink: putty.html 
 ---
 
 
@@ -37,7 +37,4 @@ This should allow you to SSH to the FNAL clusters and follow the rest of the tut
 
 *Created on 20220508 using notes provided by Roger Huang.* 
 
-[Return to Setup]({{ page.root }}/setup.html)
-
-
-
+[Go to Setup]({{ site.baseurl }}/setup.html) 
