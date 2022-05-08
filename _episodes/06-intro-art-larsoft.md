@@ -8,8 +8,8 @@ objectives:
 - Learn what services the *art* framework provides.
 - Learn how the LArSoft tookit is organized and how to use it.
 keypoints:
-- *Art* provides the tools physicists in a large collaboration need in order to contribute software to a large, shared effort without getting in each others' way.
-- *Art* helps us keep track of our data and job configuration, reducing the chances of producing mystery data that no one knows where it came from.
+- Art provides the tools physicists in a large collaboration need in order to contribute software to a large, shared effort without getting in each others' way.
+- Art helps us keep track of our data and job configuration, reducing the chances of producing mystery data that no one knows where it came from.
 - LArSoft is a set of simulation and reconstruction tools shared among the liquid-argon TPC collaborations.
 ---
 
