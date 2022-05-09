@@ -77,7 +77,7 @@ At Fermilab, an instance of dCache+Enstore is used for large-scale, distributed 
 **Resilient dCache**: (NOTE: DIRECT USAGE is being phased out) handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here (no data or ntuples). keeps many copies of tarball so storage of data or ntuples has large impact/problem
 
 **Tape-backed dCache**: disk based storage areas that have their contents mirrored to permanent storage on Enstore tape.  
-Files are not available for immediate read on disk, but needs to be 'staged' from tape first. Video of a tape storage robot (https://www.youtube.com/watch?v=kiNWOhl00Ao)
+Files are not available for immediate read on disk, but needs to be 'staged' from tape first ([see video of a tape storage robot](https://www.youtube.com/watch?v=kiNWOhl00Ao)).
 
 
 ## Summary on storage spaces
@@ -106,9 +106,7 @@ In the following table, \<exp\> stands for the experiment (uboone, nova, dune, e
 ![Storage Picture](/fig/Storage.png)
 
 ## Monitoring and Usage
-Remember that these volumes are not infinite, and monitoring your and the experiment usage of these volumes is important to smooth access to data and simulation samples. To see your persistent usage visit here (bottom left):
-
-https://fifemon.fnal.gov/monitor/d/000000175/dcache-persistent-usage-by-vo?orgId=1&var-VO=dune
+Remember that these volumes are not infinite, and monitoring your and the experiment usage of these volumes is important to smooth access to data and simulation samples. To see your persistent usage visit [here](https://fifemon.fnal.gov/monitor/d/000000175/dcache-persistent-usage-by-vo?orgId=1&var-VO=dune) (bottom left):
 
 And to see the have some idea about the total volume usage at Rucio Storage Elements around the world:
 
