@@ -12,9 +12,9 @@ humandate: "May 12-13, 2022"
 humantime: "8:00 am - 3:00 pm"
 startdate: "2022-05-12"
 enddate: "2021-05-13"
-instructor: ["Michael Kirby","Steve Timms","Tom Junk","Ken Herner"]
+instructor: ["Michael Kirby","Steve Timm","Tom Junk","Ken Herner"]
 helper: ["mentor1", "mentor2"]
-email: ["mkirby@fnal.gov","timms@fnal.gov","junk@fnal.gov","herner@fnal.gov"]
+email: ["mkirby@fnal.gov","timm@fnal.gov","junk@fnal.gov","herner@fnal.gov"]
 collaborative_notes: "2022-04-12-dune"
 eventbrite:
 ---
