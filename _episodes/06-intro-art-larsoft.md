@@ -330,19 +330,19 @@ More documentation: [https://art.fnal.gov/gallery/][art-more-documentation]
 
 ### Introductory Documentation
 
-LArSoft's home page: [https://larsoft.org][larsoft.org]
+LArSoft's home page: [larsoft.org](https://larsoft.org)
   
-The LArSoft wiki is here:  [https://larsoft.github.io/LArSoftWiki/][larsoft-wiki].
+The LArSoft wiki is here: [larsoft-wiki](https://larsoft.github.io/LArSoftWiki/).
 
 ### Software structure
 
 The LArSoft toolkit is a set of software components that simulate and reconstruct LArTPC data, and also it provides tools for accessing raw data from the experiments. LArSoft contains an interface to GEANT4 (art does not list GEANT4 as a dependency) and the GENIE generator. It contains geometry tools that are adapted for wire-based LArTPC detectors.
 
-A recent graph of the UPS products in a full stack staring with dunesw is available here: [https://wiki.dunescience.org/w/img_auth.php/f/f0/Dunesw_v09_48_01d00_e20_prof_graph.pdf][dunesw] You can see the LArSoft pieces under dunetpc, as well as GEANT4, GENIE, ROOT, and a few others.
+A recent graph of the UPS products in a full stack staring with dunesw is available [here](https://wiki.dunescience.org/w/img_auth.php/f/f0/Dunesw_v09_48_01d00_e20_prof_graph.pdf) (dunesw). You can see the LArSoft pieces under dunetpc, as well as GEANT4, GENIE, ROOT, and a few others.
 
 ### LArSoft Data Products
 
-A very good introduction to data products such as raw digits, calibrated waveforms, hits and tracks, that are created and used by LArSoft modules and usable by analyzers was given by Tingjun Yang at the 2019 ProtoDUNE analysis workshop: [https://indico.fnal.gov/event/19133/contributions/50492/attachments/31462/38611/dataproducts.pdf][larsoft-data-products].
+A very good introduction to data products such as raw digits, calibrated waveforms, hits and tracks, that are created and used by LArSoft modules and usable by analyzers was given by Tingjun Yang at the [2019 ProtoDUNE analysis workshop](https://indico.fnal.gov/event/19133/contributions/50492/attachments/31462/38611/dataproducts.pdf) (larsoft-data-products).
 
 There are a number of data product dumper fcl files. A non-exhaustive list of useful examples is given below:
 
@@ -378,7 +378,7 @@ This command will make a file called `DumpMCTruth.log` which you can open in a t
 
 The page with instructions on how to find and look at ProtoDUNE data has links to standard fcl configurations for simulating and reconstructing ProtoDUNE data: [https://wiki.dunescience.org/wiki/Look_at_ProtoDUNE_SP_data][look-at-protodune].
 
-Try it yourself! The workflow for ProtoDUNE-SP MC is given in the Simulation Task Force web page. [https://wiki.dunescience.org/wiki/ProtoDUNE-SP_Simulation_Task_Force][protodune-sim-task-force] 
+Try it yourself! The workflow for ProtoDUNE-SP MC is given in the [Simulation Task Force web page](https://wiki.dunescience.org/wiki/ProtoDUNE-SP_Simulation_Task_Force).
 
 
 #### Running on a dunegpvm machine at Fermilab
@@ -481,7 +481,7 @@ A good old-fashioned `grep -r` or a find command can be effective if you are loo
 ~~~
 {: .language-bash}
 
-Putting it to use: A very common workflow in developing software is to look for an example of how to do something similar to what you want to do. Let's say you want to find some examples of how to use `FindManyP` -- it's an *art* method for retrieving associations between data products, and the art documentation isn't as good as the examples for learning how to use it. You can use a recursive grep through your checked-out version, or you can even look through the installed source in CVMFS. This example looks through the duneprototype product's source files for FindManyP:
+Putting it to use: A very common workflow in developing software is to look for an example of how to do something similar to what you want to do. Let's say you want to find some examples of how to use `FindManyP` -- it's an *art* method for retrieving associations between data products, and the art documentation isn't as good as the examples for learning how to use it. You can use a recursive grep through your checked-out version, or you can even look through the installed source in CVMFS. This example looks through the duneprototype product's source files for `FindManyP`:
 
 ```bash 
  cd $DUNEPROTOTYPES_DIR/source/duneprototypes
@@ -505,7 +505,7 @@ ups list -aK+ garsoft
 ~~~
 {:. source}
 
-and you can check out the source and build it by following the instructions on the GArSoft wiki: [https://cdcvs.fnal.gov/redmine/projects/garsoft/wiki][garsoft-wiki]
+and you can check out the source and build it by following the instructions on the [GArSoft wiki](https://cdcvs.fnal.gov/redmine/projects/garsoft/wiki).
 
 {%include links.md%} 
 
