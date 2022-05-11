@@ -299,6 +299,6 @@ See this very thorough [presentation][knoepfel-thread-safety] by Kyle Knoepfel a
 [valgrind-root]: https://root-forum.cern.ch/t/valgrind-and-root/28506
 [obfuscated-C]: https://www.ioccc.org/
 [knoepfel-thread-safety]: https://indico.fnal.gov/event/20453/contributions/57777/attachments/36182/44065/2019-LArSoftWorkshop-ThreadSafety.pdf
-[LArSoftSorkshop2019]: https://indico.fnal.gov/event/20453/timetable/?view=standard
+[LArSoftWorkshop2019]: https://indico.fnal.gov/event/20453/timetable/?view=standard
 
 {%include links.md%}
