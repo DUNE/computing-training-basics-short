@@ -2,7 +2,6 @@
 title: Data Management
 teaching: 45
 exercises: 0
-questions:
 - What are the data management tools and software for DUNE?
 - How are different software versions handled?
 - What are the best data management practices?
@@ -215,7 +214,7 @@ Also the PYTHONPATH describes where Python modules will be loaded from.
 > * show all the dependencies of dunesw by using "ups depend dunesw $DUNESW_VERSION -q e20:prof"
 {: .challenge}
 
->## UPS Docmentation Links
+>## UPS Documentation Links
 
 > * [UPS reference manual](http://www.fnal.gov/docs/products/ups/ReferenceManual/)
 > * [UPS documentation](https://cdcvs.fnal.gov/redmine/projects/ups/wiki)
