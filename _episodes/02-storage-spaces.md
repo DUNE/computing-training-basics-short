@@ -29,7 +29,7 @@ The session will be captured on video a placed here after the workshop for async
 
 ## Live Notes
 
-[Live Notes](https://docs.google.com/document/d/1UAjvEw6AakwckWcXTMc0deSlm7FaNeg2l7yrLXZ6LGk/edit?usp=sharing)
+[live Notes](https://docs.google.com/document/d/1dEn_JrGc9bZmzWzXcWzU1taTy41fQxZD19xGEmz_rrs/edit#heading=h.f0jxtlpw51py)
 
 ## Introduction
 There are three types of storage volumes that you will encounter at Fermilab: local hard drives, network attached storage, and large-scale, distributed storage. Each has it's own advantages and limitations, and knowing which one to use when isn't all straightforward or obvious. But with some amount of foresight, you can avoid some of the common pitfalls that have caught out other users.
