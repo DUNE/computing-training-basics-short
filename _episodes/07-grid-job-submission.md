@@ -305,7 +305,7 @@ uploaded: /tmp/x509up_voms_dune_Analysis_kherner to POMS server
 
 where NNNNN will be your UID. As you see, the utility will automatically upload a proxy and give it the proper name for you.
 
-Finally, here is an example of a campaign that does the same thing as the previous one, using some MC reco file from ProtoDUNE SP Prod4a, but does it via making a SAM dataset using that as the input: [POMS campaign stage information](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14101). 
+Here is an example of a campaign that does the same thing as the previous one, using some MC reco files from ProtoDUNE SP Prod4a, but does it via making a SAM dataset using that as the input: [POMS campaign stage information](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14101). 
 Of course, before running **any** SAM project, we should prestage our input definition(s). The way most people do that is to do
 
 ```bash
@@ -319,7 +319,7 @@ replacing the above definition with your own definition as appropriate. However,
 samweb run-project --defname=kherner-may2022tutorial-mc --schema https 'echo %fileurl && curl -L --cert $X509_USER_PROXY --key $X509_USER_PROXY --cacert $X509_USER_PROXY --capath /etc/grid-security/certificates -H "Range: bytes=0-3" %fileurl && echo'
 ```
 
-Note you will need to have the X509_USER_PROXY environment variable set. Most of the time that will simply be set as
+This reads the first four bytes of each file, which will reset the LRU clock. Note you will need to have the X509_USER_PROXY environment variable set. Most of the time that will simply be set as
 
 ```bash
 export X509_USER_PROXY=/tmp/x509up_u$(id -u)
@@ -327,9 +327,9 @@ export X509_USER_PROXY=/tmp/x509up_u$(id -u)
 
 if you ever find yourself doing work under a shared account (dunepro for example) you should *NOT* manually set X509_USER_PROXY in this way.
 
-This reads the first four bytes of each file, which will reset the LRU clock.
+**Side note:** Some people will pass file lists to their jobs instead of using a SAM dataset. We do not recommend that for two reasons: 1) 
 
-**Important side note:** If you are used to using other programs for your work such as project.py (which is NOT officially supported by DUNE or the Fermilab Scientific Computing Division), there is a helpful tool called [Project-py][project-py-guide] that you can use to convert existing xml into POMS configs, so you don't need to start from scratch! Then you can just switch to using POMS from that point forward. As a reminder, if you use unsupported tools, you are own your own and will receive NO SUPPORT WHATSOEVER.
+**Another important side note:** If you are used to using other programs for your work such as project.py (which is **NOT** officially supported by DUNE or the Fermilab Scientific Computing Division), there is a helpful tool called [Project-py][project-py-guide] that you can use to convert existing xml into POMS configs, so you don't need to start from scratch! Then you can just switch to using POMS from that point forward. As a reminder, if you use unsupported tools, you are own your own and will receive NO SUPPORT WHATSOEVER. You are still responsible for making sure that your jobs satisfy Fermilab's policy for job efficiency: https://cd-docdb.fnal.gov/cgi-bin/sso/RetrieveFile?docid=7045&filename=FIFE_User_activity_mitigation_policy_20200625.pdf&version=1
 
 ## Further Reading
 Some more background material on these topics (including some examples of why certain things are bad) is in these links:  
