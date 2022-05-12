@@ -1,6 +1,6 @@
 ---
 title: Coffee Break
-teaching: 30
+teaching: 15
 exercises: 0
 questions:
 - How to take a good break?
