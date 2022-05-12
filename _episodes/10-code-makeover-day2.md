@@ -203,7 +203,7 @@ for (size_t i=0; i<results.size(); ++i)<br>
 
 **Pass objects by reference.**  Especially big ones.  C and C++ call semantics specify that objects are passed by value by default, meaning that the called method gets a copy of the input.  This is okay for scalar quantities like int and float, but not okay for a big vector, for example.  The thing to note then is that the called method may modify the contents of the passed object, while an object passed by value can be expected not to be modified by the called method.
 
-**Use references to receive returned objects created by methods**  That way they don't get copied.
+**Use references to receive returned objects created by methods**  That way they don't get copied.  The example below is from the VD coldbox channel map.  Bad, inefficient code courtesy of Tom Junk, and good code suggestion courtesy of Alessandro Thea.  The infotohcanmap object is a map of maps of maps:  std::unordered_map<int,std::unordered_map<int,std::unordered_map<int,int> > > infotochanmap;
 
 <div style="display: grid;grid-template-columns: repeat(2,460px);grip-gap: 5px;width:1120px;border: 2px solid #ffffff;font-family:Courier, monospace;color: #000000;font-size: 10pt;">
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (BAD)</div>
@@ -240,12 +240,14 @@ int dune::VDColdboxChannelMapService::getOfflChanFromWIBConnectorInfo(int wib, i
   r = fm3->second;  <br>
   return r;<br>
 }<br>
+</div>
+</div>
 
-</div>
-</div>
 **Minimize cloning TH1’s.**  It is really slow.
 
 **Minimize formatted I/O.**   Formatting strings for output is CPU-consuming, even if they are never printed to the screen or output to your logfile.  `MF_LOG_INFO` calls for example must prepare the string for printing even if it is configured not to output it.
+
+**Avoid using caught exceptions as part of normal program operation**  While this isn't an efficiency issue or even a code readability issue, it is a problem when debugging programs.  Most debuggers have a feature to set a breakpoint on thrown exceptions.  This is sometimes necessary to use in order to track down a stubborn bug.  Bugs that stop program execution like segmentation faults are sometimes easer to track down than caught exceptions (which often aren't even bugs but sometimes they are).  If many caught exceptions take place before the buggy one, then the breakpoint on thrown exceptions has limited value.
 
 **Use sparse matrix tools where appropriate.**  This also saves memory.
 
