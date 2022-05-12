@@ -201,6 +201,48 @@ for (size_t i=0; i<results.size(); ++i)<br>
 
 **Check for NaN and Inf.**  While your program will still function if an intermediate result is `NaN` or `Inf` (and it may even produce valid output, especially if the `NaN` or `Inf` is irrelevant), processing `NaN`s and `Inf`s is slower than processing valid numbers.  Letting a `NaN` or an `Inf` propagate through your calculations is almost never the right thing to do - check functions for domain validity (square roots of negative numbers, logarithms of zero or negative numbers, divide by zero, etc.) when you execute them and decide at that point what to do.  If you have a lengthy computation and the end result is `NaN`, it is often ambiguous at what stage the computation failed.
 
+**Pass objects by reference.**  Especially big ones.  C and C++ call semantics specify that objects are passed by value by default, meaning that the called method gets a copy of the input.  This is okay for scalar quantities like int and float, but not okay for a big vector, for example.  The thing to note then is that the called method may modify the contents of the passed object, while an object passed by value can be expected not to be modified by the called method.
+
+**Use references to receive returned objects created by methods**  That way they don't get copied.
+
+<div style="display: grid;grid-template-columns: repeat(2,460px);grip-gap: 5px;width:1120px;border: 2px solid #ffffff;font-family:Courier, monospace;color: #000000;font-size: 10pt;">
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (BAD)</div>
+
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (GOOD)</div>
+
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
+int dune::VDColdboxChannelMapService::getOfflChanFromWIBConnectorInfo(int wib, int wibconnector, int cechan)<br>
+{<br>
+  int r = -1;<br>
+  auto fm1 = infotochanmap.find(wib);<br>
+  if (fm1 == infotochanmap.end()) return r;<br>
+  auto m1 = fm1-&gt;second;<br>
+  auto fm2 = m1.find(wibconnector);<br>
+  if (fm2 == m1.end()) return r;<br>
+  auto m2 = fm2-&gt;second;<br>
+  auto fm3 = m2.find(cechan);<br>
+  if (fm3 == m2.end()) return r;<br>
+  r = fm3->second;  <br>
+  return r;<br>
+</div>
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
+int dune::VDColdboxChannelMapService::getOfflChanFromWIBConnectorInfo(int wib, int wibconnector, int cechan)<br>
+{<br>
+  int r = -1;<br>
+  auto fm1 = infotochanmap.find(wib);<br>
+  if (fm1 == infotochanmap.end()) return r;<br>
+  auto& m1 = fm1-&gt;second;<br>
+  auto fm2 = m1.find(wibconnector);<br>
+  if (fm2 == m1.end()) return r;<br>
+  auto& m2 = fm2-&gt;second;<br>
+  auto fm3 = m2.find(cechan);<br>
+  if (fm3 == m2.end()) return r;<br>
+  r = fm3->second;  <br>
+  return r;<br>
+}<br>
+
+</div>
+</div>
 **Minimize cloning TH1’s.**  It is really slow.
 
 **Minimize formatted I/O.**   Formatting strings for output is CPU-consuming, even if they are never printed to the screen or output to your logfile.  `MF_LOG_INFO` calls for example must prepare the string for printing even if it is configured not to output it.
