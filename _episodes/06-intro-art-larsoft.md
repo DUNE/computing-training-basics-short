@@ -322,7 +322,7 @@ There was an [art/LArSoft course in 2015][art-LArSoft-2015]. While it, too is a 
 
 Gallery is a lightweight tool that lets users read art-formatted root files and make plots without having to write and build art modules. It works well with interpreted and compiled ROOT macros, and is thus ideally suited for data exploration and fast turnaround of making plots. It lacks the ability to use art services, however, though some LArSoft services have been split into services and service providers. The service provider code is intended to be able to run outside of the art framework and linked into separate programs.
 
-Gallery also lacks the ability to write data products to an output file. You are of course free to open and write files of your own devising in your gallery programs. There are example gallery ROOT scripts in dunetpc/dune/GalleryScripts. They are only in the git repository but do not get installed in the UPS product.
+Gallery also lacks the ability to write data products to an output file. You are of course free to open and write files of your own devising in your gallery programs. There are example gallery ROOT scripts in duneexamples/duneexamples/GalleryScripts. They are only in the git repository but do not get installed in the UPS product.
 
 More documentation: [https://art.fnal.gov/gallery/][art-more-documentation]
 
@@ -338,7 +338,7 @@ The LArSoft wiki is here: [larsoft-wiki](https://larsoft.github.io/LArSoftWiki/)
 
 The LArSoft toolkit is a set of software components that simulate and reconstruct LArTPC data, and also it provides tools for accessing raw data from the experiments. LArSoft contains an interface to GEANT4 (art does not list GEANT4 as a dependency) and the GENIE generator. It contains geometry tools that are adapted for wire-based LArTPC detectors.
 
-A recent graph of the UPS products in a full stack staring with dunesw is available [here](https://wiki.dunescience.org/w/img_auth.php/f/f0/Dunesw_v09_48_01d00_e20_prof_graph.pdf) (dunesw). You can see the LArSoft pieces under dunetpc, as well as GEANT4, GENIE, ROOT, and a few others.
+A recent graph of the UPS products in a full stack staring with dunesw is available [here](https://wiki.dunescience.org/w/img_auth.php/f/f0/Dunesw_v09_48_01d00_e20_prof_graph.pdf) (dunesw). You can see the LArSoft pieces under dunesw, as well as GEANT4, GENIE, ROOT, and a few others.
 
 ### LArSoft Data Products
 
@@ -448,7 +448,7 @@ The follow-up part of this tutorial gives hands-on exercises for doing these thi
 
 ### Contributing to LArSoft
 
-Unlike dunetpc, protoduneana and garsoft, which are hosted in Fermilab's Redmine repository, the LArSoft git repositories are hosted on GitHub and use a pull-request model. LArSoft's github link is [https://github.com/larsoft][github-link]
+Unlike dunesw, protoduneana and garsoft, which are hosted in Fermilab's Redmine repository, the LArSoft git repositories are hosted on GitHub and use a pull-request model. LArSoft's github link is [https://github.com/larsoft][github-link]
 
 See the documentation at this link: [https://larsoft.github.io/LArSoftWiki/Developing_With_LArSoft][developing-with-larsoft]
 
