@@ -327,7 +327,7 @@ export X509_USER_PROXY=/tmp/x509up_u$(id -u)
 
 if you ever find yourself doing work under a shared account (dunepro for example) you should *NOT* manually set X509_USER_PROXY in this way.
 
-**Side note:** Some people will pass file lists to their jobs instead of using a SAM dataset. We do not recommend that for two reasons: 1) 
+**Side note:** Some people will pass file lists to their jobs instead of using a SAM dataset. We do not recommend that for two reasons: 1) Lists do not protect you from cases where files fall out of cache at the location(s) in your list. When that happens your jobs sit idle waiting for the files to be fetched from tape, which kills your efficiency and blocks resources for others. 2) You miss out on cases where there might be a local copy of the file at the site you're running on, or at least at closer one to your list. So you may end up unecessarily streaming across oceans, whereas using SAM (or later Rucio) will find you closer, local copies when they exist.
 
 **Another important side note:** If you are used to using other programs for your work such as project.py (which is **NOT** officially supported by DUNE or the Fermilab Scientific Computing Division), there is a helpful tool called [Project-py][project-py-guide] that you can use to convert existing xml into POMS configs, so you don't need to start from scratch! Then you can just switch to using POMS from that point forward. As a reminder, if you use unsupported tools, you are own your own and will receive NO SUPPORT WHATSOEVER. You are still responsible for making sure that your jobs satisfy Fermilab's policy for job efficiency: https://cd-docdb.fnal.gov/cgi-bin/sso/RetrieveFile?docid=7045&filename=FIFE_User_activity_mitigation_policy_20200625.pdf&version=1
 
