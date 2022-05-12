@@ -141,9 +141,7 @@ Another useful data handling command you will soon come across is ifdh. This sta
 
 Here is an example to copy a file. Refer to the [Mission Setup]({{ site.baseurl }}/setup.html) for the setting up the `DUNESW_VERSION`.
 ~~~
-export DUNESW_VERSION=v09_48_01d00
-alias dune_setup='source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh'
-source ~/.dune_presetup_202205.sh
+source ~/dune_presetup_202205.sh
 dune_setup
 setup_fnal_security
 ifdh cp -D root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/physics/full-reconstructed/2019/mc/out1/PDSPProd2/22/60/37/10/PDSPProd2_protoDUNE_sp_reco_35ms_sce_off_23473772_0_452d9f89-a2a1-4680-ab72-853a3261da5d.root /dev/null
