@@ -214,7 +214,7 @@ Factorize your program into parts that do i/o and compute.   That way, if you do
 
 ## Memory optimization:
 
-Use `valgrind`.  Its default operation checks for memory leaks and invalid accesses.  Search the output for the words “invalid” and “lost”.  Valgrind is a `UPS` product you can set up along with everything else.
+Use `valgrind`.  Its default operation checks for memory leaks and invalid accesses.  Search the output for the words “invalid” and “lost”.  Valgrind is a `UPS` product you can set up along with everything else.  It is set up as part of the dunesw stack.
 
 ~~~
 setup valgrind
