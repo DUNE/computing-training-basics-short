@@ -146,6 +146,7 @@ dune_setup
 kx509
 export ROLE=Analysis
 voms-proxy-init -rfc -noregen -voms=dune:/dune/Role=$ROLE -valid 120:00
+setup ifdhc
 ifdh cp root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/physics/full-reconstructed/2019/mc/out1/PDSPProd2/22/60/37/10/PDSPProd2_protoDUNE_sp_reco_35ms_sce_off_23473772_0_452d9f89-a2a1-4680-ab72-853a3261da5d.root /dev/null
 ~~~
 {: .language-bash}
