@@ -37,37 +37,38 @@ There are three types of storage volumes that you will encounter at Fermilab: lo
 
 ## Vocabulary
 
-**What is immutable?** A file is immutable means that once it is written to the volume it cannot be modified, only read, moved, or deleted. Not a good choice for code or other files you want to change.
+**What is POSIX?** A volume with POSIX access (Portable Operating System Interface [Wikipedia](https://en.wikipedia.org/wiki/POSIX)) allow users to directly read, write and modify using standard commands, e.g. using bash scripts, fopen(). In general, volumes mounted directly into the operating system.
 
-**What is interactive or POSIX?** Interactive volumens, or volume with POSIX access (Portable Operating System Interface [Wikipedia](https://en.wikipedia.org/wiki/POSIX)) allow users to directly read, write and modify using standard commands, e.g. using bash language.
+**What is meant by 'grid accessible'?** Volumes that are grid accessible require specific tool suites to handle data stored there. Grid access to a volume is NOT POSIX access. This will be explained in the following sections.
 
-**What is meant by 'grid accessible'?** Volumes that are grid accessible require specific tool suites to handle data stored there. This will be explained in the following sections.
+**What is immutable?** A file that is immutable means that once it is written to the volume it cannot be modified. It can only be read, moved, or deleted. This property is in general a restriction imposed by the storage volume on which the file is stored. Not a good choice for code or other files you want to change.
+
 
 ## Interactive storage volumes
 
-**Home area**  is similar to the user's local hard drive but network mounted
+**Home area** is similar to the user's local hard drive but network mounted
 * access speed to the volume very high, on top of full POSIX access
-* they NOT safe to store certificates and tickets 
-* not accessible as an output location from grid worker nodes
+* network volumes are NOT safe to store certificates and tickets
+* important: users have a single home area at FNAL used for all experiments 
+* not accessible from grid worker nodes
 * not for code developement (size of less than 2 GB)
-* You need a valid Kerberos ticket in order to access files in your Home area
-* Periodic snapshots are taken so you can recover deleted files. (/nashome/.snapshot)
+* at Fermilab, need a valid Kerberos ticket in order to access files in your Home area
+* periodic snapshots are taken so you can recover deleted files. (/nashome/.snapshot)
 
-**Locally mounted volumes** are physical disks, mounted directly
+**Locally mounted volumes** are physical disks, mounted directly on the computer
 * physically inside the computer node you are remotely accessing
 * mounted on the machine through the motherboard (not over network)
 * used as temporary storage for infrastructure services (e.g. /var, /tmp,)
-* can be used to store certificates and tickets. (These are saved there automatically with owner-read permission and other permissions disabled.)
+* can be used to store certificates and tickets. (These are saved there automatically with owner-read on and other permissions disabled.)
 * usually very small and should not be used to store data files or for code development
 * files on these volumes are not backed up
 
 **Network Attached Storage (NAS)** element behaves similar to a locally mounted volume.
 * functions similar to services such as Dropbox or OneDrive
-* fast and stable access rate 
+* fast and stable POSIX access to these volumes
 * volumes available only on a limited number of computers or servers
 * not available on larger grid computing (FermiGrid, Open Science Grid, etc.)
-* /dune/app has periodic snapshots in /dune/app/.snapshot, but /dune/data and /dune/data2 do not
-
+* /dune/app has periodic snapshots in /dune/app/.snapshot, but /dune/data and /dune/data2 do NOT
 
 ## Grid-accessible storage volumes
 
@@ -77,7 +78,7 @@ At Fermilab, an instance of dCache+Enstore is used for large-scale, distributed 
 
 **Scratch dCache**: large volume shared across all experiments. When a new file is written to scratch space, old files are removed in order to make room for the newer file. removal is based on LRU policy
 
-**Resilient dCache**: (NOTE: DIRECT USAGE is being phased out) handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here (no data or ntuples). keeps many copies of tarball so storage of data or ntuples has large impact/problem
+**Resilient dCache**: (NOTE: DIRECT USAGE is being phased out) handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here (no data or ntuples). keeps many copies of tarball so storage of data or ntuples has large impact and will quickly create problems
 
 **Tape-backed dCache**: disk based storage areas that have their contents mirrored to permanent storage on Enstore tape.  
 Files are not available for immediate read on disk, but needs to be 'staged' from tape first ([see video of a tape storage robot](https://www.youtube.com/watch?v=kiNWOhl00Ao)).
@@ -111,7 +112,7 @@ In the following table, \<exp\> stands for the experiment (uboone, nova, dune, e
 ## Monitoring and Usage
 Remember that these volumes are not infinite, and monitoring your and the experiment usage of these volumes is important to smooth access to data and simulation samples. To see your persistent usage visit [here](https://fifemon.fnal.gov/monitor/d/000000175/dcache-persistent-usage-by-vo?orgId=1&var-VO=dune) (bottom left):
 
-And to see the have some idea about the total volume usage at Rucio Storage Elements around the world:
+And to see the total volume usage at Rucio Storage Elements around the world:
 
 **Resource** [DUNE Rucio Storage](https://dune.monitoring.edi.scotgrid.ac.uk/app/dashboards#/view/7eb1cea0-ca5e-11ea-b9a5-15b75a959b33?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-1d,to:now)))
 
@@ -154,8 +155,8 @@ ifdh cp -D root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepr
 > ## Exercise 2
 > Using the ifdh command, complete the following tasks:
 * create a directory in your dCache scratch area (/pnfs/dune/scratch/users/${USER}/) called "DUNE_tutorial_May2022"
-* copy your ~/.bashrc file to that directory.
-* copy the .bashrc file from your scrtach directory DUNE_tutorial_May2022 dCache to /dev/null
+* copy /dune/app/users/${USER}/my_first_login.txt file to that directory.
+* copy the my_first_login.txt file from your scrtach directory DUNE_tutorial_May2022 dCache to /dev/null
 * remove the directory DUNE_tutorial_May2022 using "ifdh rmdir /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_May2022"
 > Note, if the destination for an ifdh cp command is a directory instead of filename with full path, you have to add the "-D" option to the command line. Also, for a directory to be deleted, it must be empty.
 {: .challenge}
