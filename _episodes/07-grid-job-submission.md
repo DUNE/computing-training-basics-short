@@ -34,7 +34,7 @@ First, log in to a `dunegpvm` machine (should work from `lxplus` too with a mino
 ```bash
 source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
 setup jobsub_client
-mkdir /pnfs/dune/scratch/users/${USER} # if you have not done this before
+mkdir -p /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_May2022 # if you have not done this before
 ```
 Having done that, let us submit a prepared script:
 
@@ -78,6 +78,31 @@ Verify that the file exists and is non-zero size after the job completes.
 You can delete it after that; it just prints out some information about the environment.
 
 More information about `jobsub` is available [here][redmine-wiki-jobsub] and [here][redmine-wiki-using-the-client].
+
+## Manipulating submitted jobs
+
+If you want to remove existing jobs, you can do
+
+```bash
+jobsub_rm -G dune --jobid=12345678.9@jobsub0N.fnal.gov
+```
+
+to remove all jobs in a given submission (i.e. if you used -N <some number greater than 1>) you can do
+
+```bash
+jobsub_rm -G dune --jobid=12345678@jobsub0N.fnal.gov
+```
+To remove all of your jobs, you can do
+```bash
+jobsub_rm -G dune --user=username
+```
+If you want to manipulate only a certian subset of jobs, you can use a HTCondor-style constraint. For example, if I want to remove only held jobs asking for more than say 8 GB of memory that went held because they went over their request, I could do something like
+```bash
+jobsub_rm -G dune --constraint='Owner=="username"&&JobStatus==5&&RequestMemory>=8000&&(HoldReasonCode==34||(HoldReasonCode==26&&HoldReasonSubCode==1))'
+```
+To hold jobs, it's the same procedure as `jobsub_rm`; just replace that with `jobsub_hold`. To release a held job (which will restart from the beginning), it's the same commands as above, only use `jobsub_release` in place of rm or hold.
+
+if you get tired of typing `-G dune` all the time, you can set the JOBSUB_GROUP environment variable to dune, and then omit the -G option.
 
 ## Submit a job using the tarball containing custom code
 
@@ -307,7 +332,7 @@ This reads the first four bytes of each file, which will reset the LRU clock.
 **Important side note:** If you are used to using other programs for your work such as project.py (which is NOT officially supported by DUNE or the Fermilab Scientific Computing Division), there is a helpful tool called [Project-py][project-py-guide] that you can use to convert existing xml into POMS configs, so you don't need to start from scratch! Then you can just switch to using POMS from that point forward. As a reminder, if you use unsupported tools, you are own your own and will receive NO SUPPORT WHATSOEVER.
 
 ## Further Reading
-Some more background material on these topics (including some examples of why certain things are bad) are on this PDF:  
+Some more background material on these topics (including some examples of why certain things are bad) is in these links:  
 [DUNE Computing Tutorial:Advanced topics and best practices](DUNE_computing_tutorial_advanced_topics_20210129)
 
 [2021 Intensity Frontier Summer School](https://indico.fnal.gov/event/49414)
