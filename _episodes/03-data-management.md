@@ -1,15 +1,14 @@
 ---
 title: Data Management
-teaching: 45
+teaching: 60
 exercises: 0
-- What are the data management tools and software for DUNE?
-- How are different software versions handled?
-- What are the best data management practices?
-
-objectives:   
-- Learn how to access data from DUNE Data Catalog
-- Understand the roles of the tools UPS, mrb and CVMFS 
-
+questions:
+- What are the data management tools and software for DUNE? 
+- How are different software versions handled? 
+- What are the best data management practices? 
+objectives:
+- Learn how to access data from DUNE Data Catalog.
+- Understand the roles of the tools UPS, mrb and CVMFS. 
 keypoints:
 - SAM and Rucio are data handling systems used by the DUNE collaboration to retrieve data.
 - Staging is a necessary step to make sure files are on disk in dCache (as opposed to only on tape).
@@ -77,6 +76,7 @@ castor:/neutplatform/protodune/rawdata/np04/detector/None/raw/07/42/28/49
 enstore:/pnfs/dune/tape_backed/dunepro/protodune/np04/beam/detector/None/raw/07/42/28/49(597@vr0337m8)
 ~~~
 {: .output}
+
 which is the locations of the file on disk and tape. We can use this to copy the file from tape to our local disk.
 
 To list raw data files for a given run:
@@ -109,6 +109,7 @@ np04_raw_run005758_0061_dl8_reco_14670148_0_20190105T175536.root
 np04_raw_run005758_0044_dl6_reco_14669100_0_20190105T172046.root
 ~~~
 {: .output}
+
 The above is truncated output to show us the one reconstructed file that is the child of the raw data file above.
 
 To see the total number of files that match a certain query expression, then add the `--summary` option to `samweb list-files`.
@@ -120,7 +121,7 @@ To see the total number of files that match a certain query expression, then add
 * [dune-data.fnal.gov](https://dune-data.fnal.gov) lists some official dataset definitions 
 
 ## Accessing data for use in your analysis
-To access data without copying it, XRootD is the tool to use. However it will work only if the file is staged to the disk.
+To access data without copying it, `XRootD` is the tool to use. However it will work only if the file is staged to the disk.
 
 You can stream files worldwide if you have a DUNE VO certificate as described in the preparation part of this tutorial.
 
@@ -285,7 +286,6 @@ More information on CVMFS is available [here](https://wiki.dunescience.org/wiki/
 * [mrb reference guide (redmine)](https://cdcvs.fnal.gov/redmine/projects/mrb/wiki/MrbRefereceGuide)
 * CVMFS on DUNE wiki: [Access files in CVMFS](https://wiki.dunescience.org/wiki/DUNE_Computing/Access_files_in_CVMFS)
 
-
 [Ifdh_commands]: https://cdcvs.fnal.gov/redmine/projects/ifdhc/wiki/Ifdh_commands
 [xrootd-man-pages]: https://xrootd.slac.stanford.edu/docs.html
 [Understanding-storage]: https://cdcvs.fnal.gov/redmine/projects/fife/wiki/Understanding_storage_volumes
@@ -293,3 +293,4 @@ More information on CVMFS is available [here](https://wiki.dunescience.org/wiki/
 [dune-data-fnal]: https://dune-data.fnal.gov/
 [dune-data-fnal-how-works]: https://dune-data.fnal.gov/tutorial/howitworks.pdf
 [sam-data-control]: https://wiki.dunescience.org/wiki/Using_the_SAM_Data_Catalog_to_find_data
+
