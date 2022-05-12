@@ -235,7 +235,7 @@ Of course replace 12345678.0@jobsub0N.fnal.gov with your own job ID.
 * **NEVER** copy job outputs to a directory in resilient dCache. Remember that they are replicated by a factor of 20! **Any such files are subject to deletion without warning**.  
 * **NEVER** do hadd on files in `/pnfs` areas unless you're using `xrootd`. I.e. do NOT do hadd out.root `/pnfs/dune/file1 /pnfs/dune/file2 ...` This can cause severe performance degradations.  
 
-## Submitting with POMS
+## Submitting with POMS, Part I
 
 POMS is the recommended (i.e., supported) way of submitting large workflows. It offers several advantages over other systems, such as 
 
@@ -247,7 +247,7 @@ POMS is the recommended (i.e., supported) way of submitting large workflows. It 
 At its core, in POMS one makes a "campaign", which has one or more "stages". In our example there is only a single stage.  
 
 For analysis use: [main POMS page][poms-page-ana]  
-An [example campaign](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=9743).
+An [example campaign](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14102).
 
 Typical POMS use centers around a configuration file (often more like a template which can be reused for many campaigns) and various campaign-specific settings for overriding the defaults in the config file.
 An example config file designed to do more or less what we did in the previous submission is here: `/dune/app/users/kherner/may2022tutorial/work/pomsdemo.cfg`
@@ -255,14 +255,36 @@ An example config file designed to do more or less what we did in the previous s
 You can find more about POMS here: [POMS User Documentation][poms-user-doc]  
 Helpful ideas for structuring your config files are here: [Fife launch Reference][fife-launch-ref]  
 
-When you start using POMS you must upload an x509 proxy to the sever before submitting (you can just scp your proxy file from a dunegpvm machine) and it must be named x509up_voms_dune_Analysis_yourusername when you upload it.
-To upload, look for the User Data item in the left-hand menu on the POMS site, choose Uploaded Files, and follow the instructions.
+When you start using POMS you must upload an x509 proxy to the sever before submitting and you need to periodically repeat this as the proxy gets close to expoiration (typically once every few days). If uploading it manually, it must be named x509up_voms_dune_Analysis_yourusername when you upload it.
+To upload, look for the User Data item in the left-hand menu on the POMS site, choose Uploaded Files, and follow the instructions. 
 
-Finally, here is an example of a campaign that does the same thing as the previous one, using our usual MC reco file from Prod2, but does it via making a SAM dataset using that as the input: [POMS campaign stage information](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=9753). 
+By far the easiest way to upload the proxy, however, is to use the `upload_file` command from the *fife_utils* package. To do that, simply first set up fife_utils if not already done:
+
+```bash
+setup -g analysis fife_utils
+```
+And then run the upload file command:
+```bash
+upload_file --experiment=dune --proxy
+```
+
+Typical output will look something like
+~~~
+Fetching options from https://fifebatch.fnal.gov/cigetcertopts.txt
+Checking if /tmp/x509up_uNNNNN has at least 1.0 hours left
+117.19 hours remaining, enough to reuse
+Checking if myproxy.fnal.gov has at least 503.0 hours left
+663.62 hours remaining, enough to reuse
+uploaded: /tmp/x509up_voms_dune_Analysis_kherner to POMS server
+~~~
+
+where NNNNN will be your UID. As you see, the utility will automatically upload a proxy and give it the proper name for you.
+
+Finally, here is an example of a campaign that does the same thing as the previous one, using some MC reco file from ProtoDUNE SP Prod4a, but does it via making a SAM dataset using that as the input: [POMS campaign stage information](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14101). 
 Of course, before running **any** SAM project, we should prestage our input definition(s). The way most people do that is to do
 
 ```bash
-samweb prestage-dataset kherner-may2021tutorial-mc
+samweb prestage-dataset kherner-may2022tutorial-mc
 ```
 {: .source}
 
