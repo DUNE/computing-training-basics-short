@@ -301,7 +301,7 @@ You are welcome to write standard C++ code -- classes and C-style functions are 
 
 ### Retrieving Data Products
 
-In a producer or analyzer module, data products can be retrieved from the art event store with `getByLabel()` or `getValidHandle()` calls, or more rarely `getManyByType` or other calls. The arguments to these calls specify the module label and the instance of the data product. A typical `TBranch` name in the Events tree in an *art*ROOT file is
+In a producer or analyzer module, data products can be retrieved from the art event store with `getHandle()` or `getValidHandle()` calls, or more rarely `getManyByType` or other calls. The arguments to these calls specify the module label and the instance of the data product. A typical `TBranch` name in the Events tree in an *art*ROOT file is
 
 ~~~
 simb::MCParticles_largeant__G4Stage1.
