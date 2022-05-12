@@ -12,19 +12,9 @@ keypoints:
 
 ## Quiz Time
 
-Arrive on time at 10:30AM CST.
+The questions will be available on the [timetable][indico-timetable] as an attachment.
 
-You will be assigned to breakout rooms, in teams of 6. You will have a couple of minutes to introduce yourself.
-
-The questions will be available on Indico at 10:35AM CST. Refresh the [timetable][indico-timetable] and you will see the slideshow.
-
-Discuss solutions to each of the questions. Consider using Software Carpentry's [Etherpad][sc-etherpad] for shared dialog.
-
-You will have 20 minutes.
-
-At the end of the session, a second slide show will be posted with answers.
-
-Enjoy learning!  
+Dr. Herner will provide insight to the correct answers.
 
 ## Session Video
 
@@ -35,7 +25,7 @@ The session will be captured on video a placed here after the workshop for async
 </center>-->
 
 
-[indico-timetable]: https://indico.fnal.gov/event/48756/timetable/#all
+[indico-timetable]: https://indico.fnal.gov/event/51991/timetable/#all
 [sc-etherpad]: https://pad.carpentries.org/
 
 
