@@ -3,9 +3,9 @@ title: Code-makeover - Submit with POMS
 teaching: 60
 exercises: 0
 questions:
-- How to submit grid jobs with POMS?
+- How to submit realistic grid jobs with POMS?
 objectives:  
-- Demonstrate use of POMS for job submission.
+- Demonstrate use of POMS for job submission with more complicated setups.
 keypoints:
 - Always, always, always prestage input datasets. No exceptions.
 ---
@@ -21,7 +21,7 @@ The session will be captured on video a placed here after the workshop for async
 
 </center>-->
 
-## Submit with POMS Part II: More complicated workflows
+# Submit with POMS Part II: More complicated workflows
 
 This lesson extends from earlier work: [Grid Job Submission and Common Errors]({{ site.baseurl }}/07-grid-job-submission/index.html) 
 
@@ -40,16 +40,16 @@ An [example campaign](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/
 Of course in reality you may need to run multiple steps of a workflow in a single job, or run multiple stages in separate jobs, or modify things from a default release, or iterate over multiple config sets, or any number of other arbitrarily complicated ideas. You also have to consider things like SAM metadata for your files. In this lesson we'll look at some of these more realistic cases and show how they can be set up with POMS campaigns.
 
 
-# Submit work with a modified .fcl file
+## Submit work with a modified .fcl file
 
 Suppose you want to run something with a minor modification to a fcl file. Why bother with downloading and building a custom release and shipping that to your jobs when you don't have any new code or libraries? A much simpler way 
 
-# Run a workflow with multiple executable sections (and chained inputs/outputs)
+## Run a workflow with multiple executable sections (and chained inputs/outputs)
 
 
-# Create a multi-stage workflow
+## Create a multi-stage workflow
 
-# Iterate over multiple datasets or list items
+## Iterate over multiple datasets or list items
 
 
 
