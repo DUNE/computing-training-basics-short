@@ -150,14 +150,7 @@ tar --exclude '.git' -czf may2022tutorial.tar.gz may2022tutorial/localProducts_l
 Then submit another job (in the following we keep the same submit file as above):
 
 ```bash
-jobsub_submit -G dune -M -N 1 --memory=1800MB --disk=2GB --expected-lifetime=3h --cpu=1 --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE --tar_file_name=dropbox:///dune/app/users/<username>/may2022tutorial.tar.gz -l '+SingularityImage=\"/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest\"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&
-TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&
-TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&
-TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105&&
-TARGET.HAS_CVMFS_fifeuser1_opensciencegrid_org==true&&
-TARGET.HAS_CVMFS_fifeuser2_opensciencegrid_org==true&&
-TARGET.HAS_CVMFS_fifeuser3_opensciencegrid_org==true&&
-TARGET.HAS_CVMFS_fifeuser4_opensciencegrid_org==true)' file:///dune/app/users/kherner/run_May2022tutorial.sh
+jobsub_submit -G dune -M -N 1 --memory=2500MB --disk=2GB --expected-lifetime=3h --cpu=1 --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE --tar_file_name=dropbox:///dune/app/users/<username>/may2022tutorial.tar.gz -l '+SingularityImage=\"/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest\"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105&&TARGET.HAS_CVMFS_fifeuser1_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser2_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser3_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser4_opensciencegrid_org==true)' file:///dune/app/users/kherner/run_may2022tutorial.sh
 ```
 
 You'll see this is very similar to the previous case, but there are some new options: 
@@ -236,7 +229,7 @@ Of course replace 12345678.0@jobsub0N.fnal.gov with your own job ID.
 * When creating a new workflow or making changes to an existing one, <span style="color:red">**ALWAYS test with a single job first**</span>. Then go up to 10, etc. Don't submit thousands of jobs immediately and expect things to work.  
 * **ALWAYS** be sure to prestage your input datasets before launching large sets of jobs.  
 * **Use RCDS**; do not copy tarballs from places like scratch dCache. There's a finite amount of transfer bandwidth available from each dCache pool. If you absolutely cannot use RCDS for a given file, it's better to put it in resilient (but be sure to remove it when you're done!). The same goes for copying files from within your own job script: if you have a large number of jobs looking for a same file, get it from resilient. Remove the copy when no longer needed. Files in resilient dCache that go unaccessed for 45 days are automatically removed.  
-* Be careful about placing your output files. **NEVER** place more than a few thousand files into any one directory inside dCache. That goes for all type of dCache (scratch, persistent, resilient, etc).  
+* Be careful about placing your output files. **NEVER place more than a few thousand files into any one directory inside dCache. That goes for all type of dCache (scratch, persistent, resilient, etc).**
 * **Avoid** commands like `ifdh ls /path/with/wildcards/*/` inside grid jobs. That is a VERY expensive operation and can cause a lot of pain for many users.  
 * Use xrootd when opening files interactively; this is much more stable than simply doing `root /pnfs/dune/...`
 * **NEVER** copy job outputs to a directory in resilient dCache. Remember that they are replicated by a factor of 20! **Any such files are subject to deletion without warning**.  
@@ -266,16 +259,30 @@ When you start using POMS you must upload an x509 proxy to the sever before subm
 To upload, look for the User Data item in the left-hand menu on the POMS site, choose Uploaded Files, and follow the instructions.
 
 Finally, here is an example of a campaign that does the same thing as the previous one, using our usual MC reco file from Prod2, but does it via making a SAM dataset using that as the input: [POMS campaign stage information](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=9753). 
-Of course, before running **any** SAM project, we should prestage our input definition(s):
+Of course, before running **any** SAM project, we should prestage our input definition(s). The way most people do that is to do
 
 ```bash
 samweb prestage-dataset kherner-may2021tutorial-mc
 ```
 {: .source}
 
-replacing the above definition with your own definition as appropriate.
+replacing the above definition with your own definition as appropriate. However, this does NOT reset the clock on the LRU algorithm, because if prestage-dataset sees a file is already chached, it goes on to the next one; it does no lifetime or last access checking, nor does it read the file. A better way to prestage is to instead do
 
-If you are used to using other programs for your work such as project.py (which is NOT officially supported by DUNE or the Fermilab Scientific Computing Division), there is a helpful tool called [Project-py][project-py-guide] that you can use to convert existing xml into POMS configs, so you don't need to start from scratch! Then you can just switch to using POMS from that point forward. As a reminder, if you use unsupported tools, you are own your own and will receive NO SUPPORT WHATSOEVER.
+```bash
+samweb run-project --defname=kherner-may2022tutorial-mc --schema https 'echo %fileurl && curl -L --cert $X509_USER_PROXY --key $X509_USER_PROXY --cacert $X509_USER_PROXY --capath /etc/grid-security/certificates -H "Range: bytes=0-3" %fileurl && echo'
+```
+
+Note you will need to have the X509_USER_PROXY environment variable set. Most of the time that will simply be set as
+
+```bash
+export X509_USER_PROXY=/tmp/x509up_u$(id -u)
+```
+
+if you ever find yourself doing work under a shared account (dunepro for example) you should *NOT* manually set X509_USER_PROXY in this way.
+
+This reads the first four bytes of each file, which will reset the LRU clock.
+
+**Important side note:** If you are used to using other programs for your work such as project.py (which is NOT officially supported by DUNE or the Fermilab Scientific Computing Division), there is a helpful tool called [Project-py][project-py-guide] that you can use to convert existing xml into POMS configs, so you don't need to start from scratch! Then you can just switch to using POMS from that point forward. As a reminder, if you use unsupported tools, you are own your own and will receive NO SUPPORT WHATSOEVER.
 
 ## Further Reading
 Some more background material on these topics (including some examples of why certain things are bad) are on this PDF:  
