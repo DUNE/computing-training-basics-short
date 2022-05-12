@@ -143,8 +143,10 @@ Here is an example to copy a file. Refer to the [Mission Setup]({{ site.baseurl 
 ~~~
 source ~/dune_presetup_202205.sh
 dune_setup
-setup_fnal_security
-ifdh cp -D root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/physics/full-reconstructed/2019/mc/out1/PDSPProd2/22/60/37/10/PDSPProd2_protoDUNE_sp_reco_35ms_sce_off_23473772_0_452d9f89-a2a1-4680-ab72-853a3261da5d.root /dev/null
+kx509
+export ROLE=Analysis
+voms-proxy-init -rfc -noregen -voms=dune:/dune/Role=$ROLE -valid 120:00
+ifdh cp root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/physics/full-reconstructed/2019/mc/out1/PDSPProd2/22/60/37/10/PDSPProd2_protoDUNE_sp_reco_35ms_sce_off_23473772_0_452d9f89-a2a1-4680-ab72-853a3261da5d.root /dev/null
 ~~~
 {: .language-bash}
 
@@ -167,10 +169,9 @@ XRootD is most suitable for read-only data access.
 [XRootD Man pages](https://xrootd.slac.stanford.edu/docs.html)
 
 
-Issue the following commands. The first command converts a pnfs location into an xrootd URI. Please look at the input and output of the first command, to try and understand how this translation could be done by hand if you needed to do so. The output of the first command allows one to type the second command inputs for any pnfs directory.
+Issue the following command. Please look at the input and output of the command, and recognize that this is a listing of /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_May2022. Try and understand how the translation between a NFS path and an xrootd URI could be done by hand if you needed to do so.
 
 ~~~
-pnfs2xrootd /pnfs/dune/scratch/users/${USER}/
 xrdfs root://fndca1.fnal.gov:1094/ ls /pnfs/fnal.gov/usr/dune/scratch/users/${USER}/DUNE_tutorial_May2022
 ~~~
 {: .language-bash}
@@ -200,7 +201,7 @@ thefile = ROOT.TFile.Open(<xrootd_uri>)
 > ## Exercise 3
 > Using a combination of `ifdh` and `xrootd` commands discussed previously:
 > * Use `ifdh` locateFile to find the directory for this file `PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root`
-> * Use `pnfs2xrootd` to get the `xrootd` URI for that file.
+> * Translate the pnfs path to get an `xrootd` URI for that file.
 > * Use `xrdcp` to copy that file to `/dev/null`
 > * Using `xrdfs` and the `ls` option, count the number of files in the same directory as `PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root`
 {: .challenge}
