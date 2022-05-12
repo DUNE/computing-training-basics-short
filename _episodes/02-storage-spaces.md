@@ -107,7 +107,7 @@ In the following table, \<exp\> stands for the experiment (uboone, nova, dune, e
 | Home Area (NFS mount)	| Yes (~10 GB) | Centrally Managed by CCD | No | Until manually deleted | Storing global environment scripts (All FNAL Exp) | /nashome/\<letter\>/\<uid\>| No |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 
-![Storage Picture](../fig/Storage.png)
+![Storage Picture](../fig/Storage.png){: .image-with-shadow }
 
 ## Monitoring and Usage
 Remember that these volumes are not infinite, and monitoring your and the experiment usage of these volumes is important to smooth access to data and simulation samples. To see your persistent usage visit [here](https://fifemon.fnal.gov/monitor/d/000000175/dcache-persistent-usage-by-vo?orgId=1&var-VO=dune) (bottom left):
