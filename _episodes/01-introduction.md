@@ -46,7 +46,9 @@ The session will be captured on video a placed here after the workshop for async
 
 ## Schedule
 
-This incarnation of the computing training spans two days.
+This incarnation of the computing training spans two days. 
+
+The official schedule for this training is on the [Indico site](https://indico.fnal.gov/event/54191/timetable/#20220512).
 
 ## Support
 
