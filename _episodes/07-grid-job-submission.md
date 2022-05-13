@@ -17,7 +17,7 @@ keypoints:
 - Always, always, always prestage input datasets. No exceptions.
 ---
 
-## Video Session Part 1 of 2
+## Video Session 
 
 <!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
 The session was captured for your asynchronous review.
@@ -198,9 +198,11 @@ mv mytmpfile file_I_want_to_edit # now it's available as an editable regular fil
 You certainly don't want to do this for every file, but for a handful of small text files this is perfectly acceptable and the overall benefits of copying in code via the RCDS far outweigh this small cost. 
 This can get a little complicated when trying to do it for things several directories down, so it's easiest to have such files in the top level of your tar file. 
 
+<!--
 ## Video Session Part 2 of 2
 
 The session will be captured on video a placed here after the workshop for asynchronous study.
+-->
 
 <!--<center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/L3dx-NQJvp8" title="DUNE Computing Tutorial May 2021 Day 2 Grid Job Submission and Common Errors Part 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
