@@ -44,7 +44,7 @@ Of course in reality you may need to run multiple steps of a workflow in a singl
 
 Suppose you want to run something with a minor modification to a fcl file. Why bother with downloading and building a custom release and shipping that to your jobs when you don't have any new code or libraries? A much simpler way is to make a local copy of the .fcl file in job and then edit the local copy as needed.
 
-https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14110
+[https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14110](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14110)
 
 ## Run a workflow with multiple executable sections (and chained inputs/outputs)
 
@@ -52,25 +52,25 @@ In this example we run a reco2 step followed by a michelremoving step in the sam
 
 You'll see we also retained the fcl editing bit and a metadata extractor for the reco2 file.
 
-https://pomsgpvm01.fnal.gov/poms/show_campaign_stages/dune/analysis?campaign_name=kherner-May2022Tutorial-multi-exec
+[https://pomsgpvm01.fnal.gov/poms/show_campaign_stages/dune/analysis?campaign_name=kherner-May2022Tutorial-multi-exec](https://pomsgpvm01.fnal.gov/poms/show_campaign_stages/dune/analysis?campaign_name=kherner-May2022Tutorial-multi-exec)
 
 ## Create a multi-stage workflow
 
 Sometimes you may want to break separate components into multiple stages. We have the same components as the mutiple executable example but we split the reco2 and michelremoving since the michelremoving files are very small and we want to merge many to one (not we set n_files_per_job much higher in the michel stage). We could of course do things the same way as before but would have to manually merge later. In particular note the [stage_X] sections of the POMS config file. For each stage section you have have separate overrides and still use the same config file. We also use the add_to_dataset option for job outputs and give it the `_poms_task` special keyword; POMS will take care of automatically generating a SMA dataset consisting of the reco2 outputs, which will serve as the input dataset to the next stage.
 
-https://pomsgpvm01.fnal.gov/poms/show_campaign_stages/dune/analysis?campaign_name=kherner-May2022Tutorial-multi-stage
+[https://pomsgpvm01.fnal.gov/poms/show_campaign_stages/dune/analysis?campaign_name=kherner-May2022Tutorial-multi-stage](https://pomsgpvm01.fnal.gov/poms/show_campaign_stages/dune/analysis?campaign_name=kherner-May2022Tutorial-multi-stage)
 
 ## Iterate over multiple datasets or list items
 
 Datasets do not have to be actual SAM dataset; they can really be any value or even a list of values. Here we set up a list and cycle through it. Each time you submit, POMS automatically increments the list position until you reach the end of the list.
 
-https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14113
+[https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14113](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14113)
 
 ## Draining dataset
 
 If you have very large datasets, or datasets that change over time (such as in keepup processing), you may want to submit only a part of it at once. Of course then you need to keep trakc of what has already been submitted from the main dataset each time. Fortunately POMS provides such functionality with the draining and drainingn dataset types. Our example uses the latter, which will carve out a dataset of at most n files at a time from the larger dataset, keeping track of which files have already been submitted to ensure no duplication between different submissions. We will use the same MC example dataset as we have been using but will now submit it in several pieces.
 
-https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14108
+[https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14108](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14108)
 
 {%include links.md%} 
 
