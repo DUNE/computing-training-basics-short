@@ -19,13 +19,14 @@ keypoints:
 
 ## Session Video
 
-The session will be captured on video a placed here after the workshop for asynchronous study.
+<!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
+The session was captured for your asynchronous review.
 
-<!-- 
+
 <center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0FMtb3jy7H8" title="DUNE Computing Tutorial May 2021 Storage Systems" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lhw4dZv8Yeo" title="DUNE Computing Tutorial May 2022 Storage Systems" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
--->
+
 
 ## Live Notes
 
