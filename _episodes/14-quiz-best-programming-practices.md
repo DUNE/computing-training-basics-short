@@ -217,8 +217,8 @@ int main(int argc, char &#8727;&#8727;argv)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int  &#8727;j = new int[1000]<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br><br>
-&nbsp;&nbsp;int k;<br>
-&nbsp;&nbsp;std::cout &#60;&#60; k &#60;&#60; std::endl;<br><br>
+&nbsp;&nbsp;int kt;<br>
+&nbsp;&nbsp;std::cout &#60;&#60; kt &#60;&#60; std::endl;<br><br>
 
 &nbsp;&nbsp;int p[100];<br>
 &nbsp;&nbsp;p[100] = 5;<br>
@@ -240,8 +240,8 @@ int main(int argc, char &#8727;&#8727;argv)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int  &#8727;j = new int[1000]<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br><br>
-&nbsp;&nbsp;int k= 0;<br>
-&nbsp;&nbsp;std::cout &#60;&#60; k &#60;&#60; std::endl;<br><br>
+&nbsp;&nbsp;int kt= 0;<br>
+&nbsp;&nbsp;std::cout &#60;&#60; kt &#60;&#60; std::endl;<br><br>
 
 &nbsp;&nbsp;int p[100];<br>
 &nbsp;&nbsp;p[99] = 5;<br>
