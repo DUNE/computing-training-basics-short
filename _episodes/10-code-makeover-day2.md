@@ -294,7 +294,7 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Rebin histograms.**  Some histograms, say binned in channels <i>x</i> ticks or channels <i>x</i> frequency bins for a 2D FFT plot, can get very memory hungry.
 
-### I/O optimization:
+## I/O optimization:
 
 **Do as much calculation as you can per data element read.**  You can spin over a TTree once per plot, or you can spin through the TTree once and make all the plots.  ROOT compresses data by default on write and uncompresses it on readin, so this is both an I/O and a CPU issue, to minimize the data that are read.
 
