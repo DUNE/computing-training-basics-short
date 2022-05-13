@@ -294,6 +294,14 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Rebin histograms.**  Some histograms, say binned in channels <i>x</i> ticks or channels <i>x</i> frequency bins for a 2D FFT plot, can get very memory hungry.
 
+### I/O optimization:
+
+**Do as much calculation as you can per data element read.**  You can spin over a TTree once per plot, or you can spin through the TTree once and make all the plots.  ROOT compresses data by default on write and uncompresses it on readin, so this is both an I/O and a CPU issue, to minimize the data that are read.
+
+**Saving compressed data reduces I/O time and storage needs.**  Even though compressing data takes CPU, a slow disk or network can mean your workflow is in fact faster to trade CPU time instead of the disk read time.
+
+**Stream data with xrootd**  You will wait less for your first event than if you copy the file, put less stress on the data storage elements, and have more reliable i/o with dCache.
+
 ## Build time optimization:
 
 **Minimize the number of #included files.**  If you don’t need an #include, don’t use it.  It takes time to find these files in the search path and include them.
