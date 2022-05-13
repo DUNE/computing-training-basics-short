@@ -298,6 +298,8 @@ Use `massif`.  `massif` is a heap checker, a tool provided with `valgrind`; see 
 
 **Do as much calculation as you can per data element read.**  You can spin over a TTree once per plot, or you can spin through the TTree once and make all the plots.  ROOT compresses data by default on write and uncompresses it on readin, so this is both an I/O and a CPU issue, to minimize the data that are read.
 
+**Read only the data you need**  ROOT's TTree access methods are set up to give you only the requested TBranches.  If you use TTree::MakeClass to write a template analysis ROOT macro script, it will generate code that reads in _all_ TBranches and leaves.  It is easy to trim out the extras to speed up your workflow.
+
 **Saving compressed data reduces I/O time and storage needs.**  Even though compressing data takes CPU, a slow disk or network can mean your workflow is in fact faster to trade CPU time instead of the disk read time.
 
 **Stream data with xrootd**  You will wait less for your first event than if you copy the file, put less stress on the data storage elements, and have more reliable i/o with dCache.
