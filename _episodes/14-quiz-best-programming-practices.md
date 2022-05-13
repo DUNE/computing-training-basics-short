@@ -21,7 +21,7 @@ In the following two code snippets, which example is more efficient, A or B?
 
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (A)</div><!--BAD-->
 
-<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (B)</div><!--GOOD-->
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071">Code Example (B)</div><!--GOOD-->
 
 
 <div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
@@ -33,7 +33,7 @@ for (size_t i=0; i<n_channels; ++i)<br>
 }<br>
 </div><!--BAD-->
 
-<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 double sum = 0;<br>
 for (size_t i=0; i<n_channels; ++i)<br>
 {<br>
@@ -53,13 +53,13 @@ In the following two code snippets, which example is more efficient, A or B?
 
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (A)</div><!--BAD-->
 
-<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (B)</div> <!--GOOD-->
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (B)</div> <!--GOOD-->
 
 <div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 double r = TMath::Sqrt( x*x + y*y );
 </div><!--BAD-->
 
-<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 double r = TMath::Power(  TMath::Power(x,2) + TMath::Power(y,2), 0.5);
 </div><!--GOOD-->
 
@@ -71,11 +71,11 @@ double r = TMath::Power(  TMath::Power(x,2) + TMath::Power(y,2), 0.5);
 In the following two code snippets, which example is more efficient, A or B?
 
 <div style="display: grid;grid-template-columns: repeat(2,460px);grip-gap: 5px;width:1120px;border: 2px solid #ffffff;font-family:Courier, monospace;color: #000000;font-size: 10pt;">
-<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (A)</div><!--GOOD-->
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (A)</div><!--GOOD-->
 
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (B)</div>  <!--BAD-->
 
-<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 double r = TMath::Sqrt( slow_function_calculating_x()*<br>slow_function_calculating_x() + <br> slow_function_calculating_y()* <br> slow_function_calculating_y()  );
 </div><!--GOOD-->
 
@@ -93,11 +93,11 @@ In the following two code snippets, which example is more efficient, A or B?
 
 <div style="display: grid;grid-template-columns: repeat(2,460px);grip-gap: 5px;width:1120px;border: 2px solid #ffffff;font-family:Courier, monospace;color: #000000;font-size: 10pt;"><!--HEADER-->
 
-<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (A)</div><!--GOOD-->
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (A)</div><!--GOOD-->
 
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (B)</div><!--BAD-->
 
-<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 if (TMath::Sqrt( x*x + y*y ) < rcut )<br>
 {<br>
   do_something();<br>
@@ -123,7 +123,7 @@ In the following two code snippets, which example is more efficient, A or B?
 
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (A)</div><!--BAD-->
 
-<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (B)</div><!--GOOD-->
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (B)</div><!--GOOD-->
 
 
 <div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
@@ -136,7 +136,7 @@ for (size_t i=0; i<results.size(); ++i)<br>
 }
 </div><!--BAD-->
 
-<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 double sum = 0;<br>
 std::vector &lt;double&gt; results;<br>
 (fill lots of results)<br>
@@ -156,11 +156,11 @@ for (size_t i=0; i<results.size(); ++i)<br>
 In the following two code snippets, which example is more efficient, A or B?
 
 <div style="display: grid;grid-template-columns: repeat(2,460px);grip-gap: 5px;width:1120px;border: 2px solid #ffffff;font-family:Courier, monospace;color: #000000;font-size: 10pt;">
-<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (A)</div><!--GOOD-->
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (A)</div><!--GOOD-->
 
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (B)</div><!--BAD-->
 
-<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 int dune::VDColdboxChannelMapService:: getOfflChanFromWIBConnectorInfo (int wib, int wibconnector, int cechan)<br>
 {<br>
   int r = -1;<br>
@@ -206,7 +206,7 @@ Can you point out the errors in the following code blocks?
 
 <div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (A)</div><!--BAD-->
 
-<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;border-left-width: thick; border-left-color: #280071;border-radius: 5px;">Code Example (B)</div> <!--GOOD-->
+<div style="background-color: #EFEAF4; border: 1px solid #000000;text-align: center; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;color: #280071;">Code Example (B)</div> <!--GOOD-->
 
 <div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 
@@ -231,7 +231,7 @@ int main(int argc, char &#8727;&#8727;argv)<br>
 
 </div><!--BAD-->
 
-<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px; border-left-width: thick; border-left-color: #280071;border-radius: 5px;">
+<div style="background-color: #EBEBEB; border: 1px solid #000000;text-align: left; padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;">
 
 #include  &#60;iostream&#62;  <br>
 int main(int argc, char &#8727;&#8727;argv)<br>
@@ -240,13 +240,13 @@ int main(int argc, char &#8727;&#8727;argv)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int  &#8727;j = new int[1000]<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br><br>
-&nbsp;&nbsp;int k;<br>
+&nbsp;&nbsp;int k= 0;<br>
 &nbsp;&nbsp;std::cout &#60;&#60; k &#60;&#60; std::endl;<br><br>
 
 &nbsp;&nbsp;int p[100];<br>
-&nbsp;&nbsp;p[100] = 5;<br>
-&nbsp;&nbsp;std::cout &#60;&#60; p[100] &#60;&#60; std::endl;<br><br>
-&nbsp;&nbsp;int &#8727;k;<br>
+&nbsp;&nbsp;p[99] = 5;<br>
+&nbsp;&nbsp;std::cout &#60;&#60; p[99] &#60;&#60; std::endl;<br><br>
+&nbsp;&nbsp;int &#8727;k=k;<br>
 &nbsp;&nbsp;k= 0;<br>
 &nbsp;&nbsp;&#8727;k = 6;<br>
 &nbsp;&nbsp;std::cout &#60;&#60; &#8727;k &#60;&#60; std::endl;<br>
