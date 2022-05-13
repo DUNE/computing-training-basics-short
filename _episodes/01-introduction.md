@@ -21,12 +21,13 @@ Coordinator: Heidi Schellman (Oregon State University)
 ## Welcome Session Video
 
 
-The session will be captured on video a placed here after the workshop for asynchronous study.
+<!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
+The session was captured for your asynchronous review.
 
-<!--
+
 <center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2Vg4kXcxzCs" title="DUNE Computing Tutorial May 2021 Welcome" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>-->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/B1mr3v1i7M8" title="DUNE Computing Tutorial May 2022 Introduction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ## Tutorial Instructors
 
