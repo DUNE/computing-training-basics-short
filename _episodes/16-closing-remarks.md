@@ -36,17 +36,11 @@ We are thankful for the instructor's hard work, and for the numerous participant
 
 ##  Survey time!
 
-Please give us feedback on this training by filling out this: 
-
-TBA
-
-<!--[S U R V E Y](https://forms.gle/F962ejyN31rGRg3D7)-->
-
-It is anonymous. Send us your impressions, praise, critiques and suggestions! Thank you very much.
+Please give us feedback on this training by filling out our [S U R V E Y](https://forms.gle/RqsxHWjYFxmguFUW7). Entries to the survey anonymous, any impressions, praise, critiques and suggestions are appreciated.
 
 ##  Next Steps
 
-Video recordings of the sessions have been posted within each lesson.
+Session recordings have been posted within each lesson after processed.
 
 We invite you to bookmark this training site and to revisit the content regularly.
 
