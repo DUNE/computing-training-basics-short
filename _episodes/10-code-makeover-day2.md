@@ -199,6 +199,10 @@ for (size_t i=0; i<results.size(); ++i)<br>
 </div>
 </div>
 
+**Minimize conversions between int and float or double**
+
+The up-conversion from int to float takes time, and the down-conversion from float to int loses precision and also takes time.  Sometimes you want the precision loss, but sometimes it's a mistake.
+
 **Check for NaN and Inf.**  While your program will still function if an intermediate result is `NaN` or `Inf` (and it may even produce valid output, especially if the `NaN` or `Inf` is irrelevant), processing `NaN`s and `Inf`s is slower than processing valid numbers.  Letting a `NaN` or an `Inf` propagate through your calculations is almost never the right thing to do - check functions for domain validity (square roots of negative numbers, logarithms of zero or negative numbers, divide by zero, etc.) when you execute them and decide at that point what to do.  If you have a lengthy computation and the end result is `NaN`, it is often ambiguous at what stage the computation failed.
 
 **Pass objects by reference.**  Especially big ones.  C and C++ call semantics specify that objects are passed by value by default, meaning that the called method gets a copy of the input.  This is okay for scalar quantities like int and float, but not okay for a big vector, for example.  The thing to note then is that the called method may modify the contents of the passed object, while an object passed by value can be expected not to be modified by the called method.
