@@ -16,9 +16,9 @@ keypoints:
 
 The session will be captured on video a placed here after the workshop for asynchronous study.
 
-<!--<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CVLChHWiSZI" title="DUNE Computing Tutorial May 2021 Day 3 Quiz Expert in the Room Grid and Batch System" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>-->
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hdjR4M6B8FM" title="DUNE Computing Tutorial May 2022 Closing Remarks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ## Two Days of Training
 

@@ -24,11 +24,12 @@ keypoints:
 
 ## Video Session
 
-The session will be captured on video a placed here after the workshop for asynchronous study.
+<!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
+The session was captured for your asynchronous review.
 
-<!--<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/s3DOtHEhl2c" title="DUNE Computing Tutorial May 2021 Day 3 Expert in the Room, LArSoft" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>-->
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/E1I9V4sdzHk" title="DUNE Computing Tutorial May 2022 Expert in the Room, LArSoft" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ## Set up your environment
 

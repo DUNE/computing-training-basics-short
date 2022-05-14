@@ -10,8 +10,16 @@ keypoints:
 - Practice makes perfect.
 ---
 
-## Quiz Time
+## Video Session
 
+<!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
+The session was captured for your asynchronous review.
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qENjAa0L1lU" title="DUNE Computing Tutorial May 2022 Quiz Programming Efficiency" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+## Quiz Time
 
 ### Question 01
 
