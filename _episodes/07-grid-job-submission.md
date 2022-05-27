@@ -319,6 +319,7 @@ samweb prestage-dataset kherner-may2022tutorial-mc
 replacing the above definition with your own definition as appropriate. However, this does NOT reset the clock on the LRU algorithm, because if prestage-dataset sees a file is already chached, it goes on to the next one; it does no lifetime or last access checking, nor does it read the file. A better way to prestage is to instead do
 
 ```bash
+unsetup curl # necessary as of May 2022 because there's an odd interaction with the UPS version of curl, so we need to turn it off
 samweb run-project --defname=kherner-may2022tutorial-mc --schema https 'echo %fileurl && curl -L --cert $X509_USER_PROXY --key $X509_USER_PROXY --cacert $X509_USER_PROXY --capath /etc/grid-security/certificates -H "Range: bytes=0-3" %fileurl && echo'
 ```
 
