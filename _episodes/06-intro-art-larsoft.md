@@ -459,7 +459,7 @@ There are bi-weekly LArSoft coordination meetings [https://indico.fnal.gov/categ
 A good old-fashioned `grep -r` or a find command can be effective if you are looking for an example of how to call something but I do not know where such an example might live. The copies of LArSoft source in CVMFS lack the CMakeLists.txt files and if that's what you're looking for to find examples, it's good to have a copy checked out. Here's a script that checks out all the LArSoft source and DUNE LArSoft code but does not compile it. Warning: it deletes a directory called "inspect" in your app area. Make sure `/dune/app/users/<yourusername>` exists first:
 
 ~~~
- #!/bin/sh
+ #!/bin/bash
  USERNAME=`whoami`
  LARSOFT_VERSION=v09_48_00
  COMPILER=e19
