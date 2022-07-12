@@ -59,7 +59,7 @@ lxplus.cern.ch interactive nodes. Create two scripts in your home directory:
 `newDevMay2022Tutorial.sh` should have these contents:
 
 ~~~
-#!/bin/sh
+#!/bin/bash
 
 PROTODUNEANA_VERSION=v09_48_01d00
 
