@@ -266,10 +266,11 @@ dune_setup
 ~~~
 {: .language-bash}
 
-2) Create a working directory in the `dune/app` and `pnfs/dune` areas (these will be explained during the training):
+2) Create working directories in the `dune/app` and `pnfs/dune` areas (these will be explained during the training):
 ~~~
 mkdir -p /dune/app/users/${USER}
 mkdir -p /pnfs/dune/scratch/users/${USER}
+mkdir -p /pnfs/dune/persistent/users/${USER}
 ~~~
 {: .language-bash}
 
