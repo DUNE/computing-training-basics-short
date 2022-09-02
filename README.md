@@ -2,7 +2,7 @@
 DUNE Computing Training May 2022 edition
 ========================================
 
-This repository holds the source code of the webpage that is rendered [here](https://dune.github.io/computing-training-202105/). 
+This repository holds the source code of the webpage that is rendered [here](https://dune.github.io/computing-training-basics/). 
 
 This training module is part of an initiative of the [DUNE Computing Consortium](https://dunescience.org/).
 
