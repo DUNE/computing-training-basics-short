@@ -202,7 +202,7 @@ thefile = ROOT.TFile.Open(<xrootd_uri>)
 > ## Exercise 3
 > Using a combination of `ifdh` and `xrootd` commands discussed previously:
 > * Use `ifdh` locateFile to find the directory for this file `PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root`
-> * Translate the pnfs path to get an `xrootd` URI for that file.
+> * Translate the pnfs path to get an `xrootd` URI for that file.  Hint:  use the duneutil script pnfs2xrootd
 > * Use `xrdcp` to copy that file to `/dev/null`
 > * Using `xrdfs` and the `ls` option, count the number of files in the same directory as `PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root`
 {: .challenge}
