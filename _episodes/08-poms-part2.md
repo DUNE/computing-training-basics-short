@@ -1,6 +1,6 @@
 ---
 title: Code-makeover - Submit with POMS
-teaching: 60
+teaching: 30
 exercises: 0
 questions:
 - How to submit realistic grid jobs with POMS?
@@ -13,7 +13,7 @@ keypoints:
 ## Video Session
 
 <!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
-The session was captured for your asynchronous review.
+The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QyKM8lVR85U" title="DUNE Computing Tutorial May 2022 Code-makeover - Submit with POMS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

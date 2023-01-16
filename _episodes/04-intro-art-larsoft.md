@@ -1,6 +1,6 @@
 ---
 title: Introduction to art and LArSoft
-teaching: 90
+teaching: 30
 exercises: 0
 questions:
 - Why do we need a complicated software framework? Can't I just write standalone code?
@@ -16,7 +16,7 @@ keypoints:
 ## Session Video
 
 <!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
-The session was captured for your asynchronous review.
+The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/a2QXS2hCT-I" title="DUNE Computing Tutorial May 2022 Introduction to art and LArSoft" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

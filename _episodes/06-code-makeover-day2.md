@@ -1,6 +1,6 @@
 ---
 title: Code-makeover on how to code for better efficiency
-teaching: 90
+teaching: 15
 exercises: 0
 questions:
 - How to write the most efficient code?
@@ -10,12 +10,12 @@ keypoints:
 - CPU, memory, and build time optimizations are possible when good code practices are followed.
 ---
 
-## DUNE Computing Training May 2022
+## DUNE Computing Training
 
 ## Session Video
 
 <!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
-The session was captured for your asynchronous review.
+The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/z7myUSaGYnQ" title="DUNE Computing Tutorial May 2022 Code-makeover on how to code for better efficiency" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

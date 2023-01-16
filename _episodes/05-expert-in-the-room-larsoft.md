@@ -1,6 +1,6 @@
 ---
 title: Expert in the Room - LArSoft How to modify a module
-teaching: 60
+teaching: 15
 exercises: 0
 questions:
 - How do I check out, modify, and build DUNE code?
@@ -25,7 +25,8 @@ keypoints:
 ## Video Session
 
 <!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
-The session was captured for your asynchronous review.
+The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.
+
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/E1I9V4sdzHk" title="DUNE Computing Tutorial May 2022 Expert in the Room, LArSoft" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

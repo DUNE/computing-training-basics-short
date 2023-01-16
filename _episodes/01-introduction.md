@@ -1,6 +1,6 @@
 ---
 title: Workshop Welcome and Introduction 
-teaching: 15
+teaching: 5
 exercises: 0
 questions:
 - What should I expect in participating in this workshop?
@@ -22,7 +22,7 @@ Coordinator: Heidi Schellman (Oregon State University)
 
 
 <!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
-The session was captured for your asynchronous review.
+The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.
 
 
 <center>
@@ -47,9 +47,9 @@ The session was captured for your asynchronous review.
 
 ## Schedule
 
-This incarnation of the computing training spans two days. 
+This version of the computing training is designed for one half day.
 
-The official schedule for this training is on the [Indico site](https://indico.fnal.gov/event/54191/timetable/#20220512).
+The official schedule for this training is on the TBA Indico site  <!--- [Indico site](https://indico.fnal.gov/event/54191/timetable/#20220512). --->
 
 ## Support
 
@@ -58,8 +58,8 @@ There will be live documents linked from [Indico][indico-event-link] for each [Z
 You can join DUNE's Slack: `dunescience.slack.com`. We created a special channel `computing_training_may2022` for technical support, join [here][slack-join-link].
 
 
-[indico-event-link]: https://indico.fnal.gov/event/54191/
-[slack-join-link]: https://dunescience.slack.com/archives/C03CMH6TUCS
+[indico-event-link]: https://indico.fnal.gov/event/54191/     <!--- FIXME --->
+[slack-join-link]: https://dunescience.slack.com/archives/C03CMH6TUCS  <!--- FIXME --->
 [zoom-link]: https://fnal.zoom.us/
 
 

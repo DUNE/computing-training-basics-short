@@ -6,7 +6,7 @@ This repository holds the source code of the webpage that is rendered [here](htt
 
 This training module is part of an initiative of the [DUNE Computing Consortium](https://dunescience.org/).
 
-This edition of the computing training extends from a 2 Day [DUNE May 2022 training](https://dune.github.io/computing-training-basics) and is a shortened version for one half day.
+This edition of the computing training extends from a 2 Day [May 2022 training](https://dune.github.io/computing-training-basics) and is a shortened version for one half day at the DUNE Collaboration meeting held at CERN.
 <!--- [January 2021 training](https://wiki.dunescience.org/wiki/DUNE_Computing_Tutorial_January_2021). --->
 
 When:
@@ -22,7 +22,7 @@ There will be hands-on, facilitated with a Q&A on a live doc.
 
 How to attend?
 
-Participants must have a valid FNAL or CERN account. The Indico site is TBA. <!--[https://indico.fnal.gov/event/54191/][indico-event] --->
+Participants must have a valid FNAL or CERN account. The Indico site is TBA. <!--- [https://indico.fnal.gov/event/54191/][indico-event] --->
 
 Apply immediately if you do not yet have accounts at either lab (info).
 
@@ -30,7 +30,7 @@ Questions?
 
 Contact the organizers at: dune-computing-training@fnal.gov 
 
-New slack channel: #computing_training_basics
+New slack channel: #computing_training_basics <!--- update? --->
 
 ## Contributing
 

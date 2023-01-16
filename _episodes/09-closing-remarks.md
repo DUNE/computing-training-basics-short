@@ -1,6 +1,6 @@
 ---
 title: Closing Remarks
-teaching: 15
+teaching: 5
 exercises: 0
 questions:
 - Are you fortified with enough information to start your event analysis?
@@ -13,16 +13,15 @@ keypoints:
 # Closing Remarks
 
 ## Video Session
-
-The session will be captured on video a placed here after the workshop for asynchronous study.
+The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hdjR4M6B8FM" title="DUNE Computing Tutorial May 2022 Closing Remarks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 
-## Two Days of Training
+## Two Days of Training Collapsed into One-Half Day
 
-The instruction in this two day version of the DUNE computing workshop was provided by several experienced physicists and is based on years of experience. 
+The instruction in this half day version of the DUNE computing workshop was provided by several experienced physicists and is based on years of experience. 
 
 The secure access to Fermilab computing systems and a familiarity with data storage are key components.
 
@@ -36,7 +35,7 @@ We are thankful for the instructor's hard work, and for the numerous participant
 
 ##  Survey time!
 
-Please give us feedback on this training by filling out our [S U R V E Y](https://forms.gle/RqsxHWjYFxmguFUW7). Entries to the survey anonymous, any impressions, praise, critiques and suggestions are appreciated.
+Please give us feedback on this training by filling out our TBA <!--- [S U R V E Y](https://forms.gle/RqsxHWjYFxmguFUW7) --->. Entries to the survey anonymous, any impressions, praise, critiques and suggestions are appreciated.
 
 ##  Next Steps
 
