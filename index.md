@@ -8,14 +8,14 @@ country: "us"
 language: "en"
 latitude: "45"
 longitude: "-1"
-humandate: "May 12-13, 2022"
-humantime: "8:00 am - 3:00 pm"
-startdate: "2022-05-12"
-enddate: "2021-05-13"
+humandate: "January 26, 2023"
+humantime: "8:00 am - 11:30 am"
+startdate: "2023-01-26"
+enddate: "2023-01-26"
 instructor: ["Michael Kirby","Steve Timm","Tom Junk","Ken Herner"]
 helper: ["mentor1", "mentor2"]
 email: ["mkirby@fnal.gov","timm@fnal.gov","junk@fnal.gov","herner@fnal.gov"]
-collaborative_notes: "2022-04-12-dune"
+collaborative_notes: "2023-01-26-dune"
 eventbrite:
 ---
 
@@ -56,10 +56,10 @@ You will need a valid FNAL or CERN account to be able to do the tutorial and be 
 <h2 id="schedule">Schedule by Day</h2>
 
 
+{% comment %}
 {% include sc/schedule.html %}
-
 <!--<center><img  alt="" src="fig/Schedule_computing_training_202105.png"/></center>-->
-
 <!-- An [asynchronous session]({{site.baseurl}}/asynchronous/) is designed as later day acivities for the first two days of the workshop.-->
+{% endcomment %}
 
 {% include links.md %}

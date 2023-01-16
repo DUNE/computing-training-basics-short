@@ -1,27 +1,28 @@
 
-DUNE Computing Training May 2022 edition
+DUNE Computing Training January 2023
 ========================================
 
-This repository holds the source code of the webpage that is rendered [here](https://dune.github.io/computing-training-basics/). 
+This repository holds the source code of the webpage that is rendered [here](https://dune.github.io/computing-training-basics-short/). 
 
 This training module is part of an initiative of the [DUNE Computing Consortium](https://dunescience.org/).
 
-This edition of the computing training extends from the [January 2021 training](https://wiki.dunescience.org/wiki/DUNE_Computing_Tutorial_January_2021).
+This edition of the computing training extends from a 2 Day [DUNE May 2022 training](https://dune.github.io/computing-training-basics) and is a shortened version for one half day.
+<!--- [January 2021 training](https://wiki.dunescience.org/wiki/DUNE_Computing_Tutorial_January_2021). --->
 
 When:
 
-2022 May 13-14, from 8:00 AM - 3:00 PM CST
+2023 January 26, from 8:00 AM - 11:30 AM CST (GMT-6)
 
 What:
 
 Learn the basics of DUNE computing:  storage spaces, data management, LArSoft, grid job submission
 New! Lectures will be recorded. 
 There will be hands-on, facilitated with a Q&A on a live doc.
-New! There will be quizzes and special sessions “expert in the room” to answer questions of beginners and not-so-beginner about their code.
+<!--- There will be quizzes and special sessions “expert in the room” to answer questions of beginners and not-so-beginner about their code. --->
 
 How to attend?
 
-Participants must have a valid FNAL or CERN account. The Indico site is [https://indico.fnal.gov/event/54191/][indico-event]
+Participants must have a valid FNAL or CERN account. The Indico site is TBA. <!--[https://indico.fnal.gov/event/54191/][indico-event] --->
 
 Apply immediately if you do not yet have accounts at either lab (info).
 
@@ -39,7 +40,7 @@ New slack channel: #computing_training_basics
 
 ## Maintainer(s)
 
-Maintainers of this GitHub space are:
+Maintainers of this GitHub space include:
 
 * David DeMuth
 
