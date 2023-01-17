@@ -57,7 +57,7 @@ Start up session #1, editing code, on one of the dunegpvm*.fnal.gov
 interactive nodes.  These scripts have also been tested on the
 lxplus.cern.ch interactive nodes. Create two scripts in your home directory:
 
-`newDevMay2022Tutorial.sh` should have these contents:
+`newDevJan2023Tutorial.sh` should have these contents:
 
 ~~~
 #!/bin/bash
@@ -65,7 +65,7 @@ lxplus.cern.ch interactive nodes. Create two scripts in your home directory:
 PROTODUNEANA_VERSION=v09_48_01d00
 
 QUALS=e20:prof
-DIRECTORY=may2022tutorial
+DIRECTORY=jan2023tutorial
 USERNAME=`whoami`
 export WORKDIR=/dune/app/users/${USERNAME}
 if [ ! -d "$WORKDIR" ]; then
@@ -91,10 +91,10 @@ mrb i -j16
 ~~~
 {: .language-bash}
 
-and `setupMay2022Tutorial.sh` should have these contents:
+and `setupJan2023Tutorial.sh` should have these contents:
 
 ~~~
-DIRECTORY=may2022tutorial
+DIRECTORY=jan2023tutorial
 USERNAME=`whoami`
 
 source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
@@ -114,7 +114,7 @@ mrbslp
 Execute this command to make the first script executable.
 
 ~~~
-  chmod +x newDevMay2022Tutorial.sh
+  chmod +x newDevJan2023Tutorial.sh
 ~~~
 {: .language-bash}
 
@@ -141,7 +141,7 @@ to run programs (people need them to build code!)
 On the build node, execute the `newDev` script:
 
 ~~~
-  ./newDevMay2022Tutorial.sh
+  ./newDevJan2023Tutorial.sh
 ~~~
 {: .language-bash}
 
@@ -172,23 +172,23 @@ You can find the number of cores a machine has with
 
 The `mrb` system builds code in a directory distinct from the source code.  Source code is in `$MRB_SOURCE` and built code is in `$MRB_BUILDDIR`.  If the build succeeds (no error messages, and compiler warnings are treated as errors, and these will stop the build, forcing you to fix the problem), then the built artifacts are put in `$MRB_TOP/localProducts*`.  mrbslp directs ups to search in `$MRB_TOP/localProducts*` first for software and necessary components like `fcl` files.  It is good to separate the build directory from the install directory as a failed build will not prevent you from running the program from the last successful build.  But you have to look at the error messages from the build step before running a program.  If you edited source code, made a mistake, built it unsuccessfully, then running the program may run successfully with the last version which compiled.  You may be wondering why your code changes are having no effect.  You can look in `$MRB_TOP/localProducts*` to see if new code has been added (look for the "lib" directory under the architecture-specific directory of your product).
 
-Because you ran the `newDevMay2022Tutorial.sh` script instead of sourcing it, the environment it
+Because you ran the `newDevJan2023Tutorial.sh` script instead of sourcing it, the environment it
 set up within it is not retained in the login session you ran it from.  You will need to set up your environment again.
 You will need to do this when you log in anyway, so it is good to have
 that setup script.  In session #2, type this:
 
 ~~~
-  source setupMay2022Tutorial.sh
+  source setupJan2023Tutorial.sh
   cd $MRB_BUILDDIR
   mrbsetenv
 ~~~
 {: .language-bash}
 
-The shell command "source" instructs the command interpreter (bash) to read commands from the file `setupMay2022Tutorial.sh` as if they were typed at the terminal.  This way, environment variables set up by the script stay set up.
+The shell command "source" instructs the command interpreter (bash) to read commands from the file `setupJan2023Tutorial.sh` as if they were typed at the terminal.  This way, environment variables set up by the script stay set up.
 Do the following in session #1, the source editing session:
 
 ~~~
-source setupMay2022Tutorial.sh
+source setupJan2023Tutorial.sh
   cd $MRB_SOURCE
   mrbslp
 ~~~
@@ -200,7 +200,7 @@ source setupMay2022Tutorial.sh
 computer for session #3
 
 ~~~
-  source setupMay2022Tutorial.sh
+  source setupJan2023Tutorial.sh
   mrbslp
   setup_fnal_security
 ~~~
@@ -235,7 +235,7 @@ Now run the program with the input file accessed by that URL:
 lar -c analyzer_job.fcl root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/protodune-sp/full-reconstructed/2021/mc/out1/PDSPProd4/40/57/23/91/PDSPProd4_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_datadriven_41094796_0_20210121T214555Z.root
 ~~~
 
-CERN Users without access to Fermilab's `dCache`: -- example input files for this tutorial have been copied to `/afs/cern.ch/work/t/tjunk/public/may2022tutorialfiles/`.
+CERN Users without access to Fermilab's `dCache`: -- example input files for this tutorial have been copied to `/afs/cern.ch/work/t/tjunk/public/jan2023tutorialfiles/`.
 
 After running the program, you should have an output file `tutorial_hist.root`.  Note -- please do not
 store large rootfiles in `/dune/app`!  The disk is rather small, and we'd like to
