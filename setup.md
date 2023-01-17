@@ -249,15 +249,15 @@ Setting up DUNE UPS area... /cvmfs/dune.opensciencegrid.org/products/dune/
 ## 5. Exercise! (it's easy)
 This exercise will help organizers see if you reached this step or need help.
 
-1) Start in your home area `cd ~` on the DUNE machine (normally CERN or FNAL) and create the file ```dune_presetup_202205.sh```.  Write in it the following:
+1) Start in your home area `cd ~` on the DUNE machine (normally CERN or FNAL) and create the file ```dune_presetup_202301.sh```.  Write in it the following:
 ~~~
-export DUNESW_VERSION=v09_48_01d00
+export DUNESW_VERSION=v09_65_01d00
 alias dune_setup='source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh'
 ~~~
 {: .source}
 When you start the training, you will have to source this file:
 ~~~
-source ~/dune_presetup_202205.sh
+source ~/dune_presetup_202301.sh
 ~~~
 {: .language-bash}
 Then, to setup DUNE, use the created alias:
