@@ -408,8 +408,8 @@ This example puts all files in a subdirectory of your home directory. There is a
 
 ```bash 
  cd ~
- mkdir May2022Tutorial
- cd May2022Tutorial
+ mkdir Jan2023Tutorial
+ cd Jan2023Tutorial
  source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
  setup dunesw v09_48_01d00 -q e20:prof
  cat > tmpgen.fcl << EOF
