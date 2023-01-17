@@ -50,7 +50,7 @@ The configuration storage is particularly useful if you receive a data file from
 Log in to a `dunegpvm*.fnal.gov` machine and set up your environment (This script is defined in Exercise 5 of https://dune.github.io/computing-training-basics/setup.html)
 
 ```bash
-source ~/dune_presetup_202205.sh
+source ~/dune_presetup_202301.sh
 dune_setup
 setup dunesw $DUNESW_VERSION -q e20:prof
 setup_fnal_security
