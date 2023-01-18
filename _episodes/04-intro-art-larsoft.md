@@ -60,7 +60,7 @@ setup_fnal_security
 The examples below will refer to files in `dCache` at Fermilab which can best be accessed via `xrootd`. 
 
 **For those with no access to Fermilab computing resources but with a CERN account:**  
-Copies are stored in `/afs/cern.ch/work/t/tjunk/public/may2022tutorialfiles/`.
+Copies are stored in `/afs/cern.ch/work/t/tjunk/public/jan2023tutorialfiles/`.
 
 The follow-up of this tutorial provides help on how to find data and MC files in storage.
 
@@ -70,7 +70,7 @@ You can list available versions of `dunesw` installed in `CVMFS` with this comma
 ups list -aK+ dunesw
 ```
 
-The output is not sorted, although portions of it may look sorted. Do not depend on it being sorted. The string indicating the version is called the version tag (v09_48_01d00 here). The qualifiers are e20 and prof. Qualifiers can be entered in any order and are separated by colons.  "e20" corresponds to a specific version of the GNU compiler -- v9.3.0.   We also compile with `clang` -- the compiler qualifier for that is "c7".
+The output is not sorted, although portions of it may look sorted. Do not depend on it being sorted. The string indicating the version is called the version tag (v09_65_01d00 here). The qualifiers are e20 and prof. Qualifiers can be entered in any order and are separated by colons.  "e20" corresponds to a specific version of the GNU compiler -- v9.3.0.   We also compile with `clang` -- the compiler qualifier for that is "c7".
 
 "prof" means "compiled with optimizations turned on." "debug" means "compiled with optimizations turned off". More information on qualifiers is [here][about-qualifiers].
 
@@ -338,7 +338,7 @@ The LArSoft wiki is here: [larsoft-wiki](https://larsoft.github.io/LArSoftWiki/)
 
 The LArSoft toolkit is a set of software components that simulate and reconstruct LArTPC data, and also it provides tools for accessing raw data from the experiments. LArSoft contains an interface to GEANT4 (art does not list GEANT4 as a dependency) and the GENIE generator. It contains geometry tools that are adapted for wire-based LArTPC detectors.
 
-A recent graph of the UPS products in a full stack staring with dunesw is available [here](https://wiki.dunescience.org/w/img_auth.php/f/f0/Dunesw_v09_48_01d00_e20_prof_graph.pdf) (dunesw). You can see the LArSoft pieces under dunesw, as well as GEANT4, GENIE, ROOT, and a few others.
+A recent graph of the UPS products in a full stack staring with dunesw is available [here](https://wiki.dunescience.org/w/img_auth.php/8/85/Dunesw_v09_65_01_e20_prof_graph.pdf) (dunesw). You can see the LArSoft pieces under dunesw, as well as GEANT4, GENIE, ROOT, and a few others.
 
 ### LArSoft Data Products
 
@@ -388,7 +388,7 @@ export USER=`whoami`
  mkdir -p /dune/data/users/$USER/tutorialtest
  cd /dune/data/users/$USER/tutorialtest
  source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
- setup dunesw v09_48_01d00 -q e20:prof
+ setup dunesw v09_65_01d00 -q e20:prof
  lar -n 1 -c mcc12_gen_protoDune_beam_cosmics_p1GeV.fcl -o gen.root
  lar -n 1 -c protoDUNE_refactored_g4_stage1.fcl gen.root -o g4_stage1.root
  lar -n 1 -c protoDUNE_refactored_g4_stage2_sce_datadriven.fcl g4_stage1.root -o g4_stage2.root
@@ -411,10 +411,10 @@ This example puts all files in a subdirectory of your home directory. There is a
  mkdir Jan2023Tutorial
  cd Jan2023Tutorial
  source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
- setup dunesw v09_48_01d00 -q e20:prof
+ setup dunesw v09_65_01d00 -q e20:prof
  cat > tmpgen.fcl << EOF
  #include "mcc12_gen_protoDune_beam_cosmics_p1GeV.fcl"
- physics.producers.generator.FileName: "/afs/cern.ch/work/t/tjunk/public/may2022tutorialfiles/H4_v34b_1GeV_-27.7_10M_1.root"
+ physics.producers.generator.FileName: "/afs/cern.ch/work/t/tjunk/public/jan2023tutorialfiles/H4_v34b_1GeV_-27.7_10M_1.root"
  EOF
  lar -n 1 -c tmpgen.fcl -o gen.root
  lar -n 1 -c protoDUNE_refactored_g4_stage1.fcl gen.root -o g4_stage1.root
@@ -461,7 +461,7 @@ A good old-fashioned `grep -r` or a find command can be effective if you are loo
 ~~~
  #!/bin/bash
  USERNAME=`whoami`
- LARSOFT_VERSION=v09_48_00
+ LARSOFT_VERSION=v09_65_01
  COMPILER=e19
  source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
  cd /dune/app/users/${USERNAME}
