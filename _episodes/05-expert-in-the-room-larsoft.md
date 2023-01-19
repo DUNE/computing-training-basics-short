@@ -62,7 +62,7 @@ lxplus.cern.ch interactive nodes. Create two scripts in your home directory:
 ~~~
 #!/bin/bash
 
-PROTODUNEANA_VERSION=v09_48_01d00
+PROTODUNEANA_VERSION=v09_65_01d00
 
 QUALS=e20:prof
 DIRECTORY=jan2023tutorial
@@ -106,7 +106,7 @@ fi
 cd $WORKDIR/$DIRECTORY
 source localProducts*/setup
 cd work
-setup dunesw v09_48_01d00 -q e20:prof
+setup dunesw v09_65_01d00 -q e20:prof
 mrbslp
 ~~~
 {: .language-bash}
@@ -479,7 +479,7 @@ For protoduneana and dunesw, this [wiki page][dunetpc-wiki-tutorial] is quite go
 
 #### Version mismatch between source code and installed products
 
-When you perform an mrbsetenv or a mrbslp, sometimes you get a version mismatch.  The most common reason for this is that you have set up an older version of the dependent products.  Dunesw depends on protoduneana, which depends on dunecore, which depends on larsoft, which depends on *art*, ROOT, GEANT4, and many other products.  This [picture][dunesw-dependency-tree] shows the software dependency tree for dunesw v09_48_01_d00.  If the source code is newer than the installed products, the versions may mismatch.  You can check out an older version of the source code (see the example above) with
+When you perform an mrbsetenv or a mrbslp, sometimes you get a version mismatch.  The most common reason for this is that you have set up an older version of the dependent products.  Dunesw depends on protoduneana, which depends on dunecore, which depends on larsoft, which depends on *art*, ROOT, GEANT4, and many other products.  This [picture][dunesw-dependency-tree] shows the software dependency tree for dunesw v09_65_01_d00.  If the source code is newer than the installed products, the versions may mismatch.  You can check out an older version of the source code (see the example above) with
 
 ~~~
   mrb g -t <tag> repository
@@ -623,7 +623,7 @@ will use your valid Kerberos ticket to generate the necessary certificates and p
 [redmine-dev-larsoft]: https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Developing_With_LArSoft
 [redmine-working-github]: https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Working_with_GitHub
 [dune-larsoft-may21]: https://wiki.dunescience.org/wiki/Presentation_of_LArSoft_May_2021
-[dunesw-dependency-tree]: https://wiki.dunescience.org/w/img_auth.php/f/f0/Dunesw_v09_48_01d00_e20_prof_graph.pdf
+[dunesw-dependency-tree]: https://wiki.dunescience.org/w/img_auth.php/8/85/Dunesw_v09_65_01_e20_prof_graph.pdf
 
 {%include links.md%} 
 
