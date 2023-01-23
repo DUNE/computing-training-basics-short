@@ -138,6 +138,7 @@ to run programs (people need them to build code!)
 
 ### Download source code and build it
 
+
 On the build node, execute the `newDev` script:
 
 ~~~
@@ -152,7 +153,7 @@ worked on the code some, as this script will wipe it out and start fresh.
 
 This build script will take a few minutes to check code out and compile it.
 
-The `mrb g` command does a `git clone` of the specified repository with an optional tag and destination name.    More information is available [here][dunetpc-wiki] and [here][mrb-reference-guide].
+The `mrb g` command does a `git clone` of the specified repository with an optional tag and destination name.    More information is available [here][dunetpc-wiki] and [here][mrb-reference-guide].  A good, maintained reference page is [here][dunesw-wiki].
 
 Some comments on the build command
 
@@ -624,6 +625,7 @@ will use your valid Kerberos ticket to generate the necessary certificates and p
 [redmine-working-github]: https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Working_with_GitHub
 [dune-larsoft-may21]: https://wiki.dunescience.org/wiki/Presentation_of_LArSoft_May_2021
 [dunesw-dependency-tree]: https://wiki.dunescience.org/w/img_auth.php/8/85/Dunesw_v09_65_01_e20_prof_graph.pdf
+[dunesw-wiki]: https://github.com/DUNE/dunesw/wiki
 
 {%include links.md%} 
 
