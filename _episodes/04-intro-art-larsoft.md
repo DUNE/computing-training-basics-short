@@ -338,7 +338,7 @@ The LArSoft wiki is here: [larsoft-wiki](https://larsoft.github.io/LArSoftWiki/)
 
 The LArSoft toolkit is a set of software components that simulate and reconstruct LArTPC data, and also it provides tools for accessing raw data from the experiments. LArSoft contains an interface to GEANT4 (art does not list GEANT4 as a dependency) and the GENIE generator. It contains geometry tools that are adapted for wire-based LArTPC detectors.
 
-A recent graph of the UPS products in a full stack staring with dunesw is available [here](https://wiki.dunescience.org/w/img_auth.php/8/85/Dunesw_v09_65_01_e20_prof_graph.pdf) (dunesw). You can see the LArSoft pieces under dunesw, as well as GEANT4, GENIE, ROOT, and a few others.
+A recent graph of the UPS products in a full stack starting with dunesw is available [here](https://wiki.dunescience.org/w/img_auth.php/8/85/Dunesw_v09_65_01_e20_prof_graph.pdf) (dunesw). You can see the LArSoft pieces under dunesw, as well as GEANT4, GENIE, ROOT, and a few others.
 
 ### LArSoft Data Products
 
@@ -462,7 +462,7 @@ A good old-fashioned `grep -r` or a find command can be effective if you are loo
  #!/bin/bash
  USERNAME=`whoami`
  LARSOFT_VERSION=v09_65_01
- COMPILER=e19
+ COMPILER=e20
  source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
  cd /dune/app/users/${USERNAME}
  rm -rf inspect
@@ -522,7 +522,6 @@ and you can check out the source and build it by following the instructions on t
 [art-wiki-redmine]: https://cdcvs.fnal.gov/redmine/projects/art/wiki#How-to-use-the-modularity-of-art
 [art-more-documentation]: https://art.fnal.gov/gallery/][art-more-documentation
 [using-larsoft]: https://cdcvs.fnal.gov/redmine/projects/larsoft/wiki/Using_LArSoft
-[protoduneana]:https://wiki.dunescience.org/w/img_auth.php/f/fd/Protoduneana_v09_12_00_e19-prof_graph.pdf
 [larsoft-data-products]: https://indico.fnal.gov/event/19133/contributions/50492/attachments/31462/38611/dataproducts.pdf
 [dunetpc-wiki]: https://cdcvs.fnal.gov/redmine/projects/dunetpc/wiki
 [look-at-protodune]: https://wiki.dunescience.org/wiki/Look_at_ProtoDUNE_SP_data
