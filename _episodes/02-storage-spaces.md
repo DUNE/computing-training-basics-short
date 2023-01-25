@@ -44,7 +44,7 @@ There are three types of storage volumes that you will encounter at Fermilab: lo
 **What is immutable?** A file that is immutable means that once it is written to the volume it cannot be modified. It can only be read, moved, or deleted. This property is in general a restriction imposed by the storage volume on which the file is stored. Not a good choice for code or other files you want to change.
 
 
-## Interactive storage volumes
+## Interactive storage volumes (mounted on dunegpvmXX.fnal.gov)
 
 **Home area** is similar to the user's local hard drive but network mounted
 * access speed to the volume very high, on top of full POSIX access
@@ -59,7 +59,7 @@ There are three types of storage volumes that you will encounter at Fermilab: lo
 * physically inside the computer node you are remotely accessing
 * mounted on the machine through the motherboard (not over network)
 * used as temporary storage for infrastructure services (e.g. /var, /tmp,)
-* can be used to store certificates and tickets. (These are saved there automatically with owner-read on and other permissions disabled.)
+* can be used to store certificates and tickets. (These are saved there automatically with owner-read enabled and other permissions disabled.)
 * usually very small and should not be used to store data files or for code development
 * files on these volumes are not backed up
 
@@ -72,20 +72,19 @@ There are three types of storage volumes that you will encounter at Fermilab: lo
 
 ## Grid-accessible storage volumes
 
-At Fermilab, an instance of dCache+Enstore is used for large-scale, distributed storage with capacity for more than 100 PB of storage and O(10000) connections. Whenever possible, these storage elements should be accessed over xrootd (see next section) as the mount points on interactive nodes are slow and unstable. Here are the different dCache volumes:
+At Fermilab, an instance of dCache+Enstore is used for large-scale, distributed storage with capacity for more than 100 PB of storage and O(10000) connections. Whenever possible, these storage elements should be accessed over xrootd (see next section) as the mount points on interactive nodes are slow, unstable, and can cash the node to become unusable. Here are the different dCache volumes:
 
 **Persistent dCache**: the data in the file is actively available for reads at any time and will not be removed until manually deleted by user
 There is now a second persistent dCache volume that is dedicated for DUNE Physics groups and managed by the respective physics conveners of those 
 physics group.  https://wiki.dunescience.org/wiki/DUNE_Computing/Using_the_Physics_Groups_Persistent_Space_at_Fermilab gives more details on how to get 
 access to these groups.  In general if you need to store more than 5TB in persistent dCache you should be working with the Physics Groups areas.
 
-**Scratch dCache**: large volume shared across all experiments. When a new file is written to scratch space, old files are removed in order to make room for the newer file. removal is based on LRU policy
-
-**Resilient dCache**: (NOTE: DIRECT USAGE is being phased out) handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here (no data or ntuples). keeps many copies of tarball so storage of data or ntuples has large impact and will quickly create problems
+**Scratch dCache**: large volume shared across all experiments. When a new file is written to scratch space, old files are removed in order to make room for the newer file. removal is based on Least Recently Utilized (LRU) policy
 
 **Tape-backed dCache**: disk based storage areas that have their contents mirrored to permanent storage on Enstore tape.  
 Files are not available for immediate read on disk, but needs to be 'staged' from tape first ([see video of a tape storage robot](https://www.youtube.com/watch?v=kiNWOhl00Ao)).
 
+**Resilient dCache**: NOTE: DIRECT USAGE is being phased out and if the Rapid Code Distribution function in POMS/jobsub does not work for you, consult with the FIFE team for a solution (handles custom user code for their grid jobs, often in the form of a tarball. Inappropriate to store any other files here (NO DATA OR NTUPLES)).
 
 ## Summary on storage spaces
 Full documentation: [Understanding Storage Volumes](https://cdcvs.fnal.gov/redmine/projects/fife/wiki/Understanding_storage_volumes)
@@ -95,11 +94,10 @@ In the following table, \<exp\> stands for the experiment (uboone, nova, dune, e
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 |    | Quota/Space | Retention Policy | Tape Backed? | Retention Lifetime on disk |	Use for	| Path | Grid Accessible |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
-| Persistent dCache	| No/~100 TB/exp | Managed by Experiment| No| Until manually deleted | immutable files w/ long lifetime	| /pnfs/\<exp\>/persistent	| Yes |
+| Persistent dCache	| No/~100 TB/exp | Managed by Experiment| No| Until manually deleted | immutable files w/ long lifetime	| /pnfs/dune/persistent	| Yes |
+| Persistent Phy Grp	| No/~500 TB/exp | Managed by Phy Grp| No| Until manually deleted | immutable files w/ long lifetime	| /pnfs/dune/persistent/physicsgroups	| Yes |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | Scratch dCache | No/no limit | LRU eviction - least recently used file deleted | No | Varies, ~30 days (*NOT* guaranteed) | immutable files w/ short lifetime | /pnfs/\<exp\>/scratch	| Yes |
-|-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
-| Resilient dCache | No/no limit | Periodic eviction if file not accessed | No | Approx 30 days (your experiment may have an active clean up policy) | input tarballs with custom code for grid jobs (do NOT use for grid job outputs) | /pnfs/\<exp\>/resilient | Yes |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | Tape backed| dCache	No/O(10) PB | LRU eviction (from disk) | Yes | Approx 30 days | Long-term archive | /pnfs/dune/... | Yes |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
@@ -113,7 +111,7 @@ In the following table, \<exp\> stands for the experiment (uboone, nova, dune, e
 ![Storage Picture](../fig/Storage.png){: .image-with-shadow }
 
 ## Monitoring and Usage
-Remember that these volumes are not infinite, and monitoring your and the experiment usage of these volumes is important to smooth access to data and simulation samples. To see your persistent usage visit [here](https://fifemon.fnal.gov/monitor/d/000000175/dcache-persistent-usage-by-vo?orgId=1&var-VO=dune) (bottom left):
+Remember that these volumes are not infinite, and monitoring your and the experiment's usage of these volumes is important to smooth access to data and simulation samples. To see your persistent usage visit [here](https://fifemon.fnal.gov/monitor/d/000000175/dcache-persistent-usage-by-vo?orgId=1&var-VO=dune) (bottom left):
 
 And to see the total volume usage at Rucio Storage Elements around the world:
 
@@ -122,29 +120,13 @@ And to see the total volume usage at Rucio Storage Elements around the world:
 ## Commands and tools
 This section will teach you the main tools and commands to display storage information and access data.
 
-### The df command
-
-To find out what types of volumes are available on a node can be achieved with the command `df`. The `-h` is for _human readable format_. It will list a lot of information about each volume (total size, available size, mount point, device location).
-~~~
-df -h
-~~~
-{: .language-bash}
-
-> ## Exercise 1
-> From the output of the `df -h` command, identify:
-> 1. the home area
-> 2. the NAS storage spaces
-> 3. the different dCache volumes
-{: .challenge}
-
-
 ### ifdh 
 
 Another useful data handling command you will soon come across is ifdh. This stands for Intensity Frontier Data Handling. It is a tool suite that facilitates selecting the appropriate data transfer method from many possibilities while protecting shared resources from overload. You may see *ifdhc*, where *c* refers to *client*.
 
 Here is an example to copy a file. Refer to the [Mission Setup]({{ site.baseurl }}/setup.html) for the setting up the `DUNESW_VERSION`.
 ~~~
-source ~/dune_presetup_202205.sh
+source ~/dune_presetup_202301.sh
 dune_setup
 kx509
 export ROLE=Analysis
@@ -154,17 +136,29 @@ ifdh cp root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/p
 ~~~
 {: .language-bash}
 
+Note, if the destination for an ifdh cp command is a directory instead of filename with full path, you have to add the "-D" option to the command line.
+
 **Resource:** [idfh commands](https://cdcvs.fnal.gov/redmine/projects/ifdhc/wiki/Ifdh_commands)
 
-> ## Exercise 2
+> ## Exercise 1
 > Using the ifdh command, complete the following tasks:
-* create a directory in your dCache scratch area (/pnfs/dune/scratch/users/${USER}/) called "DUNE_tutorial_May2022"
-* copy /dune/app/users/${USER}/my_first_login.txt file to that directory.
-* copy the my_first_login.txt file from your scrtach directory DUNE_tutorial_May2022 dCache to /dev/null
-* remove the directory DUNE_tutorial_May2022 using "ifdh rmdir /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_May2022"
+* create a directory in your dCache scratch area (/pnfs/dune/scratch/users/${USER}/) called "DUNE_tutorial_Jan2023" 
+* copy /dune/app/users/${USER}/my_first_login.txt file to that directory
+* copy the my_first_login.txt file from your dCache scratch directory (i.e. DUNE_tutorial_Jan2023) to /dev/null
+* remove the directory DUNE_tutorial_Jan2023
+* create the directory DUNE_tutorial_Jan2023_data_file
 > Note, if the destination for an ifdh cp command is a directory instead of filename with full path, you have to add the "-D" option to the command line. Also, for a directory to be deleted, it must be empty.
 {: .challenge}
 
+~~~
+ifdh mkdir /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023
+ifdh cp -D /dune/app/users/${USER}/my_first_login.txt /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023
+ifdh cp /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023/my_first_login.txt /dev/null
+ifdh rm /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023/my_first_login.txt
+ifdh rmdir /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023
+ifdh mkdir /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023_data_file
+~~~
+{: .language-bash}
 
 ### xrootd 
 The eXtended ROOT daemon is software framework designed for accessing data from various architectures and in a complete scalable way (in size and performance). 
@@ -173,10 +167,10 @@ XRootD is most suitable for read-only data access.
 [XRootD Man pages](https://xrootd.slac.stanford.edu/docs.html)
 
 
-Issue the following command. Please look at the input and output of the command, and recognize that this is a listing of /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_May2022. Try and understand how the translation between a NFS path and an xrootd URI could be done by hand if you needed to do so.
+Issue the following command. Please look at the input and output of the command, and recognize that this is a listing of /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023. Try and understand how the translation between a NFS path and an xrootd URI could be done by hand if you needed to do so.
 
 ~~~
-xrdfs root://fndca1.fnal.gov:1094/ ls /pnfs/fnal.gov/usr/dune/scratch/users/${USER}/DUNE_tutorial_May2022
+xrdfs root://fndca1.fnal.gov:1094/ ls /pnfs/fnal.gov/usr/dune/scratch/users/${USER}/
 ~~~
 {: .language-bash}
 
@@ -202,17 +196,36 @@ thefile = ROOT.TFile.Open(<xrootd_uri>)
 
 ## Let's practice
 
-> ## Exercise 3
+> ## Exercise 2
 > Using a combination of `ifdh` and `xrootd` commands discussed previously:
-> * Use `ifdh` locateFile to find the directory for this file `PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root`
-> * Translate the pnfs path to get an `xrootd` URI for that file.  Hint:  use the duneutil script pnfs2xrootd
-> * Use `xrdcp` to copy that file to `/dev/null`
+> * Use `ifdh locateFile <file> root` to find the directory for this file `PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root`
+> * Use `xrdcp` to copy that file to `/pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023_data_file`
 > * Using `xrdfs` and the `ls` option, count the number of files in the same directory as `PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root`
 {: .challenge}
 
 Note that redirecting the standard output of a command into the command `wc -l` will count the number of lines in the output text. e.g. `ls -alrth ~/ | wc -l`
 
+~~~
+ifdh locateFile PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root root
+xrdcp root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/tape_backed/dunepro/protodune-sp/full-reconstructed/2021/mc/out1/PDSPProd4a/18/80/01/67/PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root root://fndca1.fnal.gov:1094/pnfs/fnal.gov/usr/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023_data_file/PDSPProd4a_protoDUNE_sp_reco_stage1_p1GeV_35ms_sce_off_43352322_0_20210427T162252Z.root
+xrdfs root://fndca1.fnal.gov:1094/ ls /pnfs/fnal.gov/usr/dune/tape_backed/dunepro/protodune-sp/full-reconstructed/2021/mc/out1/PDSPProd4a/18/80/01/67/ | wc -l
+~~~
+{: .language-bash}
 
+### The df command
+
+To find out what types of volumes are available on a node can be achieved with the command `df`. The `-h` is for _human readable format_. It will list a lot of information about each volume (total size, available size, mount point, device location).
+~~~
+df -h
+~~~
+{: .language-bash}
+
+> ## Exercise 3
+> From the output of the `df -h` command, identify:
+> 1. the home area
+> 2. the NAS storage spaces
+> 3. the different dCache volumes
+{: .challenge}
 
 
 ## Useful links to bookmark
