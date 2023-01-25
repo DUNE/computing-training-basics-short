@@ -94,7 +94,7 @@ Full documentation: [Understanding Storage Volumes](https://cdcvs.fnal.gov/redmi
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | Persistent dCache	| No/~100 TB/exp | Managed by Experiment| No| Until manually deleted | immutable files w/ long lifetime	| /pnfs/dune/persistent	| Yes |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
-| Persistent Phy Grp	| No/~500 TB/exp | Managed by Phy Grp| No| Until manually deleted | immutable files w/ long lifetime	| /pnfs/dune/persistent/physicsgroups	| Yes |
+| Persistent PhysGrp	| Yes/~500 TB/exp | Managed by PhysGrp| No| Until manually deleted | immutable files w/ long lifetime	| /pnfs/dune/persistent/physicsgroups	| Yes |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | Scratch dCache | No/no limit | LRU eviction - least recently used file deleted | No | Varies, ~30 days (*NOT* guaranteed) | immutable files w/ short lifetime | /pnfs/\<exp\>/scratch	| Yes |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
