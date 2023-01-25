@@ -89,12 +89,11 @@ Files are not available for immediate read on disk, but needs to be 'staged' fro
 ## Summary on storage spaces
 Full documentation: [Understanding Storage Volumes](https://cdcvs.fnal.gov/redmine/projects/fife/wiki/Understanding_storage_volumes)
 
-In the following table, \<exp\> stands for the experiment (uboone, nova, dune, etc...)
-
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 |    | Quota/Space | Retention Policy | Tape Backed? | Retention Lifetime on disk |	Use for	| Path | Grid Accessible |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | Persistent dCache	| No/~100 TB/exp | Managed by Experiment| No| Until manually deleted | immutable files w/ long lifetime	| /pnfs/dune/persistent	| Yes |
+|-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | Persistent Phy Grp	| No/~500 TB/exp | Managed by Phy Grp| No| Until manually deleted | immutable files w/ long lifetime	| /pnfs/dune/persistent/physicsgroups	| Yes |
 |-------------+------------------+----------+-------------+----------------+------------+--------------+-----------|
 | Scratch dCache | No/no limit | LRU eviction - least recently used file deleted | No | Varies, ~30 days (*NOT* guaranteed) | immutable files w/ short lifetime | /pnfs/\<exp\>/scratch	| Yes |
