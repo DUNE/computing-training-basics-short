@@ -35,7 +35,7 @@ First, log in to a `dunegpvm` machine (should work from `lxplus` too with a mino
 ```bash
 source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
 setup jobsub_client
-mkdir -p /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_May2022 # if you have not done this before
+mkdir -p /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023 # if you have not done this before
 ```
 Having done that, let us submit a prepared script:
 
@@ -122,8 +122,8 @@ You will have to change the last line with your own submit file instead of the p
 First, we should make a tarball. Here is what we can do (assuming you are starting from /dune/app/users/username/):
 
 ```bash
-cp /dune/app/users/kherner/setupMay2022Tutorial-grid.sh /dune/app/users/${USER}/
-cp /dune/app/users/kherner/may2022tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid /dune/app/users/${USER}/may2022tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid
+cp /dune/app/users/kherner/setupjan2023tutorial-grid.sh /dune/app/users/${USER}/
+cp /dune/app/users/kherner/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid /dune/app/users/${USER}/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid
 ```
 
 Before we continue, let's examine these files a bit. We will source the first one in our job script, and it will set up the environment for us.
@@ -131,7 +131,7 @@ Before we continue, let's examine these files a bit. We will source the first on
 ~~~
 #!/bin/bash                                                                                                                                                                                                      
 
-DIRECTORY=may2022tutorial
+DIRECTORY=jan2023tutorial
 # we cannot rely on "whoami" in a grid job. We have no idea what the local username will be.
 # Use the GRID_USER environment variable instead (set automatically by jobsub). 
 USERNAME=${GRID_USER}
@@ -152,36 +152,36 @@ Now let's look at the difference between the setup-grid script and the plain set
 Assuming you are currently in the /dune/app/users/username directory:
 
 ```bash
-diff may2022tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup may2022tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid
+diff jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid
 ```
 
 ~~~
-< setenv MRB_TOP "/dune/app/users/<username>/may2022tutorial"
-< setenv MRB_TOP_BUILD "/dune/app/users/<username>/may2022tutorial"
-< setenv MRB_SOURCE "/dune/app/users/<username>/may2022tutorial/srcs"
-< setenv MRB_INSTALL "/dune/app/users/<username>/may2022tutorial/localProducts_larsoft_v09_48_01_e20_prof"
+< setenv MRB_TOP "/dune/app/users/<username>/jan2023tutorial"
+< setenv MRB_TOP_BUILD "/dune/app/users/<username>/jan2023tutorial"
+< setenv MRB_SOURCE "/dune/app/users/<username>/jan2023tutorial/srcs"
+< setenv MRB_INSTALL "/dune/app/users/<username>/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof"
 ---
-> setenv MRB_TOP "${INPUT_TAR_DIR_LOCAL}/may2022tutorial"
-> setenv MRB_TOP_BUILD "${INPUT_TAR_DIR_LOCAL}/may2022tutorial"
-> setenv MRB_SOURCE "${INPUT_TAR_DIR_LOCAL}/may2022tutorial/srcs"
-> setenv MRB_INSTALL "${INPUT_TAR_DIR_LOCAL}/may2022tutorial/localProducts_larsoft_v09_48_01_e20_prof"
+> setenv MRB_TOP "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial"
+> setenv MRB_TOP_BUILD "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial"
+> setenv MRB_SOURCE "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial/srcs"
+> setenv MRB_INSTALL "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof"
 ~~~
 {: . output}
 
 As you can see, we have switched from the hard-coded directories to directories defined by environment variables; the `INPUT_TAR_DIR_LOCAL` variable will be set for us (see below).
-Now, let's actually create our tar file. Again assuming you are in `/dune/app/users/kherner/may2022tutorial/`:
+Now, let's actually create our tar file. Again assuming you are in `/dune/app/users/kherner/jan2023tutorial/`:
 ```bash
-tar --exclude '.git' -czf may2022tutorial.tar.gz may2022tutorial/localProducts_larsoft_v09_48_01_e20_prof may2022tutorial/work setupMay2022Tutorial-grid.sh
+tar --exclude '.git' -czf jan2023tutorial.tar.gz jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof jan2023tutorial/work setupjan2023tutorial-grid.sh
 ```
 Then submit another job (in the following we keep the same submit file as above):
 
 ```bash
-jobsub_submit -G dune -M -N 1 --memory=2500MB --disk=2GB --expected-lifetime=3h --cpu=1 --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE --tar_file_name=dropbox:///dune/app/users/<username>/may2022tutorial.tar.gz -l '+SingularityImage=\"/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest\"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105&&TARGET.HAS_CVMFS_fifeuser1_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser2_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser3_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser4_opensciencegrid_org==true)' file:///dune/app/users/kherner/run_may2022tutorial.sh
+jobsub_submit -G dune -M -N 1 --memory=2500MB --disk=2GB --expected-lifetime=3h --cpu=1 --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE --tar_file_name=dropbox:///dune/app/users/<username>/jan2023tutorial.tar.gz -l '+SingularityImage=\"/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest\"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105&&TARGET.HAS_CVMFS_fifeuser1_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser2_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser3_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser4_opensciencegrid_org==true)' file:///dune/app/users/kherner/run_jan2023tutorial.sh
 ```
 
 You'll see this is very similar to the previous case, but there are some new options: 
 
-* `--tar_file_name=dropbox://` automatically copies and untars the given tarball into a directory on the worker node, accessed via the INPUT_TAR_DIR_LOCAL environment variable in the job. As of now, only one such tarball can be specified. If you need to copy additional files into your job that are not in the main tarball you can use the -f option (see the jobsub manual for details). The value of INPUT_TAR_DIR_LOCAL is by default $CONDOR_DIR_INPUT/name_of_tar_file, so if you have a tar file named e.g. may2022tutorial.tar.gz, it would be $CONDOR_DIR_INPUT/may2022tutorial.
+* `--tar_file_name=dropbox://` automatically copies and untars the given tarball into a directory on the worker node, accessed via the INPUT_TAR_DIR_LOCAL environment variable in the job. As of now, only one such tarball can be specified. If you need to copy additional files into your job that are not in the main tarball you can use the -f option (see the jobsub manual for details). The value of INPUT_TAR_DIR_LOCAL is by default $CONDOR_DIR_INPUT/name_of_tar_file, so if you have a tar file named e.g. jan2023tutorial.tar.gz, it would be $CONDOR_DIR_INPUT/jan2023tutorial.
 * Notice that the `--append_condor_requirements` line is longer now, because we also check for the fifeuser[1-4]. opensciencegrid.org CVMFS repositories.  
 
 Now, there's a very small gotcha when using the RCDS, and that is when your job runs, the files in the unzipped tarball are actually placed in your work area as symlinks from the CVMFS version of the file (which is what you want since the whole point is not to have N different copies of everything).
@@ -255,7 +255,7 @@ Of course replace 12345678.0@jobsub0N.fnal.gov with your own job ID.
 ## Brief review of best practices in grid jobs (and a bit on the interactive machines)
 
 * When creating a new workflow or making changes to an existing one, <span style="color:red">**ALWAYS test with a single job first**</span>. Then go up to 10, etc. Don't submit thousands of jobs immediately and expect things to work.  
-* **ALWAYS** be sure to prestage your input datasets before launching large sets of jobs.  
+* **ALWAYS** be sure to prestage your input datasets before launching large sets of jobs. This may become less necesaary in the future 
 * **Use RCDS**; do not copy tarballs from places like scratch dCache. There's a finite amount of transfer bandwidth available from each dCache pool. If you absolutely cannot use RCDS for a given file, it's better to put it in resilient (but be sure to remove it when you're done!). The same goes for copying files from within your own job script: if you have a large number of jobs looking for a same file, get it from resilient. Remove the copy when no longer needed. Files in resilient dCache that go unaccessed for 45 days are automatically removed.  
 * Be careful about placing your output files. **NEVER place more than a few thousand files into any one directory inside dCache. That goes for all type of dCache (scratch, persistent, resilient, etc).**
 * **Avoid** commands like `ifdh ls /path/with/wildcards/*/` inside grid jobs. That is a VERY expensive operation and can cause a lot of pain for many users.  
@@ -278,7 +278,7 @@ For analysis use: [main POMS page][poms-page-ana]
 An [example campaign](https://pomsgpvm01.fnal.gov/poms/campaign_stage_info/dune/analysis?campaign_stage_id=14102).
 
 Typical POMS use centers around a configuration file (often more like a template which can be reused for many campaigns) and various campaign-specific settings for overriding the defaults in the config file.
-An example config file designed to do more or less what we did in the previous submission is here: `/dune/app/users/kherner/may2022tutorial/work/pomsdemo.cfg`
+An example config file designed to do more or less what we did in the previous submission is here: `/dune/app/users/kherner/jan2023tutorial/work/pomsdemo.cfg`
 
 You can find more about POMS here: [POMS User Documentation][poms-user-doc]  
 Helpful ideas for structuring your config files are here: [Fife launch Reference][fife-launch-ref]  
@@ -312,15 +312,15 @@ Here is an example of a campaign that does the same thing as the previous one, u
 Of course, before running **any** SAM project, we should prestage our input definition(s). The way most people do that is to do
 
 ```bash
-samweb prestage-dataset kherner-may2022tutorial-mc
+samweb prestage-dataset kherner-jan2023tutorial-mc
 ```
 {: .source}
 
 replacing the above definition with your own definition as appropriate. However, this does NOT reset the clock on the LRU algorithm, because if prestage-dataset sees a file is already chached, it goes on to the next one; it does no lifetime or last access checking, nor does it read the file. A better way to prestage is to instead do
 
 ```bash
-unsetup curl # necessary as of May 2022 because there's an odd interaction with the UPS version of curl, so we need to turn it off
-samweb run-project --defname=kherner-may2022tutorial-mc --schema https 'echo %fileurl && curl -L --cert $X509_USER_PROXY --key $X509_USER_PROXY --cacert $X509_USER_PROXY --capath /etc/grid-security/certificates -H "Range: bytes=0-3" %fileurl && echo'
+unsetup curl # necessary as of Jan 2023 because there's an odd interaction with the UPS version of curl, so we need to turn it off
+samweb run-project --defname=kherner-jan2023tutorial-mc --schema https 'echo %fileurl && curl -L --cert $X509_USER_PROXY --key $X509_USER_PROXY --cacert $X509_USER_PROXY --capath /etc/grid-security/certificates -H "Range: bytes=0-3" %fileurl && echo'
 ```
 
 This reads the first four bytes of each file, which will reset the LRU clock. Note you will need to have the X509_USER_PROXY environment variable set. Most of the time that will simply be set as
@@ -369,7 +369,7 @@ Some more background material on these topics (including some examples of why ce
 
 [project-py-guide]: https://cdcvs.fnal.gov/redmine/projects/project-py/wiki/Project-py_guide
 
-[DUNE_computing_tutorial_advanced_topics_20210129]: https://indico.fnal.gov/event/20144/contributions/55932/attachments/34945/42690/DUNE_computing_tutorial_advanced_topics_and_best_practices_20200129.pdf  
+[DUNE_computing_tutorial_advanced_topics_20200129]: https://indico.fnal.gov/event/20144/contributions/55932/attachments/34945/42690/DUNE_computing_tutorial_advanced_topics_and_best_practices_20200129.pdf  
 
 
 {%include links.md%}
