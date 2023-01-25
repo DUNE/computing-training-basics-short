@@ -75,6 +75,9 @@ There are three types of storage volumes that you will encounter at Fermilab: lo
 At Fermilab, an instance of dCache+Enstore is used for large-scale, distributed storage with capacity for more than 100 PB of storage and O(10000) connections. Whenever possible, these storage elements should be accessed over xrootd (see next section) as the mount points on interactive nodes are slow and unstable. Here are the different dCache volumes:
 
 **Persistent dCache**: the data in the file is actively available for reads at any time and will not be removed until manually deleted by user
+There is now a second persistent dCache volume that is dedicated for DUNE Physics groups and managed by the respective physics conveners of those 
+physics group.  https://wiki.dunescience.org/wiki/DUNE_Computing/Using_the_Physics_Groups_Persistent_Space_at_Fermilab gives more details on how to get 
+access to these groups.  In general if you need to store more than 5TB in persistent dCache you should be working with the Physics Groups areas.
 
 **Scratch dCache**: large volume shared across all experiments. When a new file is written to scratch space, old files are removed in order to make room for the newer file. removal is based on LRU policy
 
