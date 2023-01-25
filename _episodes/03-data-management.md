@@ -32,7 +32,7 @@ The session was video captured for your asynchronous review. The video from the 
 DUNE data is stored around the world and the storage elements are not always organized in a way that they can be easily inspected. For this purpose we use the SAM web client.
 
 ### What is SAM?  
-Sequential Access with Metadata (SAM) is a data handling system developed at Fermilab.  It is designed to tracklocations of files and other file metadata.
+Sequential Access with Metadata (SAM) is a data handling system developed at Fermilab.  It is designed to track locations of files and other file metadata.
 
 This lecture will show you how to access data files that have been defined to the DUNE Data Catalog. Execute the following commands after logging in to the DUNE interactive node, and sourcing the main dune setups.
 
@@ -48,8 +48,9 @@ Rucio has two functions:
 1. A rule-based system to get files to Rucio Storage Elements around the world and keep them there.
 2. To return the "nearest" replica of any data file for use either in interactive or batch file use.  It is expected that most DUNE users will not be regularly using direct Rucio commands, but other wrapper scripts that calls them indirectly.
 
-As of the date of this May 2022 tutorial:
-- The Rucio client is not installed as a part of the standard DUNE client software
+As of the date of this January 2023 tutorial:
+- The Rucio client is installed in CVMFS. 
+- "setup rucio" to get it.
 - Most DUNE users are not yet enabled to use it.  But when we do, some of the commands will look like this:
 
 ~~~
@@ -59,6 +60,30 @@ rucio download protodune-sp:np04_raw_run005801_0001_dl1.root
 
 rucio list-rses
 ~~~
+
+In the early days of Rucio the most common use case will be for locating the nearest replica of a file.  That is what the rucio list-file-replicas command given above is for.  It will return URI suitable for streaming the file in question.  Rucio will be read-only to most users initially.
+Current plans are that a wrapper will be supplied to users for use both in jobs and interactively to write files.  Users should not have to 
+learn the commands that are necessary for uploading to Rucio directly.  On the client side Rucio provides both command line tools and a Python API.
+
+### Rucio Concepts
+
+A DID is a Data Identifier.  Data Identifiers can describe a File, a Dataset (which can contain many files) or a Container (which can contain many datasets).  A DID has the form of scope:name
+
+A Replica is a copy of a File in a specific location.  Most files have more than one Replica
+
+A Scope (in our implementation) is a collection of related data.  Most of our rucio Scopes map to detector type, i.e. protodune-sp, protodune-dp, vd-coldbox-top, hd-coldbox, hd-protodune, etc.
+
+A Rule is an instruction to move a file, dataset, or Container to a specific place and keep it there.
+
+An RSE is a Rucio Storage Element where replicas can be stored.
+
+### MetaCat Introduction
+
+Everything that is in DUNE-managed storage must have metadata.  Any file in Rucio must have metadata before it can be added.
+The MetaCat client is available in DUNE CVMFS.  Extensive documentation is available at https://metacat.readthedocs.io
+The MetaCat web GUI is available at https://metacat.fnal.gov:9443/dune_meta_demo/app/gui.  Any DUNE user should be able to log
+in using their user name and password.  MetaCat also has the ability to add plugins to jointly search the file database and other
+DUNE databases such as the conditions database jointly.  
 
 ## Finding data
 
