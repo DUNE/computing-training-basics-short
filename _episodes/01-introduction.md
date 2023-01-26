@@ -66,7 +66,7 @@ Throughout the training, participants are free to ask questions via a Google Liv
 
 You can write questions there, anonymously or not, and experts will reply. This method is preferred as the chat on Zoom can quickly saturate so this method proved to be successful at the previous training. We will collect all questions and release a Q&A after the event.
 
-You can join DUNE's Slack: `dunescience.slack.com`. We created a special channel `computing_training_may2022` for technical support, join [here][slack-join-link].
+You can join DUNE's Slack: `dunescience.slack.com`. We created a special channel `#computing_training_basics` for technical support, join [here][slack-join-link].
 
 
 [indico-event-link]: https://indico.fnal.gov/event/57711/ 
