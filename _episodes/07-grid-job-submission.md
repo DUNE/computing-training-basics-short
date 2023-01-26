@@ -36,11 +36,12 @@ First, log in to a `dunegpvm` machine (should work from `lxplus` too with a mino
 source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
 setup jobsub_client
 mkdir -p /pnfs/dune/scratch/users/${USER}/DUNE_tutorial_Jan2023 # if you have not done this before
+mkdir -p /pnfs/dune/scratch/users/${USER}/jan2023tutorial
 ```
 Having done that, let us submit a prepared script:
 
 ~~~
-jobsub_submit -G dune -M -N 1 --memory=1000MB --disk=1GB --cpu=1 --expected-lifetime=1h --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE -l '+SingularityImage=\"/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest\"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105)' file:///dune/app/users/kherner/submission_test_singularity.sh
+jobsub_submit -G dune -M -N 1 --memory=1000MB --disk=1GB --cpu=1 --expected-lifetime=1h --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE -l '+SingularityImage=\"/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest\"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105)' -e GFAL_PLUGIN_DIR=/usr/lib64/gfal2-plugins -e GFAL_CONFIG_DIR=/etc/gfal2.d file:///dune/app/users/kherner/submission_test_singularity.sh
 ~~~
 {: .source}
 
@@ -70,7 +71,8 @@ Now, let's look at some of these options in more detail.
 * `--memory, --disk, --cpu, --expected-lifetime` request this much memory, disk, number of cpus, and max run time.  Jobs that exceed the requested amounts will go into a held state. Defaults are 2000 MB, 10 GB, 1, and 8h, respectively. Note that jobs are charged against the DUNE FermiGrid quota according to the greater of memory/2000 MB and number of CPUs, with fractional values possible. For example, a 3000 MB request is charged 1.5 "slots", and 4000 MB would be charged 2. You are charged for the amount **requested**, not what is actually used, so you should not request any more than you actually need (your jobs will also take longer to start the more resources you request). Note also that jobs that run offsite do NOT count against the FermiGrid quota. **In general, aim for memory and run time requests that will cover 90-95% of your jobs and use the [autorelease feature][job-autorelease] to deal with the remainder**.  
 * `--resource-provides=usage_model` This controls where jobs are allowed to run. DEDICATED means use the DUNE FermiGrid quota, OPPORTUNISTIC means use idle FermiGrid resources beyond the DUNE quota if they are available, and OFFSITE means use non-Fermilab resources. You can combine them in a comma-separated list. <span style="color:red"> In nearly all cases you should be setting this to DEDICATED,OPPORTUNISTIC,OFFSITE.</span> This ensures maximum resource availability and will get your jobs started the fastest. Note that because of Singularity, **there is absolutely no difference** between the environment on Fermilab worker nodes and any other place. Depending on where your input data are (if any), you might see slight differences in network latency, but that's it.  
 * `-l` (or `--lines=`) allows you to pass additional arbitrary HTCondor-style `classad` variables into the job. In this case, we're specifying exactly what `Singularity` image we want to use in the job. It will be automatically set up for us when the job starts. Any other valid HTCondor `classad` is possible. In practice you don't have to do much beyond the `Singularity` image. Here, pay particular attention to the quotes and backslashes.  
-* `--append_condor_requirements` allows you to pass additional `HTCondor-style` requirements to your job. This helps ensure that your jobs don't start on a worker node that might be missing something you need (a corrupt or out of date `CVMFS` repository, for example). Some checks run at startup for a variety of `CVMFS` repositories. Here, we check that Singularity invocation is working and that the `CVMFS` repos we need ( [dune.opensciencegrid.org][dune-openscience-grid-org] and [larsoft.opensciencegrid.org][larsoft-openscience-grid-org] ) are in working order. Optionally you can also place version requirements on CVMFS repos (as we did here as an example), useful in case you want to use software that was published very recently and may not have rolled out everywhere yet.  
+* `--append_condor_requirements` allows you to pass additional `HTCondor-style` requirements to your job. This helps ensure that your jobs don't start on a worker node that might be missing something you need (a corrupt or out of date `CVMFS` repository, for example). Some checks run at startup for a variety of `CVMFS` repositories. Here, we check that Singularity invocation is working and that the `CVMFS` repos we need ( [dune.opensciencegrid.org][dune-openscience-grid-org] and [larsoft.opensciencegrid.org][larsoft-openscience-grid-org] ) are in working order. Optionally you can also place version requirements on CVMFS repos (as we did here as an example), useful in case you want to use software that was published very recently and may not have rolled out everywhere yet.
+*  `-e VAR=VAL` will set the environment variable VAR to the value VAL inside the job. You can pass this option multiple times for each variable you want to set. You can also just do `-e VAR` and that will set VAR inside the job to be whatever value it's set to in your current environment (make sure it's actually set though!) **One thing to note here as of January 2022 is that these two gfal variables may need to be set as shown to prevent problems with output copyback at a few sites.** It is safe to set these variable to the values shown here in all jobs at all sites, since the locations exist in the default container (assuming you're using that).
 
 ## Job Output
 
@@ -123,7 +125,7 @@ First, we should make a tarball. Here is what we can do (assuming you are starti
 
 ```bash
 cp /dune/app/users/kherner/setupjan2023tutorial-grid.sh /dune/app/users/${USER}/
-cp /dune/app/users/kherner/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid /dune/app/users/${USER}/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid
+cp /dune/app/users/kherner/jan2023tutorial/localProducts_larsoft_v09_63_00_e20_prof/setup-grid /dune/app/users/${USER}/jan2023tutorial/localProducts_larsoft_v09_63_00_e20_prof/setup-grid
 ```
 
 Before we continue, let's examine these files a bit. We will source the first one in our job script, and it will set up the environment for us.
@@ -166,7 +168,7 @@ diff jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup jan2023tutor
 > setenv MRB_SOURCE "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial/srcs"
 > setenv MRB_INSTALL "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof"
 ~~~
-{: . output}
+{: .output}
 
 As you can see, we have switched from the hard-coded directories to directories defined by environment variables; the `INPUT_TAR_DIR_LOCAL` variable will be set for us (see below).
 Now, let's actually create our tar file. Again assuming you are in `/dune/app/users/kherner/jan2023tutorial/`:
@@ -176,7 +178,7 @@ tar --exclude '.git' -czf jan2023tutorial.tar.gz jan2023tutorial/localProducts_l
 Then submit another job (in the following we keep the same submit file as above):
 
 ```bash
-jobsub_submit -G dune -M -N 1 --memory=2500MB --disk=2GB --expected-lifetime=3h --cpu=1 --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE --tar_file_name=dropbox:///dune/app/users/<username>/jan2023tutorial.tar.gz -l '+SingularityImage=\"/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest\"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105&&TARGET.HAS_CVMFS_fifeuser1_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser2_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser3_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser4_opensciencegrid_org==true)' file:///dune/app/users/kherner/run_jan2023tutorial.sh
+jobsub_submit -G dune -M -N 1 --memory=2500MB --disk=2GB --expected-lifetime=3h --cpu=1 --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE --tar_file_name=dropbox:///dune/app/users/<username>/jan2023tutorial.tar.gz -l '+SingularityImage=\"/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest\"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105&&TARGET.HAS_CVMFS_fifeuser1_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser2_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser3_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser4_opensciencegrid_org==true)' -e GFAL_PLUGIN_DIR=/usr/lib64/gfal2-plugins -e GFAL_CONFIG_DIR=/etc/gfal2.d file:///dune/app/users/kherner/run_jan2023tutorial.sh
 ```
 
 You'll see this is very similar to the previous case, but there are some new options: 
@@ -268,8 +270,59 @@ Of course replace 12345678.0@jobsub0N.fnal.gov with your own job ID.
 
 **Another important side note:** If you are used to using other programs for your work such as project.py (which is **NOT** officially supported by DUNE or the Fermilab Scientific Computing Division), there is a helpful tool called [Project-py][project-py-guide] that you can use to convert existing xml into POMS configs, so you don't need to start from scratch! Then you can just switch to using POMS from that point forward. As a reminder, if you use unsupported tools, you are own your own and will receive NO SUPPORT WHATSOEVER. You are still responsible for making sure that your jobs satisfy Fermilab's policy for job efficiency: https://cd-docdb.fnal.gov/cgi-bin/sso/RetrieveFile?docid=7045&filename=FIFE_User_activity_mitigation_policy_20200625.pdf&version=1
 
+
+## The Future is Now(-ish): jobsub_lite
+
+The existing jobsub consist of both a server and a client product (what users see). In order to simplify development and maintenance a new product call *jobsub_lite* is now available. There is no need for a separate server with jobsub_lite as the client talks directly to HTCondor schedulers. The client has nearly a 100% feature overlap with the existing jobsub_client (sometimes hereafter called "legacy jobsub") and generally requires little to no modification of existing submission scripts. It is currently available for testing on dunegpvm14 and dunegpvm15 and will be on the rest of the gpvm machines by early February, but is already available on all machines via CVMFS.
+
+The official jobsub_lite documentation page is here: https://fifewiki.fnal.gov/wiki/Jobsub_Lite
+
+**Note: jobsub_lite will be the default product, and legacy jobsub will no longer work, by the next collaboration meeting in May.** 
+
+Since the changeover will be happening gradually over the next few months, now is a good time to gain familiarity with it and test your workflows. Let's try the same things we did before. If you're logged in to dunegpvm14 or dunegpvm15 with no DUNE software set up, things will already work. If you're on another machine and/or have done some UPS setup steps, then you just need to do
+
+```bash
+setup jobsub_client v_lite
+```
+
+Let's try a submission very similar to the first one we did:
+
+
+
+
+Now let's submit our job with an input tarball:
+
+```bash
+jobsub_submit -G dune --mail_always -N 1 --memory=2500MB --disk=2GB --expected-lifetime=3h --cpu=1 --resource-provides=usage_model=DEDICATED,OPPORTUNISTIC,OFFSITE --tar_file_name=dropbox:///dune/app/users/kherner/jan2023tutorial.tar.gz -l '+SingularityImage="/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105&&TARGET.HAS_CVMFS_fifeuser1_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser2_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser3_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser4_opensciencegrid_org==true)' -e GFAL_PLUGIN_DIR=/usr/lib64/gfal2-plugins -e GFAL_CONFIG_DIR=/etc/gfal2.d file:///dune/app/users/kherner/run_jan2023tutorial.sh
+```
+
+~~~
+Attempting to get token from https://htvaultprod.fnal.gov:8200 ... succeeded
+Storing bearer token in /tmp/bt_token_dune_Analysis_11469
+Using bearer token located at /tmp/bt_token_dune_Analysis_11469 to authenticate to RCDS
+Checking to see if uploaded file is published on RCDS.
+Could not locate uploaded file on RCDS.  Will retry in 30 seconds.
+Found uploaded file on RCDS.
+Submitting job(s).
+1 job(s) submitted to cluster 57110231.
+Use job id 57110231.0@jobsub01.fnal.gov to retrieve output
+~~~
+
+Note that it did not prompt for another token since it already had one. If you're uploading a new (or modified) tar file, there may be a short delay before the submission finishes because it (now correctly) waits until the tar file is on the RCDS publishing machine.
+
+
+Quite a bit of extra information is included in the "Futher Reading" section. See the top for jobsub_lite information.
+
 ## Further Reading
-Some more background material on these topics (including some examples of why certain things are bad) is in these links:  
+Some more background material on these topics (including some examples of why certain things are bad) is in these links:
+
+
+[December 2022 jobsub_lite demo and information session](https://indico.fnal.gov/event/57514/)
+
+[January 2023 additional experiment feedback session on jobsub_lite]( )
+
+[Wiki page listing differences between jobsub_lite and legacy jobsub](https://fifewiki.fnal.gov/wiki/Differences_between_jobsub_lite_and_legacy_jobsub_client/server)
+
 [DUNE Computing Tutorial:Advanced topics and best practices](DUNE_computing_tutorial_advanced_topics_20210129)
 
 [2021 Intensity Frontier Summer School](https://indico.fnal.gov/event/49414)
