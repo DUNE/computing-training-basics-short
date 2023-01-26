@@ -154,26 +154,26 @@ Now let's look at the difference between the setup-grid script and the plain set
 Assuming you are currently in the /dune/app/users/username directory:
 
 ```bash
-diff jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof/setup-grid
+diff jan2023tutorial/localProducts_larsoft_v09_63_00_e20_prof/setup jan2023tutorial/localProducts_larsoft_v09_63_00_e20_prof/setup-grid
 ```
 
 ~~~
 < setenv MRB_TOP "/dune/app/users/<username>/jan2023tutorial"
 < setenv MRB_TOP_BUILD "/dune/app/users/<username>/jan2023tutorial"
 < setenv MRB_SOURCE "/dune/app/users/<username>/jan2023tutorial/srcs"
-< setenv MRB_INSTALL "/dune/app/users/<username>/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof"
+< setenv MRB_INSTALL "/dune/app/users/<username>/jan2023tutorial/localProducts_larsoft_v09_63_00_e20_prof"
 ---
 > setenv MRB_TOP "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial"
 > setenv MRB_TOP_BUILD "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial"
 > setenv MRB_SOURCE "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial/srcs"
-> setenv MRB_INSTALL "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof"
+> setenv MRB_INSTALL "${INPUT_TAR_DIR_LOCAL}/jan2023tutorial/localProducts_larsoft_v09_63_00_e20_prof"
 ~~~
 {: .output}
 
 As you can see, we have switched from the hard-coded directories to directories defined by environment variables; the `INPUT_TAR_DIR_LOCAL` variable will be set for us (see below).
 Now, let's actually create our tar file. Again assuming you are in `/dune/app/users/kherner/jan2023tutorial/`:
 ```bash
-tar --exclude '.git' -czf jan2023tutorial.tar.gz jan2023tutorial/localProducts_larsoft_v09_48_01_e20_prof jan2023tutorial/work setupjan2023tutorial-grid.sh
+tar --exclude '.git' -czf jan2023tutorial.tar.gz jan2023tutorial/localProducts_larsoft_v09_63_00_e20_prof jan2023tutorial/work setupjan2023tutorial-grid.sh
 ```
 Then submit another job (in the following we keep the same submit file as above):
 
@@ -273,11 +273,13 @@ Of course replace 12345678.0@jobsub0N.fnal.gov with your own job ID.
 
 ## The Future is Now(-ish): jobsub_lite
 
-The existing jobsub consist of both a server and a client product (what users see). In order to simplify development and maintenance a new product call *jobsub_lite* is now available. There is no need for a separate server with jobsub_lite as the client talks directly to HTCondor schedulers. The client has nearly a 100% feature overlap with the existing jobsub_client (sometimes hereafter called "legacy jobsub") and generally requires little to no modification of existing submission scripts. It is currently available for testing on dunegpvm14 and dunegpvm15 and will be on the rest of the gpvm machines by early February, but is already available on all machines via CVMFS.
+The existing jobsub consist of both a server and a client product (what users see). In order to simplify development and maintenance a new product call *jobsub_lite* is now available. There is no need for a separate server with jobsub_lite as the client talks directly to HTCondor schedulers. The client has nearly a 100% command name and feature overlap with the existing jobsub_client (sometimes hereafter called "legacy jobsub") and generally requires little to no modification of existing submission scripts. It is currently available for testing on dunegpvm14 and dunegpvm15 and will be on the rest of the gpvm machines by early February, but is already available on all machines via CVMFS.
 
 The official jobsub_lite documentation page is here: https://fifewiki.fnal.gov/wiki/Jobsub_Lite
 
 **Note: jobsub_lite will be the default product, and legacy jobsub will no longer work, by the next collaboration meeting in May.** 
+
+The biggest change behind the scenes other than getting rid of the server side of things is the switch to using tokens instead of x509 proxies for authenitcation. This is nearly 100% transparent in reality; the jobs all work the same way, and fresh tokens are automatically pushed to jobs much like proxies are now. In reality, there's nothing to worry about with tokens after you do the first submission (see below).
 
 Since the changeover will be happening gradually over the next few months, now is a good time to gain familiarity with it and test your workflows. Let's try the same things we did before. If you're logged in to dunegpvm14 or dunegpvm15 with no DUNE software set up, things will already work. If you're on another machine and/or have done some UPS setup steps, then you just need to do
 
@@ -287,8 +289,39 @@ setup jobsub_client v_lite
 
 Let's try a submission very similar to the first one we did:
 
+```bash
+jobsub_submit -G dune --mail_always -N 1 --memory=2500MB --disk=2GB --expected-lifetime=3h --cpu=1 -l '+SingularityImage="/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest"' --append_condor_requirements='(TARGET.HAS_Singularity==true&&TARGET.HAS_CVMFS_dune_opensciencegrid_org==true&&TARGET.HAS_CVMFS_larsoft_opensciencegrid_org==true&&TARGET.CVMFS_dune_opensciencegrid_org_REVISION>=1105&&TARGET.HAS_CVMFS_fifeuser1_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser2_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser3_opensciencegrid_org==true&&TARGET.HAS_CVMFS_fifeuser4_opensciencegrid_org==true)' -e GFAL_PLUGIN_DIR=/usr/lib64/gfal2-plugins -e GFAL_CONFIG_DIR=/etc/gfal2.d file:///nashome/k/kherner/submission_test_singularity.sh
+```
+The first time you try to do a submission you will probably get some output like this:
+~~~
+ttempting OIDC authentication with https://htvaultprod.fnal.gov:8200
 
+Complete the authentication at:
+    https://cilogon.org/device/?user_code=ABC-D1E-FGH
+No web open command defined, please copy/paste the above to any web browser
+Waiting for response in web browser
+~~~
 
+In this particular case, you do want to follow the instructions and copy and paste the link into your browser (can be any browser). There is a time limit on it so its best to do it right away. Always choose Fermilab as the identity provider in the menu, even if your home institution is listed. After you hit log on, you'll get a message saying you approved the access request, and then after a short delay (may be several seconds) in the terminal you will see
+
+~~~
+Saving credkey to /nashome/u/username/.config/htgettoken/credkey-dune-default
+Saving refresh token ... done
+Attempting to get token from https://htvaultprod.fnal.gov:8200 ... succeeded
+Storing bearer token in /tmp/bt_token_dune_Analysis_number.othernumber
+Storing condor credentials for dune
+Submitting job(s)
+.
+1 job(s) submitted to cluster 57110235.
+~~~
+
+And that's it! Then you can use *jobsub_rm*, *jobsub_fetchlog*, etc., as you normally would. **Note you can't see or manipulate jobs submitted with jobsub_lite with legacy jobsub, and vice versa.** The refresh tokens are good for 30 days, so as long as you do something that uses a token at least once every 30 days, you won't have to go through the browser request approval again. If you don't, then you'll just get the same message as earlier and you paste the link into a browser as we did. One other thing to note there is that if you often submit via scripts or other automation, make sure you have a valid refresh token before you kick the scripts off. You could just submit a single dummy job by hand and then immediately remove it, for example.
+
+Let's consider a few differences betwene this submission at the first one:
+
+* `-M` is replaced with `--mail_always`, though it works the same way.
+* `--resource-provides=...` is no longer needed, though you can still give it without breaking anything. There are simplified options available for controlling where jobs can run; see the [documentation](https://fifewiki.fnal.gov/wiki/Differences_between_jobsub_lite_and_legacy_jobsub_client/server#--site.2F--onsite.2F--offsite) for details. The default is still to run on all available resources, which is almost always what you want anyway.
+* It wasn't necessary to escape the double quotes in `-l '+SingularityImage="/cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest"'`. You can keep the escapes in any existing submission scripts though, and it will still work properly.
 
 Now let's submit our job with an input tarball:
 
@@ -310,6 +343,16 @@ Use job id 57110231.0@jobsub01.fnal.gov to retrieve output
 
 Note that it did not prompt for another token since it already had one. If you're uploading a new (or modified) tar file, there may be a short delay before the submission finishes because it (now correctly) waits until the tar file is on the RCDS publishing machine.
 
+### Some known issues and things to be aware of, January 2023
+
+Since jobsub_lite isn't officially in production yet, there are still a few things that may slightly change, don't quite work as advertised yet, or are slightly different from how legacy jobsub worked. Here is a non-exhaustive list:
+
+* Emails on job completion aren't working yet.
+* jobsub_lite jobs (and logs) aren't visible in FIFEMON yet, but they will be.
+* Output directories must be group-writable for copyback to work. Just doing `chmod g+w mydirectory` is enough.
+* Multiple `--tar_file_name` options are now supported (and will be unpacked) if you need things in multiple tarballs.
+* The `-f` behavior with and without dropbox:// in front is slightly different from legacy jobsub; see the [documentation](https://fifewiki.fnal.gov/wiki/Differences_between_jobsub_lite_and_legacy_jobsub_client/server#Bug_with_-f_dropbox:.2F.2F.2Fa.2Fb.2Fc.tar) for details.
+* Older versions of IFDH will not support tokens, so be careful if you're intentionally setting up old versions. Everything now current is fine though.
 
 Quite a bit of extra information is included in the "Futher Reading" section. See the top for jobsub_lite information.
 
