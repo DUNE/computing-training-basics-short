@@ -275,7 +275,7 @@ Of course replace 12345678.0@jobsub0N.fnal.gov with your own job ID.
 
 The existing jobsub consist of both a server and a client product (what users see). In order to simplify development and maintenance a new product call *jobsub_lite* is now available. There is no need for a separate server with jobsub_lite as the client talks directly to HTCondor schedulers. The client has nearly a 100% command name and feature overlap with the existing jobsub_client (sometimes hereafter called "legacy jobsub") and generally requires little to no modification of existing submission scripts. It is currently available for testing on dunegpvm14 and dunegpvm15 and will be on the rest of the gpvm machines by early February, but is already available on all machines via CVMFS.
 
-The official jobsub_lite documentation page is here: https://fifewiki.fnal.gov/wiki/Jobsub_Lite
+The official jobsub_lite documentation page is here: [https://fifewiki.fnal.gov/wiki/Jobsub_Lite](https://fifewiki.fnal.gov/wiki/Jobsub_Lite)
 
 **Note: jobsub_lite will be the default product, and legacy jobsub will no longer work, by the next collaboration meeting in May.** 
 
