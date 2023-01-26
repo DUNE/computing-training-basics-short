@@ -280,6 +280,7 @@ Analyzer modules read data products from the event memory and produce histograms
 
 **Source Modules**  
 Source modules read data from input files and reformat it as need be, in order to put the data in *art* event data store. Most jobs use the art-provided RootInput source module which reads in art-formatted ROOT files. RootInput interacts well with the rest of the framework in that it provides lazy reading of TTree branches.  When using the RootInput source, data are not actually fetched from the file into memory when the source executes, but only when GetHandle or GetValidHandle or other product get methods are called. This is useful for *art* jobs that only read a subset of the TBranches in an input file. Code for sources must be in files of the form: `modulename_source.cc`, where `modulename` does not have any underscores in it.
+Monte Carlo generator jobs use the input source called EmptyEvent.
 
 **Services**  
 These are singleton classes that are globally visible within an *art* job. They can be FHiCL configured like modules, and they can schedule methods to be called on begin job, begin run, begin event, etc. They are meant to help supply configuration parameters like the drift velocity, or more complicated things like geometry functions, to modules that need them. Please do not use services as a back door for storing event data outside of the *art* event store. Source code must be in files of the form: `servicename_service.cc`, where servicename does not have any underscores in it.
@@ -297,8 +298,13 @@ for instructions on how to invoke it.
 
 ### Ordering of Plug-in Execution
 
-The input source always goes first, and it defines the run, subrun and event number of the trigger record being processed.
+The constructors for each plug-in are called at job-start time, after the shared object libraries are loaded by the image activater after their names have been discovered from the fcl configuration.  Producer, analyzer and service plug-ins have BeginJob, BeginRun, BeginSubRun, EndSubRun, EndRun, EndJob methods where they can do things like book histograms, write out summary information, or clean up memory.
+
+When processing data, the input source always gets executed first, and it defines the run, subrun and event number of the trigger record being processed.
 The producers and filters in trigger_paths then get executed for each event.  The analyzers and filters in end_paths then get executed.  Analyzers cannot be added to trigger_paths, and producers cannot be added to end_paths.  This ordering ensures that data products are all produced by the time they are needed to be analyzed.  But it also forces high memory usage for the same reason.
+
+Services and tools are visible to other plug-ins at any stage of processing.  They are loaded dynamically from names in the fcl configurations, so a common error is to use in code a service that hasn't been mentioned in the job configuration.  You will get an error asking you to configure the service, even if it is just an empty configuration with the service name and no parameters set.
+
 
 
 ### Non-Plug-In Code
