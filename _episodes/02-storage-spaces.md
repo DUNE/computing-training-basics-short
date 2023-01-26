@@ -177,7 +177,7 @@ xrdfs root://fndca1.fnal.gov:1094/ ls /pnfs/fnal.gov/usr/dune/scratch/users/${US
 
 Note that you can do
 ~~~
-lar -c <xrootd_uri> <input.fcl>
+lar -c <input.fcl> <xrootd_uri> 
 ~~~
 {: .language-bash}
 
