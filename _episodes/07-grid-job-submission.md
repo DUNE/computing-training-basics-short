@@ -349,7 +349,7 @@ Since jobsub_lite isn't officially in production yet, there are still a few thin
 
 * Emails on job completion aren't working yet.
 * jobsub_lite jobs (and logs) aren't visible in FIFEMON yet, but they will be.
-* Output directories must be group-writable for copyback to work. Just doing `chmod g+w mydirectory` is enough.
+* Output directories must be group-writable for copyback to work. Just doing `chmod g+w mydirectory` is enough. That should be fixed in February 2023 during a scheduled dCache downtime.
 * Multiple `--tar_file_name` options are now supported (and will be unpacked) if you need things in multiple tarballs.
 * The `-f` behavior with and without dropbox:// in front is slightly different from legacy jobsub; see the [documentation](https://fifewiki.fnal.gov/wiki/Differences_between_jobsub_lite_and_legacy_jobsub_client/server#Bug_with_-f_dropbox:.2F.2F.2Fa.2Fb.2Fc.tar) for details.
 * Older versions of IFDH will not support tokens, so be careful if you're intentionally setting up old versions. Everything now current is fine though.
