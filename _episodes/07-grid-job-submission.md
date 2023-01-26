@@ -353,6 +353,8 @@ Since jobsub_lite isn't officially in production yet, there are still a few thin
 * Multiple `--tar_file_name` options are now supported (and will be unpacked) if you need things in multiple tarballs.
 * The `-f` behavior with and without dropbox:// in front is slightly different from legacy jobsub; see the [documentation](https://fifewiki.fnal.gov/wiki/Differences_between_jobsub_lite_and_legacy_jobsub_client/server#Bug_with_-f_dropbox:.2F.2F.2Fa.2Fb.2Fc.tar) for details.
 * Older versions of IFDH will not support tokens, so be careful if you're intentionally setting up old versions. Everything now current is fine though.
+* For normal analysis use, you will only be able to copy back directly to your user directory in scratch dCache and possibly some other SEs as remote sites decide to allow.
+* Jobsub_lite submission does not work from lxplus. Ways to submit from outside Fermilab are still under development.
 
 Quite a bit of extra information is included in the "Futher Reading" section. See the top for jobsub_lite information.
 
