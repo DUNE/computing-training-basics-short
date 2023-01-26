@@ -89,6 +89,7 @@ if you ever find yourself doing work under a shared account (dunepro for example
 
 ### Side note: other systems such as the workflow requests system are also coming online; initially they'll be used for managing larger productions. If you have a large production coming up, we encourage you to make a request to the Production group to have it done centrally.
 
+### Another side note: be sure to use fife_utils v3_5_0 or later when running with legacy jobsub. If you're trying something within POMS using jobsub_lite and tokens, but sure to use v3_6_0 or later.
 
 # Submit with POMS Part II: More complicated workflows
 
