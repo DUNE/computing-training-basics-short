@@ -241,7 +241,7 @@ Also the PYTHONPATH describes where Python modules will be loaded from.
 |------------------------------------------------|------------------------------------------------------------------|
 | `ups list -aK+ dunesw`                        | List the versions and flavors of dunesw that exist on this node |
 | `ups active`                                   | Displays what has been setup                                     |
-| `ups depend dunesw v09_48_01d00 -q e20:prof` | Displays the dependencies for this version of dunesw           |
+| `ups depend dunesw v09_65_01d00 -q e20:prof` | Displays the dependencies for this version of dunesw           |
 
 > ## Exercise 4
 > * show all the dependencies of dunesw by using "ups depend dunesw $DUNESW_VERSION -q e20:prof"
@@ -293,7 +293,7 @@ Results must be reproducible, so identical code and associated files must be dis
 
 CVMFS is a perfect tool for distributing software and related files. It stands for CernVM File System (VM is Virtual Machine). Local caches are provided on each target computer, and files are accessed via the `/cvmfs` mount point. DUNE software is in the directory `/cvmfs/dune.opensciencegrid.org`, and LArSoft code is in `/cvmfs/larsoft.opensciencegrid.org`. These directories are auto-mounted and need to be visible when one executes `ls /cvmfs` for the first time.  Some software is also in /cvmfs/fermilab.opensciencegrid.org.
 
-CVMFS also provides a de-duplication feature.  If a given file is the same in all 100 releases of dunetpc, it is only cached and transmitted once, not independently for every release.  So it considerably decreases the size of code that has to be transferred.
+CVMFS also provides a de-duplication feature.  If a given file is the same in all 100 releases of dunesw, it is only cached and transmitted once, not independently for every release.  So it considerably decreases the size of code that has to be transferred.
 
 When a file is accessed in `/cvmfs`, a daemon on the target computer wakes up and determines if the file is in the local cache, and delivers it if it is. If not, the daemon contacts the CVMFS repository server responsible for the directory, and fetches the file into local cache. In this sense, it works a lot like AFS. But it is a read-only filesystem on the target computers, and files must be published on special CVMFS publishing servers. Files may also be cached in a layer between the CVMFS host and the target node in a squid server, which helps facilities with many batch workers reduce the network load in fetching many copies of the same file, possibly over an international connection.
 
