@@ -295,6 +295,12 @@ cetskelgen --help
 
 for instructions on how to invoke it.
 
+### Ordering of Plug-in Execution
+
+The input source always goes first, and it defines the run, subrun and event number of the trigger record being processed.
+The producers and filters in trigger_paths then get executed for each event.  The analyzers and filters in end_paths then get executed.  Analyzers cannot be added to trigger_paths, and producers cannot be added to end_paths.  This ordering ensures that data products are all produced by the time they are needed to be analyzed.  But it also forces high memory usage for the same reason.
+
+
 ### Non-Plug-In Code
 
 You are welcome to write standard C++ code -- classes and C-style functions are no problem. In fact, to enhance the portability of code, the *art* team encourages the separation of algorithm code into non-framework-specific source files, and to call these functions or class methods from the *art* plug-ins. Typically, source files for standalone algorithm code have the extension .cxx while art plug-ins have .cc extensions. Most directories have a CMakeLists.txt file which has instructions for building the plug-ins, each of which is built into a .so library, and all other code gets built and put in a separate .so library.
