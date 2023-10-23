@@ -20,19 +20,18 @@ keypoints:
 
 ## Session Video
 
-The session will be captured on video a placed here after the workshop for asynchronous study.
+<!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
 
-<!--- The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference. --->
+The session was video from the training in January 2023 is provided here as a reference. 
 
-<!---
 <center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Nz5goj93eq0" title="DUNE Computing Tutorial May 2022 Data Management" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4RmeEltmFSk" title="DUNE Computing Tutorial January 26 2023 Data Management" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center> 
---->
+
 
 ## Live Notes
 
-[Live Notes](https://docs.google.com/document/d/1sgRQPQn1OCMEUHAk28bTPhZoySdT5NUSDnW07aL-iQU/edit)
+A archive of the [Live Notes](https://docs.google.com/document/d/1sgRQPQn1OCMEUHAk28bTPhZoySdT5NUSDnW07aL-iQU/edit) is also provided.
 
 ## Introduction
 

@@ -19,19 +19,18 @@ keypoints:
 
 ## Session Video
 
-The session will be captured on video a placed here after the workshop for asynchronous study.
+<!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
 
-<!--- The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.--->
+The session video from the training in January 2023 is provided here as a reference.
 
-<!---
 <center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lhw4dZv8Yeo" title="DUNE Computing Tutorial May 2022 Storage Systems" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xa6m7EVGiIM" title="DUNE Computing Tutorial January 26 2023 Storage Systems" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
---->
+
 
 ## Live Notes
 
-[live Notes](https://docs.google.com/document/d/1sgRQPQn1OCMEUHAk28bTPhZoySdT5NUSDnW07aL-iQU/edit)
+An archive of the [live Notes](https://docs.google.com/document/d/1sgRQPQn1OCMEUHAk28bTPhZoySdT5NUSDnW07aL-iQU/edit) from the session are also provided.
 
 ## Introduction
 There are three types of storage volumes that you will encounter at Fermilab: local hard drives, network attached storage, and large-scale, distributed storage. Each has it's own advantages and limitations, and knowing which one to use when isn't all straightforward or obvious. But with some amount of foresight, you can avoid some of the common pitfalls that have caught out other users.

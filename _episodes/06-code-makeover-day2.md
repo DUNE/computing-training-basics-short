@@ -15,11 +15,14 @@ keypoints:
 ## Session Video
 
 <!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
-The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.
+<!--The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.-->
 
+<!--
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/z7myUSaGYnQ" title="DUNE Computing Tutorial May 2022 Code-makeover on how to code for better efficiency" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+</center>-->
+
+A similar code-makeover session and vido was offered in [May 2022](https://dune.github.io/computing-training-basics/10-code-makeover-day2/index.html).
 
 ### Code Make-over
 

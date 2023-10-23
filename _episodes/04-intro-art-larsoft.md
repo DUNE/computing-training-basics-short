@@ -16,11 +16,12 @@ keypoints:
 ## Session Video
 
 <!--The session will be captured on video a placed here after the workshop for asynchronous study.-->
-The session was video captured for your asynchronous review. The video from the full two day training in May 2022 is provided here as a reference.
+The session video from the training in January 2023 is provided here as a reference.
 
 <center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/a2QXS2hCT-I" title="DUNE Computing Tutorial May 2022 Introduction to art and LArSoft" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jMznuTC6-4I" title="DUNE Computing Tutorial January 2023 Introduction to art and LArSoft" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
+
 
 ## Introduction to *art*
 
